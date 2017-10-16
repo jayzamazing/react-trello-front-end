@@ -6,7 +6,7 @@ export default class CreateItems extends React.Component {
     return (
       <form className="list-form">
         <input type="text" onChange={this.props.onAddInputChanged} name={this.props.name}/>
-        <input type="button" value="Submit" onClick={this.props.addItems}/>
+        <button type="submit" value="Submit" onClick={this.props.addItems}/>
       </form>
     );
   }
