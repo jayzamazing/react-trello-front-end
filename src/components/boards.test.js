@@ -1,20 +1,10 @@
-// 'use strict';
-// import React from 'react';
-// import TestUtils from 'react-addons-test-utils';
-// import chai from 'chai';
-// import configureMockStore from 'redux-mock-store';
-// import thunk from 'redux-thunk';
-// import { Provider } from 'react-redux';
-// import {Boards, Container as BoardsContainer} from './boards';
-// import deepEqual from 'chai-shallow-deep-equal';
-// import nock from 'nock';
-// import {seedBoards2} from '../testutils/seeddata';
-//
-// chai.use(deepEqual);
-// chai.should();
-// const middlewares = [ thunk ];
-// const mockStore = configureMockStore(middlewares);
-// let boards = {};
+'use strict';
+import React from 'react';
+import {shallow} from 'enzyme';
+
+import {Boards, Container as BoardsContainer} from './boards';
+import {seedBoards2} from '../testutils/seeddata';
+let boards = {};
 // //testing for the boards class
 // describe('Boards component', () => {
 //   //setup before all tests
