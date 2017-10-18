@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-// import renderer from 'react-test-renderer';
+import toJson from 'enzyme-to-json';
 import {shallow, mount} from 'enzyme';
 import {Boards} from './boards';
 import {seedBoards2} from '../testutils/seeddata';
@@ -42,9 +42,12 @@ describe('Boards component', () => {
   });
   it('boards snapshot', () => {
     const dispatch = jest.fn();
-    const value = renderer.create(<Boards boards={boards} dispatch={dispatch}/>).toJSON();
-    expect(value).toMatchSnapshot();
+    const wrapper = shallow(<Boards boards={boards} dispatch={dispatch}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
+  // it('add board click snapshot', () => {
+  //
+  // });
 //   //test for performing click event on add board
   // it('should simulate a click event on add board input', () => {
 //     //set up a mockstore

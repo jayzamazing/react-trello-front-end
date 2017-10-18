@@ -3,7 +3,9 @@
 exports[`Boards component boards snapshot 1`] = `
 <div>
   <ul>
-    <li>
+    <li
+      key="0"
+    >
       <span
         onClick={[Function]}
       >
@@ -27,7 +29,9 @@ exports[`Boards component boards snapshot 1`] = `
         value="Edit Board"
       />
     </li>
-    <li>
+    <li
+      key="1"
+    >
       <span
         onClick={[Function]}
       >
@@ -51,7 +55,9 @@ exports[`Boards component boards snapshot 1`] = `
         value="Edit Board"
       />
     </li>
-    <li>
+    <li
+      key="2"
+    >
       <span
         onClick={[Function]}
       >
