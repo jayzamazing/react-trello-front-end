@@ -4,6 +4,7 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {Boards} from './boards';
 import {seedBoards2} from '../testutils/seeddata';
+import renderer from 'react-test-renderer';
 let boards = {};
 
 //mock find boards action
@@ -22,7 +23,9 @@ require.requireActual('../actions/boards'),
 describe('Boards component', () => {
   //setup before all tests
   beforeEach(() => {
-    boards = seedBoards2(3);
+    let ids = ['2skdde39hzdo08aqcdgd', '14w43d4opubteu021ato', 'kd5o3ve2858vpjxd7wjp'];
+    let words = ['XML Health', 'Bedfordshire Illinois Liaison', 'Sports Analyst Cambridgeshire'];
+    boards = seedBoards2(0, ids, words);
   });
   //tear down after tests are complete
   afterEach(() => {
@@ -30,46 +33,18 @@ describe('Boards component', () => {
   });
   it('should render', () => {
     const dispatch = jest.fn();
-    const wrapper = shallow(<Boards boards={boards}/>);
-    console.log(wrapper);
+    shallow(<Boards boards={boards} dispatch={dispatch}/>);
   });
-  // test showing board data
-  // it('should render the board items', function() {
-    //render an image component
-    // let component = renderer.create(<Boards boards={boards}/>);
-    //get the rendered react component to test against
-    // let result = component.toJSON();
-    // expect(result).toMatchSnapshot();
-    //check class name is correct
-    // result.type.should.shallowDeepEqual('div');
-    //get props
-    // let board = result.props.children;
-    // let keys = Object.keys(boards);
-    //test props for various values
-    // board[0].type.should.equal('ul');
-    // board[1].type.should.equal('input');
-    // board[1].props.type.should.equal('button');
-    // board[1].props.value.should.equal('Add Board');
-    // let board_list = board[0].props.children;
-    // board_list[0].type.should.shallowDeepEqual('li');
-    // board_list[0].props.children[0].type.should.equal('span');
-    // let span_input = board_list[0].props.children[0];
-    // span_input.props.children.type.should.equal('input');
-    // span_input.props.children.props.value.should.equal(boards[keys[0]].title);
-    // board_list[0].props.children[1].type.should.equal('input');
-    // board_list[0].props.children[1].props.type.should.equal('button');
-    // board_list[0].props.children[1].props.value.should.equal('Delete Board');
-    // board_list[1].type.should.shallowDeepEqual('li');
-    // let span_input2 = board_list[1].props.children[0];
-    // span_input2.props.children.type.should.equal('input');
-    // span_input2.props.children.props.value.should.equal(boards[keys[1]].title);
-    // board_list[1].props.children[1].type.should.equal('input');
-    // board_list[1].props.children[1].props.type.should.equal('button');
-    // board_list[1].props.children[1].props.value.should.equal('Delete Board');
-    // board_list[1].props.children[2].type.should.equal('input');
-    // board_list[1].props.children[2].props.type.should.equal('button');
-    // board_list[1].props.children[2].props.value.should.equal('Edit Board');
-  // });
+  it('dispatches findBoards on mount', () => {
+    const dispatch = jest.fn();
+    shallow(<Boards boards={boards} dispatch={dispatch}/>);
+    expect(dispatch).toHaveBeenCalledWith(mockFindBoards);
+  });
+  it('boards snapshot', () => {
+    const dispatch = jest.fn();
+    const value = renderer.create(<Boards boards={boards} dispatch={dispatch}/>).toJSON();
+    expect(value).toMatchSnapshot();
+  });
 //   //test for performing click event on add board
   // it('should simulate a click event on add board input', () => {
 //     //set up a mockstore

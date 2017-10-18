@@ -7,14 +7,6 @@ import {Immutable} from 'seamless-immutable';
 //function to render multiple lists of boards
 export class Boards extends React.Component {
   //set up initial data state
-  // getInitialState() {
-  //   return {
-  //     showCreateBoard: false,
-  //     editBoard: {},
-  //     boards: {},
-  //     boardTitle: ''
-  //   };
-  // }
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +15,6 @@ export class Boards extends React.Component {
       boards: {},
       boardTitle: ''
     }
-    console.log(this);
     this.props.dispatch(actions.getBoards());
   }
   //keep track of text
@@ -72,12 +63,6 @@ export class Boards extends React.Component {
     );
     this.forceUpdate();
   }
-  // componentDidMount() {
-  //   this.props.dispatch(
-  //     //dispatch to get all boards
-  //     actions.getBoards()
-  //   );
-  // }
   //set the variable to show the create board inputs
   showCreateBoard() {
     this.setState({showCreateBoard: true});

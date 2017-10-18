@@ -8,5 +8,9 @@ import store from './store';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+      <Boards />
+  </Provider>,
+document.getElementById('root'));
 registerServiceWorker();

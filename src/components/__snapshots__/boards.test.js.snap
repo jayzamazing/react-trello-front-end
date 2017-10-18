@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Boards component boards snapshot 1`] = `
+<div>
+  <ul>
+    <li>
+      <span
+        onClick={[Function]}
+      >
+        <input
+          disabled={true}
+          id="2skdde39hzdo08aqcdgd"
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          type="text"
+          value="XML Health"
+        />
+      </span>
+      <input
+        onClick={[Function]}
+        type="button"
+        value="Delete Board"
+      />
+      <input
+        onClick={[Function]}
+        type="button"
+        value="Edit Board"
+      />
+    </li>
+    <li>
+      <span
+        onClick={[Function]}
+      >
+        <input
+          disabled={true}
+          id="14w43d4opubteu021ato"
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          type="text"
+          value="Bedfordshire Illinois Liaison"
+        />
+      </span>
+      <input
+        onClick={[Function]}
+        type="button"
+        value="Delete Board"
+      />
+      <input
+        onClick={[Function]}
+        type="button"
+        value="Edit Board"
+      />
+    </li>
+    <li>
+      <span
+        onClick={[Function]}
+      >
+        <input
+          disabled={true}
+          id="kd5o3ve2858vpjxd7wjp"
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          type="text"
+          value="Sports Analyst Cambridgeshire"
+        />
+      </span>
+      <input
+        onClick={[Function]}
+        type="button"
+        value="Delete Board"
+      />
+      <input
+        onClick={[Function]}
+        type="button"
+        value="Edit Board"
+      />
+    </li>
+  </ul>
+  <input
+    onClick={[Function]}
+    type="button"
+    value="Add Board"
+  />
+</div>
+`;
