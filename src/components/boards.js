@@ -1,22 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Router, hashHistory } from 'react-router';
-import CreateItems from '../utils/create-items';
-import * as actions from './BoardActions';
+import CreateItems from './create-items';
+import * as actions from '../actions/boards';
 import {Immutable} from 'seamless-immutable';
 //function to render multiple lists of boards
-var Boards = React.createClass({
+export class Boards extends React.Component {
   //set up initial data state
-  getInitialState: function() {
-    return {
+  // getInitialState() {
+  //   return {
+  //     showCreateBoard: false,
+  //     editBoard: {},
+  //     boards: {},
+  //     boardTitle: ''
+  //   };
+  // }
+  constructor(props) {
+    super(props);
+    this.state = {
       showCreateBoard: false,
       editBoard: {},
       boards: {},
       boardTitle: ''
-    };
-  },
+    }
+    console.log(this);
+    this.props.dispatch(actions.getBoards());
+  }
   //keep track of text
-  onAddInputChanged: function(event) {
+  onAddInputChanged(event) {
     //if the addBoard input is being used
     if (event.target.name == 'addBoard') {
       //store title for board
@@ -25,7 +36,6 @@ var Boards = React.createClass({
     } else {
       //get boards from state
       var temp = this.state.boards;
-      console.log(temp);
       //update the title for the selected board
       var temp2 = Immutable.update(temp,
         event.target.id,
@@ -37,56 +47,56 @@ var Boards = React.createClass({
       //store the updated board title
       this.setState({boards: temp2});
     }
-  },
+  }
   //function to add a new board by dispatching post request
-  addBoard: function() {
+  addBoard() {
     this.props.dispatch(
       //dispatch to create a board
       actions.createBoards({title: this.state.boardTitle})
     );
     this.setState({showCreateBoard: false});
-  },
+  }
   //function to delete a board by dispatching delete request
-  deleteBoard: function(boardId) {
+  deleteBoard(boardId) {
     this.props.dispatch(
       //dispatch to delete a board
       actions.deleteBoards(boardId)
     );
     this.forceUpdate();
-  },
+  }
   //function to edit the name of the board
-  updateBoard: function(boardId, boardName) {
+  updateBoard(boardId, boardName) {
     this.props.dispatch(
       //dispatch tp update a board
       actions.updateBoards(boardId, {title: boardName})
     );
     this.forceUpdate();
-  },
-  componentDidMount() {
-    this.props.dispatch(
-      //dispatch to get all boards
-      actions.getBoards()
-    );
-  },
+  }
+  // componentDidMount() {
+  //   this.props.dispatch(
+  //     //dispatch to get all boards
+  //     actions.getBoards()
+  //   );
+  // }
   //set the variable to show the create board inputs
-  showCreateBoard: function() {
+  showCreateBoard() {
     this.setState({showCreateBoard: true});
-  },
-  handleKeyPress: function(events) {
+  }
+  handleKeyPress(events) {
     if(events.charCode==13){
       var temp = this.state.editBoard;
       temp[events.target.id] = true;
       this.setState({editBoard: temp});
       this.updateBoard(events.target.id, events.target.value);
     }
-  },
+  }
   //set variable to enable the editing of the boards name
-  editBoardName: function(item) {
+  editBoardName(item) {
     var temp = this.state.editBoard;
     temp[item] = false;
     this.setState({editBoard: temp});
-  },
-  showBoard: function(boardId, boardName, item) {
+  }
+  showBoard(boardId, boardName, item) {
     if (this.state.editBoard[item] == undefined) {
       var temp = this.state.editBoard;
       temp[item] = true;
@@ -95,8 +105,8 @@ var Boards = React.createClass({
     if (this.state.editBoard[item] == true) {
       hashHistory.push('/:' + boardId + '/:' + boardName);
     }
-  },
-  render: function() {
+  }
+  render() {
     var context = this;
     //only execute if there is data
     if (this.props.boards) {
@@ -128,15 +138,9 @@ var Boards = React.createClass({
       </div>
     );
   }
-});
+};
 
-var mapStateToProps = function(state) {
-  return {
-    boards: state.boards
-  };
-};
-var Container = connect(mapStateToProps)(Boards);
-module.exports = {
-  Container,
-  Boards
-};
+const mapStateToProps = state => ({
+  boards: state.boards
+});
+export default connect(mapStateToProps)(Boards);

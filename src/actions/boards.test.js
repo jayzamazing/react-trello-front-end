@@ -1,4 +1,3 @@
-import chai from 'chai';
 import {findBoardsSuccess, FIND_BOARDS_SUCCESS, getBoards,
   createBoards, createBoardSuccess, CREATE_BOARD_SUCCESS,
   deleteBoardSuccess, DELETE_BOARD_SUCCESS, deleteBoards,

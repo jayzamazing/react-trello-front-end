@@ -1,5 +1,5 @@
 'use strict';
-import {trelloReducer} from './boards';
+import {reducer} from './boards';
 import {findBoardsSuccess, createBoardSuccess, deleteBoardSuccess, updateBoardSuccess} from '../actions/boards';
 import {seedBoards} from '../testutils/seeddata';
 
@@ -15,7 +15,7 @@ describe('board reducer', () => {
   describe('reducer for FIND_BOARDS_SUCCESS', () => {
     let state;
     beforeEach(() => {
-      state = trelloReducer(undefined, findBoardsSuccess(boards));
+      state = reducer(undefined, findBoardsSuccess(boards));
     });
     it('should exist', () => {
       expect(state.boards).toEqual(expect.anything());
@@ -38,8 +38,8 @@ describe('board reducer', () => {
     let state, test;
     beforeEach(() => {
       test = seedBoards(0, 'grocery list');
-      state = trelloReducer(undefined, findBoardsSuccess(boards));
-      state = trelloReducer(state, createBoardSuccess(test));
+      state = reducer(undefined, findBoardsSuccess(boards));
+      state = reducer(state, createBoardSuccess(test));
     });
     it('should exist', () => {
       expect(state.boards).toEqual(expect.anything());
@@ -59,8 +59,8 @@ describe('board reducer', () => {
   describe('DELETE_BOARD_SUCCESS', () => {
     let state;
     beforeEach(() => {
-      state = trelloReducer(undefined, findBoardsSuccess(boards));
-      state = trelloReducer(state, deleteBoardSuccess(boards[1]._id));
+      state = reducer(undefined, findBoardsSuccess(boards));
+      state = reducer(state, deleteBoardSuccess(boards[1]._id));
     });
     it('should exist', () => {
       expect(state.boards).toEqual(expect.anything());
@@ -73,8 +73,8 @@ describe('board reducer', () => {
     let state, test;
     beforeEach(() => {
       test = seedBoards(0, 'super mario', boards[2]._id);
-      state = trelloReducer(undefined, findBoardsSuccess(boards));
-      state = trelloReducer(state, updateBoardSuccess(boards[2]._id,
+      state = reducer(undefined, findBoardsSuccess(boards));
+      state = reducer(state, updateBoardSuccess(boards[2]._id,
       test));
     });
     it('should exist', () => {

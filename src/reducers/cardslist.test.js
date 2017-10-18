@@ -1,5 +1,5 @@
 'use strict';
-import {trelloReducer} from './cardslist';
+import {reducer} from './cardslist';
 import {normalize} from 'normalizr';
 import {cardsListSchema, cardslistArray} from '../board-schema';
 import {createCardslistSuccess, deleteCardslistSuccess, updateCardslistSuccess} from '../actions/cardslist';
@@ -19,7 +19,7 @@ describe('cardslist reducer', () => {
   describe('reducer for FIND_BOARDS_SUCCESS', () => {
     let state;
     beforeEach(() => {
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());
@@ -42,8 +42,8 @@ describe('cardslist reducer', () => {
     let state, test;
     beforeEach(() => {
       test = seedCardslists(0, 'grocery list');
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
-      state = trelloReducer(state, createCardslistSuccess(test));
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(state, createCardslistSuccess(test));
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());
@@ -63,8 +63,8 @@ describe('cardslist reducer', () => {
   describe('DELETE_CARDSLIST_SUCCESS', () => {
     let state;
     beforeEach(() => {
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
-      state = trelloReducer(state, deleteCardslistSuccess(cardslist[1]._id));
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(state, deleteCardslistSuccess(cardslist[1]._id));
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());
@@ -77,8 +77,8 @@ describe('cardslist reducer', () => {
     let state, test;
     beforeEach(() => {
       test = seedCardslists(0, 'super mario', cardslist[2]._id);
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
-      state = trelloReducer(state, updateCardslistSuccess(cardslist[2]._id, test));
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(state, updateCardslistSuccess(cardslist[2]._id, test));
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());
