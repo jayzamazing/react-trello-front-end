@@ -97,7 +97,11 @@ describe('Boards component', () => {
     const wrapper = mount(<Boards boards={boards} dispatch={dispatch}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
     wrapper.find('[name="editBoard"]').at(0).simulate('click');
-    wrapper.find('[name="boardName"]').at(0).text('testing');
+    const boardName = wrapper.find('[name="boardName"]').at(0);
+    boardName.simulate('change', { target: { value: 'testing' } });
+    let test = wrapper.find('[name="boardName"]').at(0);
+    console.log('testing');
+    console.log(test.html());
     wrapper.find('[name="boardName"]').at(0).simulate('keypress', {key: 'Enter'})
     expect(toJson(wrapper)).toMatchSnapshot();
   });

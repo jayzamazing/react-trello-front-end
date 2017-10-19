@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import CreateItems from './create-items';
 import * as actions from '../actions/boards';
-import {Immutable} from 'seamless-immutable';
+import Immutable from 'seamless-immutable';
 //function to render multiple lists of boards
 export class Boards extends React.Component {
   //set up initial data state
@@ -102,7 +102,7 @@ export class Boards extends React.Component {
             <span onClick={context.showBoard.bind(null, temp._id, temp.title, temp._id)}>
               <input type="text" id={temp._id} value={context.state.boards[temp._id] ? context.state.boards[temp._id].title : temp.title}
                 disabled={(context.state.editBoard[temp._id] == undefined) ? true : context.state.editBoard[temp._id] }
-                onChange={context.onAddInputChanged}
+                onChange={(evt) => context.onAddInputChanged(evt)}
                 onKeyPress={context.handleKeyPress} name="boardName"/>
             </span>
             <input type="button" value="Delete Board" name="deleteBoard"
@@ -118,7 +118,7 @@ export class Boards extends React.Component {
         <ul>{list}</ul>
         <input type="button" value="Add Board" onClick={() => this.showCreateBoard()} name="addBoard"/>
         {this.state.showCreateBoard ?
-          <CreateItems onAddInputChanged={this.onAddInputChanged}
+          <CreateItems onAddInputChanged={() => this.onAddInputChanged()}
             addItems={this.addBoard} name="boardInput"/> : null}
       </div>
     );
