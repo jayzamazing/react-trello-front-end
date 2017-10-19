@@ -103,12 +103,12 @@ export class Boards extends React.Component {
               <input type="text" id={temp._id} value={context.state.boards[temp._id] ? context.state.boards[temp._id].title : temp.title}
                 disabled={(context.state.editBoard[temp._id] == undefined) ? true : context.state.editBoard[temp._id] }
                 onChange={context.onAddInputChanged}
-                onKeyPress={context.handleKeyPress}/>
+                onKeyPress={context.handleKeyPress} name="boardName"/>
             </span>
             <input type="button" value="Delete Board" name="deleteBoard"
               onClick={() => context.deleteBoard.bind(null, temp._id)}/>
             <input type="button" value="Edit Board" name="editBoard"
-              onClick={context.editBoardName.bind(null, temp._id)}/>
+              onClick={() => context.editBoardName.bind(null, temp._id)}/>
           </li>
         );
       });

@@ -15,6 +15,9 @@ const mockFindBoards = {
 const mockDeleteBoards = {
   type: 'DELETE_BOARDS'
 };
+const mockUpdateBoards = {
+  type: 'UPDATE_BOARDS'
+};
 jest.mock('../actions/boards', () => Object.assign({},
 require.requireActual('../actions/boards'),
 {
@@ -23,6 +26,9 @@ require.requireActual('../actions/boards'),
   }),
   deleteBoards: jest.fn().mockImplementation(() => {
     return mockDeleteBoards;
+  }),
+  updateBoards: jest.fn().mockImplementation(() => {
+    return mockUpdateBoards;
   })
 }
 ));
@@ -76,40 +82,23 @@ describe('Boards component', () => {
     wrapper.find('[name="deleteBoard"]').at(2).simulate('click');
     expect(toJson(wrapper)).toMatchSnapshot();
   });
-//   //test for performing clic event on delete board
-//   it('should simulate a click event on delete board input', () => {//TODO continue from here
-//     //set up a mockstore
-//     const store = mockStore({'boards': boards});
-//     //create instance of render and pass store to it
-//     let renderer = renderer.renderIntoDocument(
-//       <Provider store={store}>
-//         <BoardsContainer/>
-//       </Provider>
-//     );
-//     //get the input for boards
-//     let inputs = renderer.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     inputs.length.should.equal(10);
-//     //simulate button click
-//     renderer.Simulate.click(inputs[7]);
-//   });
-//   it.only('should simulate a click event on edit board input', () => {
-//     //set up a mockstore
-//     const store = mockStore({'boards': boards});
-//     //create instance of render and pass store to it
-//     let renderer = renderer.renderIntoDocument(
-//       <Provider store={store}>
-//         <BoardsContainer/>
-//       </Provider>
-//     );
-//     //get the input for boards
-//     let inputs = renderer.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     inputs.length.should.equal(10);
-//     //simulate button click
-//     renderer.Simulate.click(inputs[8]);
-//     inputs[6].value = 'happy';
-//     // console.log(inputs[5]);
-//     renderer.Simulate.change(inputs[6]);
-//     //simulate button click
-//     renderer.Simulate.keyDown(inputs[6], {key: 'Enter', keyCode: 13, which: 13});
-//   });
+  it('dispatches update board', () => {
+    const dispatch = jest.fn();
+    const wrapper = shallow(<Boards boards={boards} dispatch={dispatch}/>);
+    //clear previous dispatches
+    dispatch.mockClear();
+    const instance = wrapper.instance();
+    const keys = Object.keys(boards);
+    instance.updateBoard(keys[1]);
+    expect(dispatch).toHaveBeenCalledWith(actions.updateBoards(keys[1]));
+  });
+  it('update board snapshot', () => {//TODO test is not correct
+    const dispatch = jest.fn();
+    const wrapper = mount(<Boards boards={boards} dispatch={dispatch}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.find('[name="editBoard"]').at(0).simulate('click');
+    wrapper.find('[name="boardName"]').at(0).text('testing');
+    wrapper.find('[name="boardName"]').at(0).simulate('keypress', {key: 'Enter'})
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 });

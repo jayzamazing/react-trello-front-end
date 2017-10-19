@@ -16,6 +16,7 @@ exports[`Boards component add board click snapshot 1`] = `
           <input
             disabled={true}
             id="2skdde39hzdo08aqcdgd"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -44,6 +45,7 @@ exports[`Boards component add board click snapshot 1`] = `
           <input
             disabled={true}
             id="14w43d4opubteu021ato"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -72,6 +74,7 @@ exports[`Boards component add board click snapshot 1`] = `
           <input
             disabled={true}
             id="kd5o3ve2858vpjxd7wjp"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -118,6 +121,7 @@ exports[`Boards component add board click snapshot 2`] = `
           <input
             disabled={true}
             id="2skdde39hzdo08aqcdgd"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -146,6 +150,7 @@ exports[`Boards component add board click snapshot 2`] = `
           <input
             disabled={true}
             id="14w43d4opubteu021ato"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -174,6 +179,7 @@ exports[`Boards component add board click snapshot 2`] = `
           <input
             disabled={true}
             id="kd5o3ve2858vpjxd7wjp"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -236,6 +242,7 @@ exports[`Boards component boards snapshot 1`] = `
         <input
           disabled={true}
           id="2skdde39hzdo08aqcdgd"
+          name="boardName"
           onChange={[Function]}
           onKeyPress={[Function]}
           type="text"
@@ -264,6 +271,7 @@ exports[`Boards component boards snapshot 1`] = `
         <input
           disabled={true}
           id="14w43d4opubteu021ato"
+          name="boardName"
           onChange={[Function]}
           onKeyPress={[Function]}
           type="text"
@@ -292,6 +300,7 @@ exports[`Boards component boards snapshot 1`] = `
         <input
           disabled={true}
           id="kd5o3ve2858vpjxd7wjp"
+          name="boardName"
           onChange={[Function]}
           onKeyPress={[Function]}
           type="text"
@@ -337,6 +346,7 @@ exports[`Boards component delete board snapshot 1`] = `
           <input
             disabled={true}
             id="2skdde39hzdo08aqcdgd"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -365,6 +375,7 @@ exports[`Boards component delete board snapshot 1`] = `
           <input
             disabled={true}
             id="14w43d4opubteu021ato"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -393,6 +404,7 @@ exports[`Boards component delete board snapshot 1`] = `
           <input
             disabled={true}
             id="kd5o3ve2858vpjxd7wjp"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -439,6 +451,7 @@ exports[`Boards component delete board snapshot 2`] = `
           <input
             disabled={true}
             id="2skdde39hzdo08aqcdgd"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -467,6 +480,7 @@ exports[`Boards component delete board snapshot 2`] = `
           <input
             disabled={true}
             id="14w43d4opubteu021ato"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
@@ -495,6 +509,217 @@ exports[`Boards component delete board snapshot 2`] = `
           <input
             disabled={true}
             id="kd5o3ve2858vpjxd7wjp"
+            name="boardName"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value="Sports Analyst Cambridgeshire"
+          />
+        </span>
+        <input
+          name="deleteBoard"
+          onClick={[Function]}
+          type="button"
+          value="Delete Board"
+        />
+        <input
+          name="editBoard"
+          onClick={[Function]}
+          type="button"
+          value="Edit Board"
+        />
+      </li>
+    </ul>
+    <input
+      name="addBoard"
+      onClick={[Function]}
+      type="button"
+      value="Add Board"
+    />
+  </div>
+</Boards>
+`;
+
+exports[`Boards component update board snapshot 1`] = `
+<Boards
+  boards={Array []}
+  dispatch={[Function]}
+>
+  <div>
+    <ul>
+      <li
+        key="0"
+      >
+        <span
+          onClick={[Function]}
+        >
+          <input
+            disabled={true}
+            id="2skdde39hzdo08aqcdgd"
+            name="boardName"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value="XML Health"
+          />
+        </span>
+        <input
+          name="deleteBoard"
+          onClick={[Function]}
+          type="button"
+          value="Delete Board"
+        />
+        <input
+          name="editBoard"
+          onClick={[Function]}
+          type="button"
+          value="Edit Board"
+        />
+      </li>
+      <li
+        key="1"
+      >
+        <span
+          onClick={[Function]}
+        >
+          <input
+            disabled={true}
+            id="14w43d4opubteu021ato"
+            name="boardName"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value="Bedfordshire Illinois Liaison"
+          />
+        </span>
+        <input
+          name="deleteBoard"
+          onClick={[Function]}
+          type="button"
+          value="Delete Board"
+        />
+        <input
+          name="editBoard"
+          onClick={[Function]}
+          type="button"
+          value="Edit Board"
+        />
+      </li>
+      <li
+        key="2"
+      >
+        <span
+          onClick={[Function]}
+        >
+          <input
+            disabled={true}
+            id="kd5o3ve2858vpjxd7wjp"
+            name="boardName"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value="Sports Analyst Cambridgeshire"
+          />
+        </span>
+        <input
+          name="deleteBoard"
+          onClick={[Function]}
+          type="button"
+          value="Delete Board"
+        />
+        <input
+          name="editBoard"
+          onClick={[Function]}
+          type="button"
+          value="Edit Board"
+        />
+      </li>
+    </ul>
+    <input
+      name="addBoard"
+      onClick={[Function]}
+      type="button"
+      value="Add Board"
+    />
+  </div>
+</Boards>
+`;
+
+exports[`Boards component update board snapshot 2`] = `
+<Boards
+  boards={Array []}
+  dispatch={[Function]}
+>
+  <div>
+    <ul>
+      <li
+        key="0"
+      >
+        <span
+          onClick={[Function]}
+        >
+          <input
+            disabled={true}
+            id="2skdde39hzdo08aqcdgd"
+            name="boardName"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value="XML Health"
+          />
+        </span>
+        <input
+          name="deleteBoard"
+          onClick={[Function]}
+          type="button"
+          value="Delete Board"
+        />
+        <input
+          name="editBoard"
+          onClick={[Function]}
+          type="button"
+          value="Edit Board"
+        />
+      </li>
+      <li
+        key="1"
+      >
+        <span
+          onClick={[Function]}
+        >
+          <input
+            disabled={true}
+            id="14w43d4opubteu021ato"
+            name="boardName"
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+            value="Bedfordshire Illinois Liaison"
+          />
+        </span>
+        <input
+          name="deleteBoard"
+          onClick={[Function]}
+          type="button"
+          value="Delete Board"
+        />
+        <input
+          name="editBoard"
+          onClick={[Function]}
+          type="button"
+          value="Edit Board"
+        />
+      </li>
+      <li
+        key="2"
+      >
+        <span
+          onClick={[Function]}
+        >
+          <input
+            disabled={true}
+            id="kd5o3ve2858vpjxd7wjp"
+            name="boardName"
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
