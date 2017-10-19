@@ -105,9 +105,9 @@ export class Boards extends React.Component {
                 onChange={context.onAddInputChanged}
                 onKeyPress={context.handleKeyPress}/>
             </span>
-            <input type="button" value="Delete Board"
-              onClick={context.deleteBoard.bind(null, temp._id)}/>
-            <input type="button" value="Edit Board"
+            <input type="button" value="Delete Board" name="deleteBoard"
+              onClick={() => context.deleteBoard.bind(null, temp._id)}/>
+            <input type="button" value="Edit Board" name="editBoard"
               onClick={context.editBoardName.bind(null, temp._id)}/>
           </li>
         );
@@ -116,10 +116,10 @@ export class Boards extends React.Component {
     return (
       <div>
         <ul>{list}</ul>
-        <input type="button" value="Add Board" onClick={this.showCreateBoard}/>
+        <input type="button" value="Add Board" onClick={() => this.showCreateBoard()} name="addBoard"/>
         {this.state.showCreateBoard ?
           <CreateItems onAddInputChanged={this.onAddInputChanged}
-            addItems={this.addBoard} name="addBoard"/> : null}
+            addItems={this.addBoard} name="boardInput"/> : null}
       </div>
     );
   }

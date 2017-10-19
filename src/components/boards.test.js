@@ -4,6 +4,7 @@ import toJson from 'enzyme-to-json';
 import {shallow, mount} from 'enzyme';
 import {Boards} from './boards';
 import {seedBoards2} from '../testutils/seeddata';
+import * as actions from '../actions/boards';
 import renderer from 'react-test-renderer';
 let boards = {};
 
@@ -11,11 +12,17 @@ let boards = {};
 const mockFindBoards = {
   type: 'FIND_BOARDS'
 };
+const mockDeleteBoards = {
+  type: 'DELETE_BOARDS'
+};
 jest.mock('../actions/boards', () => Object.assign({},
 require.requireActual('../actions/boards'),
 {
   getBoards: jest.fn().mockImplementation(() => {
     return mockFindBoards;
+  }),
+  deleteBoards: jest.fn().mockImplementation(() => {
+    return mockDeleteBoards;
   })
 }
 ));
@@ -45,32 +52,30 @@ describe('Boards component', () => {
     const wrapper = shallow(<Boards boards={boards} dispatch={dispatch}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
-  // it('add board click snapshot', () => {
-  //
-  // });
-//   //test for performing click event on add board
-  // it('should simulate a click event on add board input', () => {
-//     //set up a mockstore
-//     const store = mockStore({'boards': boards});
-//     //create instance of render and pass store to it
-//     let renderer = renderer.renderIntoDocument(
-//       <Provider store={store}>
-//         <BoardsContainer/>
-//       </Provider>
-//     );
-//     //get the input for boards
-//     let inputs = renderer.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     inputs.length.should.equal(10);
-//     //simulate button click
-//     renderer.Simulate.click(inputs[9]);
-//     //get all buttons on the page after button press
-//     let inputs2 = renderer.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     //check that previous input is there plus two inputs from create-items
-//     inputs2.length.should.equal(12);
-//     inputs2[10].value = 'happy';
-//     renderer.Simulate.change(inputs2[10]);
-//     renderer.Simulate.click(inputs2[11]);
-//   });
+  it('add board click snapshot', () => {
+    const dispatch = jest.fn();
+    const wrapper = mount(<Boards boards={boards} dispatch={dispatch}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.find('[name="addBoard"]').simulate('click');
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+  it('dispatches delete board', () => {
+    const dispatch = jest.fn();
+    const wrapper = shallow(<Boards boards={boards} dispatch={dispatch}/>);
+    //clear previous dispatches
+    dispatch.mockClear();
+    const instance = wrapper.instance();
+    const keys = Object.keys(boards);
+    instance.deleteBoard(keys[1]);
+    expect(dispatch).toHaveBeenCalledWith(actions.deleteBoards(keys[1]));
+  });
+  it('delete board snapshot', () => {
+    const dispatch = jest.fn();
+    const wrapper = mount(<Boards boards={boards} dispatch={dispatch}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.find('[name="deleteBoard"]').at(2).simulate('click');
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 //   //test for performing clic event on delete board
 //   it('should simulate a click event on delete board input', () => {//TODO continue from here
 //     //set up a mockstore
