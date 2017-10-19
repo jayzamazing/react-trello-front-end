@@ -33,7 +33,7 @@ Object.keys(action.items.cards), () => action.items.cards[Object.keys(action.ite
 * params state- old state before merge
 * params action- action with data to modify state
 */
-export default cardsReducer = (state, action) => {
+export default (state, action) => {
   state = state || initialRepositoryState;
   switch (action.type) {
   case FIND_BOARDS_SUCCESS:

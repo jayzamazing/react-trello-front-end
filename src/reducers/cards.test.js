@@ -1,5 +1,5 @@
 'use strict';
-import {reducer} from './cards';
+import reducer from './cards';
 import {normalize} from 'normalizr';
 import {cardsSchema, cardsArray} from '../board-schema';
 import {createCardsSuccess, deleteCardsSuccess, updateCardsSuccess} from '../actions/cards';

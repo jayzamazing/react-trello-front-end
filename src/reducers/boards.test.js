@@ -1,5 +1,5 @@
 'use strict';
-import {reducer} from './boards';
+import reducer from './boards';
 import {findBoardsSuccess, createBoardSuccess, deleteBoardSuccess, updateBoardSuccess} from '../actions/boards';
 import {seedBoards} from '../testutils/seeddata';
 
