@@ -665,7 +665,7 @@ exports[`Boards component update board snapshot 2`] = `
             onChange={[Function]}
             onKeyPress={[Function]}
             type="text"
-            value="XML Health"
+            value="testing"
           />
         </span>
         <input

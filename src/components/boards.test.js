@@ -92,16 +92,14 @@ describe('Boards component', () => {
     instance.updateBoard(keys[1]);
     expect(dispatch).toHaveBeenCalledWith(actions.updateBoards(keys[1]));
   });
-  it('update board snapshot', () => {//TODO test is not correct
+  it('update board snapshot', () => {
     const dispatch = jest.fn();
     const wrapper = mount(<Boards boards={boards} dispatch={dispatch}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
     wrapper.find('[name="editBoard"]').at(0).simulate('click');
-    const boardName = wrapper.find('[name="boardName"]').at(0);
-    boardName.simulate('change', { target: { value: 'testing' } });
+    const keys = Object.keys(boards);
+    wrapper.find('[name="boardName"]').at(0).simulate('change', { target: { value: 'testing', id: keys[0] } });
     let test = wrapper.find('[name="boardName"]').at(0);
-    console.log('testing');
-    console.log(test.html());
     wrapper.find('[name="boardName"]').at(0).simulate('keypress', {key: 'Enter'})
     expect(toJson(wrapper)).toMatchSnapshot();
   });

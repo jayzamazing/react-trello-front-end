@@ -118,7 +118,7 @@ export class Boards extends React.Component {
         <ul>{list}</ul>
         <input type="button" value="Add Board" onClick={() => this.showCreateBoard()} name="addBoard"/>
         {this.state.showCreateBoard ?
-          <CreateItems onAddInputChanged={() => this.onAddInputChanged()}
+          <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)}
             addItems={this.addBoard} name="boardInput"/> : null}
       </div>
     );
