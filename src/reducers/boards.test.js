@@ -1,13 +1,13 @@
 'use strict';
 import reducer from './boards';
 import {findBoardsSuccess, createBoardSuccess, deleteBoardSuccess, updateBoardSuccess} from '../actions/boards';
-import {seedBoards} from '../testutils/seeddata';
+import {seedBoardsCount, seedBoardsSingle} from '../testutils/seeddata';
 
 
 describe('board reducer', () => {
   let boards;
   beforeEach(() => {
-    boards = seedBoards(5);
+    boards = seedBoardsCount(5);
   });
   afterEach(() => {
     boards = {};
@@ -37,7 +37,7 @@ describe('board reducer', () => {
   describe('CREATE_BOARD_SUCCESS', () => {
     let state, test;
     beforeEach(() => {
-      test = seedBoards(0, 'grocery list');
+      test = seedBoardsSingle('grocery list');
       state = reducer(undefined, findBoardsSuccess(boards));
       state = reducer(state, createBoardSuccess(test));
     });
@@ -72,7 +72,7 @@ describe('board reducer', () => {
   describe('UPDATE_BOARD_SUCCESS', () => {
     let state, test;
     beforeEach(() => {
-      test = seedBoards(0, 'super mario', boards[2]._id);
+      test = seedBoardsSingle('super mario', boards[2]._id);
       state = reducer(undefined, findBoardsSuccess(boards));
       state = reducer(state, updateBoardSuccess(boards[2]._id,
       test));

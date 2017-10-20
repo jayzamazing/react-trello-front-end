@@ -3,13 +3,13 @@ import reducer from './cards';
 import {normalize} from 'normalizr';
 import {cardsSchema, cardsArray} from '../board-schema';
 import {createCardsSuccess, deleteCardsSuccess, updateCardsSuccess} from '../actions/cards';
-import {seedCards, seedCards2} from '../testutils/seeddata';
+import {seedCardsSingle, seedCardsCount} from '../testutils/seeddata';
 import {FIND_BOARDS_SUCCESS} from '../actions/boards';
 
 describe('cards reducer', () => {
   let cards, items;
   beforeEach(() => {
-    cards = seedCards(5);
+    cards = seedCardsCount(234543234542, 5);
     items = (normalize(cards, cardsArray)).entities;
   });
   afterEach(() => {
@@ -39,7 +39,7 @@ describe('cards reducer', () => {
   describe('CREATE_CARDS_SUCCESS', () => {
     let state, test;
     beforeEach(() => {
-      test = seedCards(0, 'grocery list');
+      test = seedCardsSingle(234543234542, 'grocery list');
       state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
       state = reducer(state, createCardsSuccess(test));
     });
@@ -73,7 +73,7 @@ describe('cards reducer', () => {
   describe('UPDATE_CARDS_SUCCESS', () => {
     let state, test;
     beforeEach(() => {
-      test = seedCards(0, 'super mario', cards[2]._id);
+      test = seedCardsSingle(234543234542, 'super mario', cards[2]._id);
       state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
       state = reducer(state, updateCardsSuccess(cards[2]._id, test));
     });

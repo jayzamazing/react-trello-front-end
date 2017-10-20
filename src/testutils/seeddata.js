@@ -1,124 +1,133 @@
 'use strict';
 import faker from 'faker';
-
-export const seedBoards = function(count, title = faker.random.words(), _id = faker.random.alphaNumeric(20)) {
-  if (count != 0) {
-    let boards = [];
-    for (var i = 0; i < count; i++) {
-      boards.push({
-        _id: faker.random.alphaNumeric(20),
-        title: faker.random.words(),
-        cardsList: seedCardslists(count)
-      });
-    }
-    return boards;
-  } else {
-    return {
-      title: title,
-      _id: _id,
-      cardsList: null
-    };
-  }
+//used to create a single board in json
+export const seedBoardsSingle = (title = faker.random.words(), _id = faker.random.alphaNumeric(20)) => {
+  return {
+    title: title,
+    _id: _id,
+    cardsList: seedCardslistIds()
+  };
 };
-//create board items, this is after the data has been normalized
-export const seedBoards2 = (count, ids, words) => {
-  if (count != 0) {
-    let boards = [];
-    for (var i = 0; i < count; i++) {
-      var _id = faker.random.alphaNumeric(20);
-      boards[_id]= {
-        _id: _id,
-        title: faker.random.words(),
-        cardslist: []
-      };
-      for (var j = 0; j < count; j++) {
-        var _id2 = faker.random.alphaNumeric(20);
-        boards[_id].cardslist.push(_id2);
-      }
-    }
-    return boards;
-  } else {
-    let boards = [];
-    for (var i = 0; i < ids.length; i++) {
-      var _id = ids[i];
-      boards[_id]= {
-        _id: _id,
-        title: words[i],
-        cardslist: []
-      };
-    }
-    return boards;
+//used to create random boards based on count
+export const seedBoardsCount = (count) => {
+  if (!count) {
+    count = 1;
   }
-}
-export const seedCardslists = function(count, title = faker.random.words()) {
-  let _id = faker.random.alphaNumeric(20);
-  if (count != 0) {
-    let cardslist = [];
-    for (var i = 0; i < count; i++) {
-      cardslist.push({
-        _id: faker.random.alphaNumeric(20),
-        title: faker.random.words(),
-        cards: seedCards(count)
-      });
-    }
-    return cardslist;
-  } else {
-    return {
-      title: title,
-      _id: _id,
-      cards: null
-    };
-  }
-};
-//create cardslist items, this is after the data has been normalized
-export const seedCardslists2 = (count) => {
-  let cardslist = [];
+  let boards = [];
   for (var i = 0; i < count; i++) {
-    var _id = faker.random.alphaNumeric(20);
-    cardslist[_id]= {
+    let _id = faker.random.alphaNumeric(20);
+    boards.push({
       _id: _id,
       title: faker.random.words(),
-      cards: []
+      cardsList: seedCardslistIds(count)
+    });
+  }
+  return boards;
+}
+//create board items based on input values, after normalization
+export const seedBoardsInput = (ids, words) => {
+  let boards = [];
+  for (var i = 0; i < ids.length; i++) {
+    var _id = ids[i];
+    boards[_id]= {
+      _id: _id,
+      title: words[i],
+      cardslist: seedCardslistIds(ids.length)
     };
-    for (var j = 0; j < count; j++) {
-      var _id2 = faker.random.alphaNumeric(20);
-      cardslist[_id].cards.push(_id2);
-    }
+  }
+  return boards;
+}
+//used to create cardslist ids for seedboards
+export const seedCardslistIds = (count) => {
+  let cardslistIds = [];
+  for (var i = 0; i < count; i++) {
+    cardslistIds.push(faker.random.alphaNumeric(20));
+  }
+  return cardslistIds;
+}
+//used to create a single cardslist in json
+export const seedCardslistSingle = (boardId = faker.random.alphaNumeric(20), title = faker.random.words(), _id = faker.random.alphaNumeric(20)) => {
+  return {
+    boardId: boardId,
+    title: title,
+    _id: _id,
+    cards: seedCardsIds()
+  };
+}
+//used to create random cardslist based on count
+export const seedCardslistCount = (boardId, count) => {
+  if (!count) {
+    count = 1;
+  }
+  let cardslist = [];
+  for (var i = 0; i < count; i++) {
+    cardslist.push({
+      boardId: boardId,
+      _id: faker.random.alphaNumeric(20),
+      title: faker.random.words(),
+      cards: seedCardsIds(count)
+    });
   }
   return cardslist;
 }
-export const seedCards = function(count, text = faker.random.words()) {
-  let _id = faker.random.alphaNumeric(20);
-  if (count != 0) {
-    let cards = [];
-    for (var i = 0; i < count; i++) {
-      cards.push({
-        _id: faker.random.alphaNumeric(20),
-        text: faker.random.words()
-      });
-    }
-    return cards;
-  } else {
-    return {
-      text: text,
-      _id: _id
+//create cardslist items based on input value, after normalization
+export const seedCardslistInput = function(boardId, ids, words) {
+  let cardslist = [];
+  for (var i = 0; i < ids.length; i++) {
+    var _id = ids[i];
+    cardslist[_id]= {
+      boardId: boardId,
+      _id: _id,
+      title: words[i],
+      cards: seedCardsIds(ids.length)
     };
   }
+  return cardslist;
 };
-//create cards items, this is after the data has been normalized
-export const seedCards2 = (data) => {
+//used to create cardslist ids for seedboards
+export const seedCardsIds = (count) => {
+  let cardsIds = [];
+  for (var i = 0; i < count; i++) {
+    cardsIds.push(faker.random.alphaNumeric(20));
+  }
+  return cardsIds;
+}
+//used to create a single card in json
+export const seedCardsSingle = (cardslistId = faker.random.alphaNumeric(20), text = faker.random.words(), _id = faker.random.alphaNumeric(20)) => {
+  return {
+    cardslistId: cardslistId,
+    text: text,
+    _id: _id
+  };
+}
+//used to create random cardslist based on count
+export const seedCardsCount = (cardslistId, count) => {
+  if (!count) {
+    count = 1;
+  }
   let cards = [];
-  Object.keys(data).forEach((element) => {
-    data[element].cards.forEach((element2) => {
-      cards[element2] = {
-        _id: element2,
-        text: faker.random.words(),
-        cardslistId: element
-      }
+  for (var i = 0; i < count; i++) {
+    cards.push({
+      cardslistId: cardslistId,
+      _id: faker.random.alphaNumeric(20),
+      text: faker.random.words()
     });
-  });
+  }
   return cards;
 }
+//create cards items based on input value, after normalization
+export const seedCardsInput = function(cardslistId, ids, words) {
+  let cards = [];
+  for (var i = 0; i < count; i++) {
+    var _id = faker.random.alphaNumeric(20);
+    cards[_id]= {
+      cardslistId: cardslistId,
+      _id: _id,
+      text: faker.random.words()
+    };
+  }
+  return cards;
+};
 //create a random title
 export const createTitle = () => {
 return {title: faker.random.words()};
