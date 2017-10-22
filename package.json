@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "3.7.4",
+  "version": "3.8.5",
   "private": true,
   "proxy": "http://localhost:8080",
   "homepage": "https://github.com/jayzamazing/react-trello#readme",
@@ -15,7 +15,7 @@
     "url": "https://github.com/jayzamazing/react-trello/issues"
   },
   "dependencies": {
-    "normalizr": "^3.3.4",
+    "normalizr": "^3.2.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",

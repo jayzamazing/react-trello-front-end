@@ -15,7 +15,6 @@ export class Boards extends React.Component {
       boards: {},
       boardTitle: ''
     }
-    this.props.dispatch(actions.getBoards());
   }
   //keep track of text
   onAddInputChanged(event) {
@@ -39,41 +38,13 @@ export class Boards extends React.Component {
       this.setState({boards: temp2});
     }
   }
-  //function to add a new board by dispatching post request
+  //hide create board when called
   addBoard() {
-    this.props.dispatch(
-      //dispatch to create a board
-      actions.createBoards({title: this.state.boardTitle})
-    );
     this.setState({showCreateBoard: false});
-  }
-  //function to delete a board by dispatching delete request
-  deleteBoard(boardId) {
-    this.props.dispatch(
-      //dispatch to delete a board
-      actions.deleteBoards(boardId)
-    );
-    this.forceUpdate();
-  }
-  //function to edit the name of the board
-  updateBoard(boardId, boardName) {
-    this.props.dispatch(
-      //dispatch tp update a board
-      actions.updateBoards(boardId, {title: boardName})
-    );
-    this.forceUpdate();
   }
   //set the variable to show the create board inputs
   showCreateBoard() {
     this.setState({showCreateBoard: true});
-  }
-  handleKeyPress(events) {
-    if(events.charCode==13){
-      var temp = this.state.editBoard;
-      temp[events.target.id] = true;
-      this.setState({editBoard: temp});
-      this.updateBoard(events.target.id, events.target.value);
-    }
   }
   //set variable to enable the editing of the boards name
   editBoardName(item) {
@@ -92,23 +63,22 @@ export class Boards extends React.Component {
     }
   }
   render() {
-    var context = this;
     //only execute if there is data
     if (this.props.boards) {
-      var list = Object.keys(this.props.boards).map(function(item, index) {
-        var temp = context.props.boards[item];
+      var list = Object.keys(this.props.boards).map((item, index) => {
+        var temp = this.props.boards[item];
         return (
           <li key={index}>
-            <span onClick={context.showBoard.bind(null, temp._id, temp.title, temp._id)}>
-              <input type="text" id={temp._id} value={context.state.boards[temp._id] ? context.state.boards[temp._id].title : temp.title}
-                disabled={(context.state.editBoard[temp._id] == undefined) ? true : context.state.editBoard[temp._id] }
-                onChange={(evt) => context.onAddInputChanged(evt)}
-                onKeyPress={context.handleKeyPress} name="boardName"/>
+            <span onClick={() => this.showBoard(null, temp._id, temp.title, temp._id)}>
+              <input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
+                disabled={(this.state.editBoard[temp._id] == undefined) ? true : this.state.editBoard[temp._id] }
+                onChange={(evt) => this.onAddInputChanged(evt)}
+                onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>
             </span>
             <input type="button" value="Delete Board" name="deleteBoard"
-              onClick={() => context.deleteBoard.bind(null, temp._id)}/>
+              onClick={() => this.props.deleteBoard(temp._id)}/>
             <input type="button" value="Edit Board" name="editBoard"
-              onClick={() => context.editBoardName.bind(null, temp._id)}/>
+              onClick={() => this.editBoardName.bind(null, temp._id)}/>
           </li>
         );
       });
@@ -119,13 +89,29 @@ export class Boards extends React.Component {
         <input type="button" value="Add Board" onClick={() => this.showCreateBoard()} name="addBoard"/>
         {this.state.showCreateBoard ?
           <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)}
-            addItems={this.addBoard} name="boardInput"/> : null}
+            addItems={() => {this.addBoard(); this.props.addBoard();}} name="boardInput"/> : null}
       </div>
     );
   }
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   boards: state.boards
 });
-export default connect(mapStateToProps)(Boards);
+const mapDispatchToProps = (dispatch, props) => (dispatch(actions.getBoards()), {
+    //dispatch to delete board
+    deleteBoard: (boardId) => {
+      dispatch(actions.deleteBoards(boardId));
+    },
+    //dispatch to add board
+    addBoard: () => {
+      dispatch(actions.createBoards({title: props.boardTitle}));
+    },
+    //dispatch update to board name if enter key is press in field
+    updateBoard: () => {
+      if(events.charCode==13) {
+        dispatch(actions.updateBoards(events.target.id, events.target.value));
+      }
+    }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Boards);

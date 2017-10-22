@@ -333,6 +333,7 @@ exports[`Boards component boards snapshot 1`] = `
 exports[`Boards component delete board snapshot 1`] = `
 <Boards
   boards={Array []}
+  deleteBoard={[Function]}
   dispatch={[Function]}
 >
   <div>
@@ -438,6 +439,7 @@ exports[`Boards component delete board snapshot 1`] = `
 exports[`Boards component delete board snapshot 2`] = `
 <Boards
   boards={Array []}
+  deleteBoard={[Function]}
   dispatch={[Function]}
 >
   <div>
@@ -543,7 +545,7 @@ exports[`Boards component delete board snapshot 2`] = `
 exports[`Boards component update board snapshot 1`] = `
 <Boards
   boards={Array []}
-  dispatch={[Function]}
+  updateBoard={[Function]}
 >
   <div>
     <ul>
@@ -648,7 +650,7 @@ exports[`Boards component update board snapshot 1`] = `
 exports[`Boards component update board snapshot 2`] = `
 <Boards
   boards={Array []}
-  dispatch={[Function]}
+  updateBoard={[Function]}
 >
   <div>
     <ul>
