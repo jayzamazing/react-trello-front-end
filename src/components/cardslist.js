@@ -35,30 +35,9 @@ export class Cardslist extends React.Component {
       this.setState({cardslist: temp2});
     }
   }
-  //function to add a new cardslist
+  //hide the following input
   addCardslist() {
-    // this.props.dispatch(
-    // //dispatch query boards
-    // actions.createCardslist({
-    //   title: this.state.cardslistTitle,
-    //   boardId: this.props.params.boardId.replace(':', '')
-    // }));
-    //hide the following input
     this.setState({showCreateCardslist: false});
-  }
-  //function to delete a cardslist
-  // deleteCardslist(cardslistId) {
-  //   this.props.dispatch(
-  //   //dispatch query cardslist
-  //   actions.deleteCardslist(cardslistId));
-  // }
-  //function to edit the name of the cardslist
-  updateCardslist(cardslistId, cardslistName) {
-    this.props.dispatch(actions.updateCardslist(cardslistId, {
-      title: cardslistName,
-      boardId: this.props.params.boardId.replace(':', '')
-    }));
-    this.forceUpdate();
   }
   //set the variable to show the create cardslist inputs
   showCreateCardslist() {
@@ -70,7 +49,7 @@ export class Cardslist extends React.Component {
       var temp = this.state.editCardslist;
       temp[events.target.id] = true;
       this.setState({editCardslist: temp});
-      this.updateCardslist(events.target.id, events.target.value);
+      // this.updateCardslist(events.target.id, events.target.value);
     }
   }
   //set variable to enable the editing of the cardslist name
@@ -98,10 +77,11 @@ export class Cardslist extends React.Component {
                 ? this.state.cardslist[temp._id].title
                 : temp.title} disabled={(this.state.editCardslist[temp._id] == undefined)
                 ? true
-                : this.state.editCardslist[temp._id]} onChange={this.onAddInputChanged} onKeyPress={this.handleKeyPress}/>
+                : this.state.editCardslist[temp._id]} onChange={() => this.onAddInputChanged}
+                onKeyPress={(evt) => this.props.updateCardslist(evt)} name="cardslistName"/>
               <Cards cardslistId={item} key={index} boardId={boardId}/>
               <input type="button" value="Delete Cardslist" onClick={() => this.props.deleteCardslist(temp._id)} name="deleteCardslist"/>
-              <input type="button" value="Edit Cardslist" onClick={this.editCardslistName.bind(null, temp._id)} name="editCardslist"/>
+              <input type="button" value="Edit Cardslist" onClick={() => this.editCardslistName(temp._id)} name="editCardslist"/>
             </li>
           );
         }

@@ -62,7 +62,7 @@ beforeEach(() => {
     // const dispatch = jest.fn();
     const wrapper = shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} deleteCardslist={deleteCardslist}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.find('[name="deleteCardslist"').at(0).simulate('click');
+    wrapper.find('[name="deleteCardslist"]').at(0).simulate('click');
     expect(toJson(wrapper)).toMatchSnapshot();
   });
   //check dispatch is fired when update button is clicked
