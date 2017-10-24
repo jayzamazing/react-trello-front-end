@@ -78,7 +78,7 @@ export class Boards extends React.Component {
             <input type="button" value="Delete Board" name="deleteBoard"
               onClick={() => this.props.deleteBoard(temp._id)}/>
             <input type="button" value="Edit Board" name="editBoard"
-              onClick={() => this.editBoardName.bind(null, temp._id)}/>
+              onClick={() => this.editBoardName(temp._id)}/>
           </li>
         );
       });
@@ -94,7 +94,7 @@ export class Boards extends React.Component {
     );
   }
 };
-
+//allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state, props) => ({
   boards: state.boards
 });

@@ -1,21 +1,22 @@
-var React = require('react');
-var connect = require('react-redux').connect;
-var actions = require('./CardsActions');
-import CreateItems from '../utils/create-items';
+import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions/cards';
+import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
 //component to store list of cards and text
-var Cards = React.createClass({
+export class Cards extends React.Component {
   //set up initial data state
-  getInitialState: function() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       showCreateCards: false,
       editCards: {},
       cards: {},
       text: ''
-    };
-  },
+    }
+  }
   //keep track of text
-  onAddInputChanged: function(event) {
+  onAddInputChanged(event) {
     //if the addCards input is being used
     if (event.target.name == 'addCards') {
       this.setState({text: event.target.value});
@@ -34,9 +35,9 @@ var Cards = React.createClass({
       //store the updated cards
       this.setState({cardslist: temp2});
     }
-  },
+  }
   //function to add a new card
-  addCards: function() {
+  addCards() {
     // this.props.dispatch(
     //   //dispatch query cards
     //   actions.queries('cards', 'POST', {text: this.state.text},
@@ -44,40 +45,40 @@ var Cards = React.createClass({
     // );
     //hide the following input
     this.setState({showCreateCards: false});
-  },
+  }
   //function to delete a card
-  deleteCards: function(cardId) {
+  deleteCards(cardId) {
     //dispatch query cards
     // this.props.dispatch(
     //   actions.queries('cards', 'DELETE', cardId, 'delete cards')
     // );
-  },
+  }
   //function to edit the text in a card
-  updateCards: function(cardsId, cardsText) {
+  updateCards(cardsId, cardsText) {
     // this.props.dispatch(
     //   actions.queries('cards', 'PUT', {text: cardsText}, 'update cards', cardsId)
     // );
     this.forceUpdate();
-  },
-  showCreateCards: function() {
+  }
+  showCreateCards() {
     this.setState({showCreateCards: true});
-  },
+  }
   //deal with the user hitting enter from the input and updating the cards
-  handleKeyPress: function(events) {
+  handleKeyPress(events) {
     if(events.charCode == 13) {
       var temp = this.state.editCards;
       temp[events.target.id] = true;
       this.setState({editCards: temp});
       this.updateCards(events.target.id, events.target.value);
     }
-  },
+  }
   //set variable to enable the editing of the cards text
-  editCardsText: function(item) {
+  editCardsText(item) {
     var temp = this.state.editCards;
     temp[item] = false;
     this.setState({editCards: temp});
-  },
-  render: function() {
+  }
+  render() {
     var context = this;
     var cardslist = context.props.cardslist[Object.keys(context.props.cardslist).find(item => {
         //if the id of props.cardslist matches cardslistid
@@ -113,16 +114,10 @@ var Cards = React.createClass({
       </div>
     );
   }
-});
+};
 //allows subcription to redux updates and access to data stored in redux store
-var mapStateToProps = function(state) {
-  return {
-    cardslist: state.cardslist,
-    cards: state.cards
-  };
-};
-var Container = connect(mapStateToProps)(Cards);
-module.exports = {
-  Container,
-  Cards
-};
+const mapStateToProps = (state) => ({
+  cardslist: state.cardslist,
+  cards: state.cards
+});
+export default connect(mapStateToProps)(Cards);

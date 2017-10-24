@@ -2,7 +2,25 @@
 
 exports[`Boards component add board click snapshot 1`] = `
 <Boards
-  boards={Array []}
+  boards={
+    Object {
+      "14w43d4opubteu021ato": Object {
+        "_id": "14w43d4opubteu021ato",
+        "cardslist": "14w43d4opubteu021ato",
+        "title": "Bedfordshire Illinois Liaison",
+      },
+      "2skdde39hzdo08aqcdgd": Object {
+        "_id": "2skdde39hzdo08aqcdgd",
+        "cardslist": "2skdde39hzdo08aqcdgd",
+        "title": "XML Health",
+      },
+      "kd5o3ve2858vpjxd7wjp": Object {
+        "_id": "kd5o3ve2858vpjxd7wjp",
+        "cardslist": "kd5o3ve2858vpjxd7wjp",
+        "title": "Sports Analyst Cambridgeshire",
+      },
+    }
+  }
   dispatch={[Function]}
 >
   <div>
@@ -107,7 +125,25 @@ exports[`Boards component add board click snapshot 1`] = `
 
 exports[`Boards component add board click snapshot 2`] = `
 <Boards
-  boards={Array []}
+  boards={
+    Object {
+      "14w43d4opubteu021ato": Object {
+        "_id": "14w43d4opubteu021ato",
+        "cardslist": "14w43d4opubteu021ato",
+        "title": "Bedfordshire Illinois Liaison",
+      },
+      "2skdde39hzdo08aqcdgd": Object {
+        "_id": "2skdde39hzdo08aqcdgd",
+        "cardslist": "2skdde39hzdo08aqcdgd",
+        "title": "XML Health",
+      },
+      "kd5o3ve2858vpjxd7wjp": Object {
+        "_id": "kd5o3ve2858vpjxd7wjp",
+        "cardslist": "kd5o3ve2858vpjxd7wjp",
+        "title": "Sports Analyst Cambridgeshire",
+      },
+    }
+  }
   dispatch={[Function]}
 >
   <div>
@@ -332,7 +368,25 @@ exports[`Boards component boards snapshot 1`] = `
 
 exports[`Boards component delete board snapshot 1`] = `
 <Boards
-  boards={Array []}
+  boards={
+    Object {
+      "14w43d4opubteu021ato": Object {
+        "_id": "14w43d4opubteu021ato",
+        "cardslist": "14w43d4opubteu021ato",
+        "title": "Bedfordshire Illinois Liaison",
+      },
+      "2skdde39hzdo08aqcdgd": Object {
+        "_id": "2skdde39hzdo08aqcdgd",
+        "cardslist": "2skdde39hzdo08aqcdgd",
+        "title": "XML Health",
+      },
+      "kd5o3ve2858vpjxd7wjp": Object {
+        "_id": "kd5o3ve2858vpjxd7wjp",
+        "cardslist": "kd5o3ve2858vpjxd7wjp",
+        "title": "Sports Analyst Cambridgeshire",
+      },
+    }
+  }
   deleteBoard={[Function]}
   dispatch={[Function]}
 >
@@ -438,7 +492,25 @@ exports[`Boards component delete board snapshot 1`] = `
 
 exports[`Boards component delete board snapshot 2`] = `
 <Boards
-  boards={Array []}
+  boards={
+    Object {
+      "14w43d4opubteu021ato": Object {
+        "_id": "14w43d4opubteu021ato",
+        "cardslist": "14w43d4opubteu021ato",
+        "title": "Bedfordshire Illinois Liaison",
+      },
+      "2skdde39hzdo08aqcdgd": Object {
+        "_id": "2skdde39hzdo08aqcdgd",
+        "cardslist": "2skdde39hzdo08aqcdgd",
+        "title": "XML Health",
+      },
+      "kd5o3ve2858vpjxd7wjp": Object {
+        "_id": "kd5o3ve2858vpjxd7wjp",
+        "cardslist": "kd5o3ve2858vpjxd7wjp",
+        "title": "Sports Analyst Cambridgeshire",
+      },
+    }
+  }
   deleteBoard={[Function]}
   dispatch={[Function]}
 >
@@ -544,7 +616,25 @@ exports[`Boards component delete board snapshot 2`] = `
 
 exports[`Boards component update board snapshot 1`] = `
 <Boards
-  boards={Array []}
+  boards={
+    Object {
+      "14w43d4opubteu021ato": Object {
+        "_id": "14w43d4opubteu021ato",
+        "cardslist": "14w43d4opubteu021ato",
+        "title": "Bedfordshire Illinois Liaison",
+      },
+      "2skdde39hzdo08aqcdgd": Object {
+        "_id": "2skdde39hzdo08aqcdgd",
+        "cardslist": "2skdde39hzdo08aqcdgd",
+        "title": "XML Health",
+      },
+      "kd5o3ve2858vpjxd7wjp": Object {
+        "_id": "kd5o3ve2858vpjxd7wjp",
+        "cardslist": "kd5o3ve2858vpjxd7wjp",
+        "title": "Sports Analyst Cambridgeshire",
+      },
+    }
+  }
   updateBoard={[Function]}
 >
   <div>
@@ -649,7 +739,25 @@ exports[`Boards component update board snapshot 1`] = `
 
 exports[`Boards component update board snapshot 2`] = `
 <Boards
-  boards={Array []}
+  boards={
+    Object {
+      "14w43d4opubteu021ato": Object {
+        "_id": "14w43d4opubteu021ato",
+        "cardslist": "14w43d4opubteu021ato",
+        "title": "Bedfordshire Illinois Liaison",
+      },
+      "2skdde39hzdo08aqcdgd": Object {
+        "_id": "2skdde39hzdo08aqcdgd",
+        "cardslist": "2skdde39hzdo08aqcdgd",
+        "title": "XML Health",
+      },
+      "kd5o3ve2858vpjxd7wjp": Object {
+        "_id": "kd5o3ve2858vpjxd7wjp",
+        "cardslist": "kd5o3ve2858vpjxd7wjp",
+        "title": "Sports Analyst Cambridgeshire",
+      },
+    }
+  }
   updateBoard={[Function]}
 >
   <div>
@@ -661,7 +769,7 @@ exports[`Boards component update board snapshot 2`] = `
           onClick={[Function]}
         >
           <input
-            disabled={true}
+            disabled={false}
             id="2skdde39hzdo08aqcdgd"
             name="boardName"
             onChange={[Function]}

@@ -1,142 +1,86 @@
-// 'use strict';
-// import React from 'react';
-// import TestUtils from 'react-addons-test-utils';
-// import chai from 'chai';
-// import configureMockStore from 'redux-mock-store';
-// import thunk from 'redux-thunk';
-// import { Provider } from 'react-redux';
-// import * as Cardslist from './cardslist';
-// import {Cards} from '../cards'
-// import deepEqual from 'chai-shallow-deep-equal';
-// import nock from 'nock';
-// import {seedBoards2, seedCardslists2, seedCards2} from '../testutils/seeddata';
-//
-// chai.use(deepEqual);
-// chai.should();
-// const middlewares = [ thunk ];
-// const mockStore = configureMockStore(middlewares);
-//
-//
-// describe('Cardslist component', function() {
-//   let boards = {}, cardslist = {}, cards = {}, params = {}, boardKeys, cardslistKeys, cardsKeys;
-//   beforeEach(() => {
-//     nock('http://localhost/')
-//     .post('/cardslist')
-//     .query(true)
-//     .reply(201);
-//     boards = seedBoards2(3);
-//     cardslist = seedCardslists2(boards);
-//     cards = seedCards2(cardslist);
-//     boardKeys = Object.keys(boards);
-//     cardslistKeys = Object.keys(cardslist);
-//     cardsKeys = Object.keys(cards);
-//     params = {
-//       boardName: ':' + boards[boardKeys[0]].title,
-//       boardId: ':' + boardKeys[0]
-//     };
-//   });
-//   afterEach(() => {
-//     boards = {}, cardslist = {}, cards = {}, params = {};
-//     nock.cleanAll();
-//   });
-//   it('Renders the cardslist item', function() {
-//     //create instance of render
-//     var renderer = TestUtils.createRenderer();
-//     //render an image component
-//     renderer.render(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards}/>);
-//     //get the rendered react component to test against
-//     var board = renderer.getRenderOutput();
-//     board.type.should.equal('div');
-//     board.props.className.should.equal('board');
-//     var board_name = board.props.children[0];
-//     board_name.type.should.equal('div');
-//     board_name.props.className.should.equal('board-name');
-//     var h1_0 = board_name.props.children;
-//     h1_0.type.should.equal('h1');
-//     h1_0.props.children.should.equal(boards[boardKeys[0]].title);
-//     var cardslist_cp = board.props.children[1];
-//     cardslist_cp.type.should.equal('div');
-//     cardslist_cp.props.className.should.equal('board-list');
-//     var cards_cp = cardslist_cp.props.children[0];
-//     cards_cp.type.should.equal('ul');
-//     var cardItem = cards_cp.props.children[0];
-//     cardItem.type.should.equal('li');
-//     cardItem.props.children[0].type.should.equal('input');
-//     cardItem.props.children[0].props.value.should.equal(cardslist[cardslistKeys[0]].title);
-//     cardItem.props.children[1].type.WrappedComponent.should.shallowDeepEqual(Cards.Cards);
-//     cardItem.props.children[1].props.cardslistId.should.equal(cardslist[cardslistKeys[0]]._id);
-//     cardItem.props.children[1].props.boardId.should.equal(cardslist[cardslistKeys[0]].boardId);
-//     cardItem.props.children[2].type.should.equal('input');
-//     cardItem.props.children[2].props.type.should.equal('button');
-//     cardItem.props.children[2].props.value.should.equal('Delete Cardslist');
-//     cardItem.props.children[3].type.should.equal('input');
-//     cardItem.props.children[3].props.type.should.equal('button');
-//     cardItem.props.children[3].props.value.should.equal('Edit Cardslist');
-//   });
-//   //test for performing click event on add cardslist
-//   it.only('should simulate a click event on add CardsList input', () => {
-//     //set up a mockstore
-//     const store = mockStore({
-//       boards: boards,
-//       cardslist: cardslist,
-//       cards: cards
-//     });
-//     //create instance of render and pass store to it
-//     let renderer = TestUtils.renderIntoDocument(
-//       <Provider store={store}>
-//         <Cardslist.Container params={params} />
-//       </Provider>
-//     );
-//     //get the input for cards
-//     let inputs = TestUtils.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     inputs.length.should.equal(40);
-//     //simulate button click
-//     TestUtils.Simulate.click(inputs[39]);
-//     //get all buttons on the page after button press
-//     let inputs2 = TestUtils.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     //check that previous input is there plus two inputs from create-items
-//     inputs2.length.should.equal(42);
-//     inputs2[40].value = 'happy';
-//     TestUtils.Simulate.change(inputs2[40]);
-//     TestUtils.Simulate.click(inputs2[41]);
-//   });
-//   it('should simulate a click event on delete cardslist input', () => {
-//     const store = mockStore({
-//       boards: boards.boards,
-//       cardsList: boards.cardsList,
-//       cards: boards.cards
-//     });
-//     //create instance of render and pass store to it
-//     let renderer = TestUtils.renderIntoDocument(
-//       <Provider store={store}>
-//         <Cardslist.Container params={params} />
-//       </Provider>
-//     );
-//     //get the input for boards
-//     let inputs = TestUtils.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     inputs.length.should.equal(8);
-//     //simulate button click
-//     TestUtils.Simulate.click(inputs[5]);
-//   });
-//   it('should simulate a click event on edit cardslist input', () => {
-//     const store = mockStore({
-//       boards: boards.boards,
-//       cardsList: boards.cardsList,
-//       cards: boards.cards
-//     });
-//     //create instance of render and pass store to it
-//     let renderer = TestUtils.renderIntoDocument(
-//       <Provider store={store}>
-//         <Cardslist.Container params={params} />
-//       </Provider>
-//     );
-//     //get the input for boards
-//     let inputs = TestUtils.scryRenderedDOMComponentsWithTag(renderer, 'input');
-//     inputs.length.should.equal(8);
-//     //simulate button click
-//     TestUtils.Simulate.click(inputs[6]);
-//     inputs[3].value = 'happy';
-//     TestUtils.Simulate.change(inputs[0]);
-//     TestUtils.Simulate.keyDown(inputs[0], {key: 'Enter', keyCode: 13, which: 13});
-//   });
-// });
+'use strict';
+import React from 'react';
+import toJson from 'enzyme-to-json';
+import {shallow, mount} from 'enzyme';
+import component, {Cardslist} from './cardslist';
+import {seedCardslistInput, seedBoardsInput, seedCardsInput} from '../testutils/seeddata';
+import * as actions from '../actions/cardslist';
+
+describe('Cardslist component', () => {
+  let boards = {}, cardslist = {}, cards = {}, params = {}, boardKeys, cardslistKeys, cardsKeys;
+beforeEach(() => {
+  let ids = ['46mdujckqs45tkdsh2jdxz', '346rfdghsdhteu021ato', 'kd5o3ve2858qggfqw4rtfda'];
+  let words = ['XML Health', 'Bedfordshire Illinois Liaison', 'Sports Analyst Cambridgeshire'];
+  let ids2 = ['2skdde39hzdo08aqcdgd', '14w43d4opubteu021ato', 'kd5o3ve2858vpjxd7wjp'];
+  let words2 = ['XML Health', 'Bedfordshire Illinois Liaison', 'Sports Analyst Cambridgeshire'];
+  let ids3 = ['432e39hzdo08aqcdgd', '6532opubteu021ato', '5643e2858vpjxd7wjp'];
+  let words3 = ['eat dinner', 'tea tree oil', 'masking tape'];
+  boards = seedBoardsInput(ids, words, ids2);
+  cardslist = seedCardslistInput(ids, words2, ids2);
+  cards = seedCardsInput(ids2, words3, ids3);
+  boardKeys = Object.keys(boards);
+  cardslistKeys = Object.keys(cardslist);
+  cardsKeys = Object.keys(cards);
+  params = {
+    boardName: ':' + boards[boardKeys[0]].title,
+    boardId: ':' + boardKeys[0]
+  };
+});
+  afterEach(() => {
+    boards = {}, cardslist = {}, cards = {}, params = {};
+  });
+  //ensure cardslist renders without any issues
+  it('should render', () => {
+    const dispatch = jest.fn();
+    shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} dispatch={dispatch}/>)
+  });
+  //render and check against previous snapshot
+  it('cardslist snapshot', () => {
+    const dispatch = jest.fn();
+    const wrapper = shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} dispatch={dispatch}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+  //click on add button and check before and after snapshots
+  it('add cardslist click snaphot', () => {
+    const dispatch = jest.fn();
+    const wrapper = shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} dispatch={dispatch}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.find('[name="addCardslist"]').simulate('click');
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+  //check dispatch is fired off when delete button is clicked
+  it('dispatches delete cardslist', () => {
+    const deleteCardslist = jest.fn();
+    // const dispatch = jest.fn();
+    const wrapper = shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} deleteCardslist={deleteCardslist}/>);
+    wrapper.find('[name="deleteCardslist"]').at(0).simulate('click');
+    expect(deleteCardslist).toHaveBeenCalledWith(cardslistKeys[0]);
+  });
+  //click on delete button and check before and after snapshots
+  it('delete cardslist snapshot', () => {
+    const deleteCardslist = jest.fn();
+    // const dispatch = jest.fn();
+    const wrapper = shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} deleteCardslist={deleteCardslist}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.find('[name="deleteCardslist"').at(0).simulate('click');
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+  //check dispatch is fired when update button is clicked
+  it('dispatches update cardslist', () => {
+    const updateCardslist = jest.fn();
+    const wrapper = shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} updateCardslist={updateCardslist}/>);
+    wrapper.find('[name="cardslistName"]').at(0).simulate('keypress', {key: 'Enter'});
+    expect(updateCardslist).toHaveBeenCalledWith({"key": "Enter"});
+  });
+  //click on update button and check before and after snapshots
+  it('update cardslist snapshot', () => {
+    const updateCardslist = jest.fn();
+    const wrapper = shallow(<Cardslist params={params} boards={boards} cardslist={cardslist} cards={cards} updateCardslist={updateCardslist}/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.find('[name="editCardslist"]').at(0).simulate('click');
+    const keys = Object.keys(boards);
+    wrapper.find('[name="cardslistName"]').at(0).simulate('change', { target: { value: 'testing', id: keys[0] } });
+    wrapper.find('[name="cardslistName"]').at(0).simulate('keypress', {key: 'Enter'})
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+});

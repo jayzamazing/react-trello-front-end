@@ -5,44 +5,16 @@ import {shallow, mount} from 'enzyme';
 import component, {Boards} from './boards';
 import {seedBoardsInput} from '../testutils/seeddata';
 import * as actions from '../actions/boards';
-import renderer from 'react-test-renderer';
 
-
-//mock actions
-const mockFindBoards = {
-  type: 'FIND_BOARDS'
-};
-const mockDeleteBoards = {
-  type: 'DELETE_BOARDS'
-};
-const mockUpdateBoards = {
-  type: 'UPDATE_BOARDS'
-};
-//setup mock api
-jest.mock('../actions/boards', () => Object.assign({},
-require.requireActual('../actions/boards'),
-{
-  getBoards: jest.fn().mockImplementation(() => {
-    return mockFindBoards;
-  }),
-  //needed for true comparison
-  deleteBoards: jest.fn().mockImplementation(() => {
-    return mockDeleteBoards;
-  }),
-  //needed for true comparison
-  updateBoards: jest.fn().mockImplementation(() => {
-    return mockUpdateBoards;
-  })
-}
-));
 //testing for the boards class
 describe('Boards component', () => {
   let boards = {};
   //setup before all tests
   beforeEach(() => {
     let ids = ['2skdde39hzdo08aqcdgd', '14w43d4opubteu021ato', 'kd5o3ve2858vpjxd7wjp'];
+    let ids2 = ['2skdde39hzdo08aqcdgd', '14w43d4opubteu021ato', 'kd5o3ve2858vpjxd7wjp'];
     let words = ['XML Health', 'Bedfordshire Illinois Liaison', 'Sports Analyst Cambridgeshire'];
-    boards = seedBoardsInput(ids, words);
+    boards = seedBoardsInput(ids, words, ids2);
   });
   //tear down after tests are complete
   afterEach(() => {
@@ -89,8 +61,8 @@ describe('Boards component', () => {
   it('dispatches update board', () => {
     const updateBoard = jest.fn();
     const wrapper = shallow(<Boards boards={boards} updateBoard={updateBoard}/>);
-    const keys = Object.keys(boards);
-    wrapper.find('[name="boardName"]').at(0).simulate('keypress', {key: 'Enter'})
+    // const keys = Object.keys(boards);
+    wrapper.find('[name="boardName"]').at(0).simulate('keypress', {key: 'Enter'});
     expect(updateBoard).toHaveBeenCalledWith({"key": "Enter"});
   });
   //click on update button and check before and after snapshots
