@@ -102,19 +102,16 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cards
   deleteCards: () => {
-    dispatch(actions.queries('cards', 'DELETE', cardId, 'delete cards'));
+    dispatch(actions.deleteCards(cardId));
   },
   //dispatch to add a new cards
   addCardslist: () => {
-    dispatch(actions.queries('cards', 'POST', {text: this.state.text},
-      'create cards', this.props.cardslistId, this.props.boardId))
+    dispatch(actions.createCards({text: this.state.text, cardslistId: props.cardslistId}))
   },
   //dispatch update to cards name if enter key is pressed
   updateCards: () => {
     if(events.charCode==13) {
-      dispatch(
-        actions.queries('cards', 'PUT', {text: cardsText}, 'update cards', cardsId)
-      );
+      dispatch(actions.updateCards(cardsId, {text: cardsText}));
     }
   }
 });

@@ -1,4 +1,3 @@
-import chai from 'chai';
 import {createCards, createCardsSuccess, CREATE_CARDS_SUCCESS,
   deleteCardsSuccess, DELETE_CARDS_SUCCESS, deleteCards,
   updateCardsSuccess, UPDATE_CARDS_SUCCESS, updateCards} from './cards';

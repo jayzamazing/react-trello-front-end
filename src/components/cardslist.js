@@ -125,8 +125,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   updateCardslist: () => {
     if(events.charCode==13) {
       dispatch(actions.updateCardslist(events.target.id, {
-        title: events.target.value,
-        boardId: this.props.params.boardId.replace(':', '')
+        title: events.target.value
       }));
     }
   }

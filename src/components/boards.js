@@ -110,7 +110,7 @@ const mapDispatchToProps = (dispatch, props) => (dispatch(actions.getBoards()), 
     //dispatch update to board name if enter key is press in field
     updateBoard: () => {
       if(events.charCode==13) {
-        dispatch(actions.updateBoards(events.target.id, events.target.value));
+        dispatch(actions.updateBoards(events.target.id, {title: events.target.value}));
       }
     }
 });
