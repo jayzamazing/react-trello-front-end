@@ -1,26 +1,27 @@
 'use strict';
 import React from 'react';
-import {Cards} from '../cards';
+import Cards from './cards';
 import {connect} from 'react-redux';
-import * as actions from './CardsListActions';
-import CreateItems from '../utils/create-items';
+import * as actions from '../actions/cardslist';
+import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
 
-// var Cards = require('../cards');
-// var connect = require('react-redux').connect;
-// var actions = require('./CardsListActions');
-// var CreateItems = require('./create-items');
-// var Immutable = require('seamless-immutable');
 //function to render multiple lists of cards
-var Cardslist = React.createClass({
+export class Cardslist extends React.Component {
   //set up initial data state
-  getInitialState: function() {
-    return {showCreateCardsList: false, editCardsList: {}, cardslist: {}, cardslistTitle: ''};
-  },
+  constructor(props) {
+    super(props);
+    this.state = {
+      showCreateCardslist: false,
+      editCardslist: {},
+      cardslist: {},
+      cardslistTitle: ''
+    }
+  }
   //keep track of text
-  onAddInputChanged: function(event) {
-    //if the addCardsList input is being used
-    if (event.target.name == 'addCardsList') {
+  onAddInputChanged(event) {
+    //if the addCardslist input is being used
+    if (event.target.name == 'addCardslist') {
       this.setState({cardslistTitle: event.target.value});
       //otherwise assume we are editing cardslist name
     } else {
@@ -33,75 +34,53 @@ var Cardslist = React.createClass({
       //store the updated cardslist title
       this.setState({cardslist: temp2});
     }
-  },
-  //function to add a new board
-  addCardsList: function() {
-    this.props.dispatch(
-    //dispatch query boards
-    actions.createCardslist({
-      title: this.state.cardslistTitle,
-      boardId: this.props.params.boardId.replace(':', '')
-    }));
-    //hide the following input
-    this.setState({showCreateCardsList: false});
-  },
-  //function to delete a cardslist
-  deleteCardsList: function(cardslistId) {
-    this.props.dispatch(
-    //dispatch query cardslist
-    actions.deleteCardslist(cardslistId));
-  },
-  //function to edit the name of the cardslist
-  updateCardsList: function(cardslistId, cardslistName) {
-    this.props.dispatch(actions.updateCardslist(cardslistId, {
-      title: cardslistName,
-      boardId: this.props.params.boardId.replace(':', '')
-    }));
-    this.forceUpdate();
-  },
+  }
+  //hide the following input
+  addCardslist() {
+    this.setState({showCreateCardslist: false});
+  }
   //set the variable to show the create cardslist inputs
-  showCreateCardsList: function() {
-    this.setState({showCreateCardsList: true});
-  },
+  showCreateCardslist() {
+    this.setState({showCreateCardslist: true});
+  }
   //deal with the user hitting enter from the input and updating the cardslist
-  handleKeyPress: function(events) {
+  handleKeyPress(events) {
     if (events.charCode == 13) {
-      var temp = this.state.editCardsList;
+      var temp = this.state.editCardslist;
       temp[events.target.id] = true;
-      this.setState({editCardsList: temp});
-      this.updateCardsList(events.target.id, events.target.value);
+      this.setState({editCardslist: temp});
     }
-  },
+  }
   //set variable to enable the editing of the cardslist name
-  editCardsListName: function(item) {
-    var temp = this.state.editCardsList;
+  editCardslistName(item) {
+    var temp = this.state.editCardslist;
     temp[item] = false;
-    this.setState({editCardsList: temp});
-  },
-  render: function() {
-    var context = this;
+    this.setState({editCardslist: temp});
+  }
+  render() {
     if (this.props.cardslist) {
-      var boardName = context.props.params.boardName.replace(':', '');
-      var boardId = context.props.params.boardId.replace(':', '');
+      var boardName = this.props.params.boardName.replace(':', '');
+      var boardId = this.props.params.boardId.replace(':', '');
       //iterate over props.boards and get the item that matches the boardid
-      var board = context.props.boards[Object.keys(context.props.boards).find(item => {
+      var board = this.props.boards[Object.keys(this.props.boards).find(item => {
           //if the id of props.boards matches boardid
-        return context.props.boards[item]._id == boardId;
+        return this.props.boards[item]._id == boardId;
       })];
       //function to render multiple cardslist
-      var cardslist = Object.keys(context.props.cardslist).map((item, index) => {
-        if (board.cardslist.indexOf(context.props.cardslist[item]._id) > -1) {
-          var temp = context.props.cardslist[item];
+      var cardslist = Object.keys(this.props.cardslist).map((item, index) => {
+        if (board.cardslist.indexOf(this.props.cardslist[item]._id) > -1) {
+          var temp = this.props.cardslist[item];
           return (
             <li key={index}>
-              <input type="text" id={temp._id} value={context.state.cardslist[temp._id]
-                ? context.state.cardslist[temp._id].title
-                : temp.title} disabled={(context.state.editCardsList[temp._id] == undefined)
+              <input type="text" id={temp._id} value={this.state.cardslist[temp._id]
+                ? this.state.cardslist[temp._id].title
+                : temp.title} disabled={(this.state.editCardslist[temp._id] == undefined)
                 ? true
-                : context.state.editCardsList[temp._id]} onChange={context.onAddInputChanged} onKeyPress={context.handleKeyPress}/>
-              <Cards.Container cardslistId={item} key={index} boardId={boardId}/>
-              <input type="button" value="Delete Cardslist" onClick={context.deleteCardsList.bind(null, temp._id)}/>
-              <input type="button" value="Edit Cardslist" onClick={context.editCardsListName.bind(null, temp._id)}/>
+                : this.state.editCardslist[temp._id]} onChange={() => this.onAddInputChanged}
+                onKeyPress={(evt) => this.props.updateCardslist(evt)} name="cardslistName"/>
+              <Cards cardslistId={item} key={index} boardId={boardId}/>
+              <input type="button" value="Delete Cardslist" onClick={() => this.props.deleteCardslist(temp._id)} name="deleteCardslist"/>
+              <input type="button" value="Edit Cardslist" onClick={() => this.editCardslistName(temp._id)} name="editCardslist"/>
             </li>
           );
         }
@@ -116,22 +95,40 @@ var Cardslist = React.createClass({
           <ul>
             {cardslist}
           </ul>
-          <input type="button" value="Add Cards List" onClick={this.showCreateCardsList}/> {this.state.showCreateCardsList
-            ? <CreateItems onAddInputChanged={this.onAddInputChanged} addItems={this.addCardsList} name="addCardsList"/>
+          <input type="button" value="Add Cards list" onClick={() => this.showCreateCardslist()} name="addCardslist"/> {this.state.showCreateCardslist
+            ? <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)} addItems={() => {this.addCardslist(); this.props.addCardslist();}} name="cardslistInput"/>
             : null}
         </div>
       </div>
     );
   }
 
-});
+};
 //allows subcription to redux updates and access to data stored in redux store
-var mapStateToProps = function(state) {
-  return {boards: state.boards, cardslist: state.cardslist};
-};
+const mapStateToProps = (state) => ({
+  boards: state.boards,
+  cardslist: state.cardslist
+});
+const mapDispatchToProps = (dispatch, props) => ({
+  //dispatch to delete a cardslist
+  deleteCardslist: (cardslistId) => {
+    dispatch(actions.deleteCardslist(cardslistId));
+  },
+  //dispatch to add a new cardslist
+  addCardslist: () => {
+    dispatch(actions.createCardslist({
+      title: props.cardslistTitle,
+      boardId: props.params.boardId.replace(':', '')
+    }));
+  },
+  //dispatch update to cardslist name if enter key is pressed
+  updateCardslist: () => {
+    if(events.charCode==13) {
+      dispatch(actions.updateCardslist(events.target.id, {
+        title: events.target.value
+      }));
+    }
+  }
+});
 //connects component to redux store
-var Container = connect(mapStateToProps)(Cardslist);
-module.exports = {
-  Container,
-  Cardslist
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Cardslist);

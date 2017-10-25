@@ -1,15 +1,15 @@
 'use strict';
-import {trelloReducer} from './cardslist';
+import reducer from './cardslist';
 import {normalize} from 'normalizr';
 import {cardsListSchema, cardslistArray} from '../board-schema';
 import {createCardslistSuccess, deleteCardslistSuccess, updateCardslistSuccess} from '../actions/cardslist';
-import {seedCardslists, seedCardslists2} from '../testutils/seeddata';
+import {seedCardslistCount, seedCardslistSingle} from '../testutils/seeddata';
 import {FIND_BOARDS_SUCCESS} from '../actions/boards';
 
 describe('cardslist reducer', () => {
   let cardslist, items;
   beforeEach(() => {
-    cardslist = seedCardslists(5);
+    cardslist = seedCardslistCount(43245678653457, 5);
     items = (normalize(cardslist, cardslistArray)).entities;
   });
   afterEach(() => {
@@ -19,7 +19,7 @@ describe('cardslist reducer', () => {
   describe('reducer for FIND_BOARDS_SUCCESS', () => {
     let state;
     beforeEach(() => {
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());
@@ -41,9 +41,9 @@ describe('cardslist reducer', () => {
   describe('CREATE_CARDSLIST_SUCCESS', () => {
     let state, test;
     beforeEach(() => {
-      test = seedCardslists(0, 'grocery list');
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
-      state = trelloReducer(state, createCardslistSuccess(test));
+      test = seedCardslistSingle(2465432354345, 'grocery list');
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(state, createCardslistSuccess(test));
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());
@@ -63,8 +63,8 @@ describe('cardslist reducer', () => {
   describe('DELETE_CARDSLIST_SUCCESS', () => {
     let state;
     beforeEach(() => {
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
-      state = trelloReducer(state, deleteCardslistSuccess(cardslist[1]._id));
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(state, deleteCardslistSuccess(cardslist[1]._id));
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());
@@ -76,9 +76,9 @@ describe('cardslist reducer', () => {
   describe('UPDATE_CARDSLIST_SUCCESS', () => {
     let state, test;
     beforeEach(() => {
-      test = seedCardslists(0, 'super mario', cardslist[2]._id);
-      state = trelloReducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
-      state = trelloReducer(state, updateCardslistSuccess(cardslist[2]._id, test));
+      test = seedCardslistSingle(24565436542, 'super mario', cardslist[2]._id);
+      state = reducer(undefined, {type: FIND_BOARDS_SUCCESS, items});
+      state = reducer(state, updateCardslistSuccess(cardslist[2]._id, test));
     });
     it('should exist', () => {
       expect(state.cardslist).toEqual(expect.anything());

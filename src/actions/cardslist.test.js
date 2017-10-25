@@ -1,17 +1,16 @@
-import chai from 'chai';
 import {createCardslist, createCardslistSuccess, CREATE_CARDSLIST_SUCCESS,
   deleteCardslistSuccess, DELETE_CARDSLIST_SUCCESS, deleteCardslist,
   updateCardslistSuccess, UPDATE_CARDSLIST_SUCCESS, updateCardslist} from './cardslist';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import {seedCardslists, createTitle} from '../testutils/seeddata';
+import {seedCardslistCount, seedCardslistSingle, createTitle} from '../testutils/seeddata';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 let cdls;
 describe('createCardslistSuccess', () => {
   beforeEach(() => {
-    cdls = seedCardslists(1);
+    cdls = seedCardslistCount(35634235543, 1);
   });
   it('Should return the action', () => {
     const cardslist = {};
@@ -33,12 +32,12 @@ describe('createCardslist', () => {
   let card, data;
   beforeEach(() => {
     data = createTitle();
-    card = seedCardslists(0, data.title);
-    cdls = seedCardslists(0, data.title);
+    card = seedCardslistSingle(2343242341311, data.title);
+    cdls = seedCardslistSingle(2343242341311, data.title);
   });
   it('should dispatch createCardslistSuccess', () => {
     const data = createTitle();
-    const card = seedCardslists(0, data.title);
+    const card = seedCardslistSingle(2343242341311, data.title);
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       body: card
@@ -80,8 +79,8 @@ describe('deleteCardslist', () => {
   let card, data;
   beforeEach(() => {
     data = createTitle();
-    card = seedCardslists(0, data.title);
-    cdls = seedCardslists(0, data.title);
+    card = seedCardslistSingle(2343242341311, data.title);
+    cdls = seedCardslistSingle(2343242341311, data.title);
   });
   it('should dispatch deleteCardslistSuccess', () => {
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
@@ -110,7 +109,7 @@ describe('deleteCardslist', () => {
 });
 describe('updateCardslistSuccess', () => {//TODO continue from here
   beforeEach(() => {
-    cdls = seedCardslists(0, 'hello');
+    cdls = seedCardslistSingle(2343242341311, 'hello');
   });
   it('Should return the action', () => {
     const cardslist = {};
@@ -132,12 +131,12 @@ describe('updateCardslist', () => {
   let card, data;
   beforeEach(() => {
     data = createTitle();
-    card = seedCardslists(0, data.title);
-    cdls = seedCardslists(0, data.title);
+    card = seedCardslistSingle(2343242341311, data.title);
+    cdls = seedCardslistSingle(2343242341311, data.title);
   });
   it('should dispatch updateCardslistSuccess', () => {
     const data = createTitle();
-    const card = seedCardslists(0, data.title);
+    const card = seedCardslistSingle(2343242341311, data.title);
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       body: card

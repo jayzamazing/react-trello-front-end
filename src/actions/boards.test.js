@@ -1,18 +1,17 @@
-import chai from 'chai';
 import {findBoardsSuccess, FIND_BOARDS_SUCCESS, getBoards,
   createBoards, createBoardSuccess, CREATE_BOARD_SUCCESS,
   deleteBoardSuccess, DELETE_BOARD_SUCCESS, deleteBoards,
   updateBoardSuccess, UPDATE_BOARD_SUCCESS, updateBoards} from './boards';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import {seedBoards, createTitle} from '../testutils/seeddata';
+import {seedBoardsCount, seedBoardsSingle, createTitle} from '../testutils/seeddata';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 let bds;
 describe('findBoardsSuccess', () => {
   beforeEach(() => {
-    bds = seedBoards(3);
+    bds = seedBoardsCount(3);
   });
   it('Should return the action', () => {
     const boards = {};
@@ -32,7 +31,7 @@ describe('findBoardsSuccess', () => {
 });
 describe('getBoards', () => {
   beforeEach(() => {
-    bds = seedBoards(3);
+    bds = seedBoardsCount(3);
   });
   it('should dispatch findBoardsSuccess', () => {
     const boards = {}
@@ -68,7 +67,7 @@ describe('getBoards', () => {
 });
 describe('createBoardSuccess', () => {
   beforeEach(() => {
-    bds = seedBoards(1);
+    bds = seedBoardsCount(1);
   });
   it('Should return the action', () => {
     const boards = {};
@@ -90,12 +89,12 @@ describe('createBoards', () => {
   let board, data;
   beforeEach(() => {
     data = createTitle();
-    board = seedBoards(0, data.title);
-    bds = seedBoards(0, data.title);
+    board = seedBoardsSingle(data.title);
+    bds = seedBoardsSingle(data.title);
   });
   it('should dispatch createBoardSuccess', () => {
     const data = createTitle();
-    const board = seedBoards(0, data.title);
+    const board = seedBoardsSingle(data.title);
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       body: board
@@ -137,8 +136,8 @@ describe('deleteBoards', () => {
   let board, data;
   beforeEach(() => {
     data = createTitle();
-    board = seedBoards(0, data.title);
-    bds = seedBoards(0, data.title);
+    board = seedBoardsSingle(data.title);
+    bds = seedBoardsSingle(data.title);
   });
   it('should dispatch deleteBoardSuccess', () => {
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
@@ -167,7 +166,7 @@ describe('deleteBoards', () => {
 });
 describe('updateBoardSuccess', () => {//TODO continue from here
   beforeEach(() => {
-    bds = seedBoards(0, 'hello');
+    bds = seedBoardsSingle('hello');
   });
   it('Should return the action', () => {
     const boards = {};
@@ -189,12 +188,12 @@ describe('updateBoards', () => {
   let board, data;
   beforeEach(() => {
     data = createTitle();
-    board = seedBoards(0, data.title);
-    bds = seedBoards(0, data.title);
+    board = seedBoardsSingle(data.title);
+    bds = seedBoardsSingle(data.title);
   });
   it('should dispatch updateBoardSuccess', () => {
     const data = createTitle();
-    const board = seedBoards(0, data.title);
+    const board = seedBoardsSingle(data.title);
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       body: board
