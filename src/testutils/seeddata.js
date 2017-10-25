@@ -71,15 +71,19 @@ export const seedCardslistCount = (boardId, count) => {
   return cardslist;
 }
 //create cardslist items based on input value, after normalization
-export const seedCardslistInput = function(boardId, words, ids) {
-  let cardslist = {};
+export const seedCardslistInput = function(boardId, words, ids, cardsIds) {
+  let cardslist = {}, cards = [];
   for (var i = 0; i < ids.length; i++) {
-    var _id = ids[i];
-    cardslist[_id]= {
+    if (cardsIds) {
+      cards = [cardsIds[i]];
+    } else {
+      cards = seedCardsIds(ids.length);
+    }
+    cardslist[ids[i]]= {
       boardId: boardId[i],
-      _id: _id,
+      _id: ids[i],
       title: words[i],
-      cards: seedCardsIds(ids.length)
+      cards: cards
     };
   }
   return cardslist;
@@ -119,11 +123,10 @@ export const seedCardsCount = (cardslistId, count) => {
 export const seedCardsInput = function(cardslistId, words, ids) {
   let cards = {};
   for (var i = 0; i < ids.length; i++) {
-    var _id = faker.random.alphaNumeric(20);
-    cards[_id]= {
+    cards[ids[i]]= {
       cardslistId: cardslistId[i],
-      _id: _id,
-      text: faker.random.words()
+      _id: ids[i],
+      text: words[i]
     };
   }
   return cards;

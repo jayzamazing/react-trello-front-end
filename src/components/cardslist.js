@@ -49,7 +49,6 @@ export class Cardslist extends React.Component {
       var temp = this.state.editCardslist;
       temp[events.target.id] = true;
       this.setState({editCardslist: temp});
-      // this.updateCardslist(events.target.id, events.target.value);
     }
   }
   //set variable to enable the editing of the cardslist name
@@ -117,10 +116,10 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
   //dispatch to add a new cardslist
   addCardslist: () => {
-    actions.createCardslist({
+    dispatch(actions.createCardslist({
       title: props.cardslistTitle,
       boardId: props.params.boardId.replace(':', '')
-    });
+    }));
   },
   //dispatch update to cardslist name if enter key is pressed
   updateCardslist: () => {

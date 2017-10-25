@@ -36,29 +36,9 @@ export class Cards extends React.Component {
       this.setState({cardslist: temp2});
     }
   }
-  //function to add a new card
+   //hide the following input
   addCards() {
-    // this.props.dispatch(
-    //   //dispatch query cards
-    //   actions.queries('cards', 'POST', {text: this.state.text},
-    //   'create cards', this.props.cardslistId, this.props.boardId)
-    // );
-    //hide the following input
     this.setState({showCreateCards: false});
-  }
-  //function to delete a card
-  deleteCards(cardId) {
-    //dispatch query cards
-    // this.props.dispatch(
-    //   actions.queries('cards', 'DELETE', cardId, 'delete cards')
-    // );
-  }
-  //function to edit the text in a card
-  updateCards(cardsId, cardsText) {
-    // this.props.dispatch(
-    //   actions.queries('cards', 'PUT', {text: cardsText}, 'update cards', cardsId)
-    // );
-    this.forceUpdate();
   }
   showCreateCards() {
     this.setState({showCreateCards: true});
@@ -79,25 +59,24 @@ export class Cards extends React.Component {
     this.setState({editCards: temp});
   }
   render() {
-    var context = this;
-    var cardslist = context.props.cardslist[Object.keys(context.props.cardslist).find(item => {
+    var cardslist = this.props.cardslist[Object.keys(this.props.cardslist).find(item => {
         //if the id of props.cardslist matches cardslistid
-      return context.props.cardslist[item]._id == context.props.cardslistId;
+      return this.props.cardslist[item]._id == this.props.cardslistId;
     })];
     //function to render multiple cards
     var cards = Object.keys(this.props.cards).map((item, index) => {
       if (cardslist.cards.indexOf(this.props.cards[item]._id) > -1) {
-        var temp = context.props.cards[item];
+        var temp = this.props.cards[item];
         return (
           <li key={index}>
-            <input type="text" id={temp._id} value={context.state.cards[temp._id] ? context.state.cards[temp._id].text : temp.text}
-              disabled={(context.state.editCards[temp._id] == undefined) ? true : context.state.editCards[temp._id]}
-              onChange={context.onAddInputChanged}
-              onKeyPress={context.handleKeyPress}/>
+            <input type="text" id={temp._id} value={this.state.cards[temp._id] ? this.state.cards[temp._id].text : temp.text}
+              disabled={(this.state.editCards[temp._id] == undefined) ? true : this.state.editCards[temp._id]}
+              onChange={() => this.onAddInputChanged}
+              onKeyPress={(evt) => this.props.updateCards(evt)} name="cardsName"/>
             <input type="button" value="Delete Card"
-              onClick={context.deleteCards.bind(null, temp._id)}/>
+              onClick={() => this.props.deleteCards(temp._id)} name="deleteCards"/>
               <input type="button" value="Edit Card"
-                onClick={context.editCardsText.bind(null, temp._id)}/>
+                onClick={() => this.editCardsText(temp._id)} name="editCards"/>
           </li>
         );
       }
@@ -107,7 +86,7 @@ export class Cards extends React.Component {
         <ul>
           {cards}
         </ul>
-          <input type="button" value="Add Cards" onClick={this.showCreateCards}/>
+          <input type="button" value="Add Cards" onClick={() => this.showCreateCards} name="addCards"/>
           {this.state.showCreateCards ? <CreateItems
               onAddInputChanged={this.onAddInputChanged}
               addItems={this.addCards} name="addCards"/> : null}
@@ -119,5 +98,24 @@ export class Cards extends React.Component {
 const mapStateToProps = (state) => ({
   cardslist: state.cardslist,
   cards: state.cards
+});
+const mapDispatchToProps = (dispatch, props) => ({
+  //dispatch to delete a cards
+  deleteCards: () => {
+    dispatch(actions.queries('cards', 'DELETE', cardId, 'delete cards'));
+  },
+  //dispatch to add a new cards
+  addCardslist: () => {
+    dispatch(actions.queries('cards', 'POST', {text: this.state.text},
+      'create cards', this.props.cardslistId, this.props.boardId))
+  },
+  //dispatch update to cards name if enter key is pressed
+  updateCards: () => {
+    if(events.charCode==13) {
+      dispatch(
+        actions.queries('cards', 'PUT', {text: cardsText}, 'update cards', cardsId)
+      );
+    }
+  }
 });
 export default connect(mapStateToProps)(Cards);
