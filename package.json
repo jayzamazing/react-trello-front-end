@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "3.10.6",
+  "version": "3.11.6",
   "private": true,
   "proxy": "http://localhost:8080",
   "homepage": "https://github.com/jayzamazing/react-trello#readme",
@@ -15,15 +15,19 @@
     "url": "https://github.com/jayzamazing/react-trello/issues"
   },
   "dependencies": {
+    "jwt-decode": "^2.2.0",
     "normalizr": "^3.2.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
+    "redux-form": "^7.1.2",
     "redux-thunk": "^2.2.0",
-    "seamless-immutable": "^7.1.2"
+    "seamless-immutable": "^7.1.2",
+    "validator": "^9.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

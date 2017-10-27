@@ -1,5 +1,14 @@
-import {createStore, applyMiddleware} from 'redux';
-import ReduxThunk from 'redux-thunk';
-import reducer from './reducers/index';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import thunk from 'redux-thunk';
+import boardReducer from './reducers/boards';
+import cardsReducer from './reducers/cards';
+import cardslistReducer from './reducers/cardslist';
 
-export default createStore(reducer);
+export default createStore(
+  combineReducers({
+    boardReducer,
+    cardsReducer,
+    cardslistReducer
+  }),
+  applyMiddleware(thunk)
+);
