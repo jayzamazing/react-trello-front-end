@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Router, hashHistory } from 'react-router';
+import { HashRouter } from 'react-router-dom';
 import CreateItems from './create-items';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
@@ -15,11 +15,12 @@ export class Boards extends React.Component {
       boards: {},
       boardTitle: ''
     }
+    this.props.getBoards();
   }
   //keep track of text
   onAddInputChanged(event) {
     //if the addBoard input is being used
-    if (event.target.name == 'addBoard') {
+    if (event.target.name === 'addBoard') {
       //store title for board
       this.setState({boardTitle: event.target.value});
       //otherwise assume we are editing board name
@@ -53,13 +54,13 @@ export class Boards extends React.Component {
     this.setState({editBoard: temp});
   }
   showBoard(boardId, boardName, item) {
-    if (this.state.editBoard[item] == undefined) {
+    if (this.state.editBoard[item] === undefined) {
       var temp = this.state.editBoard;
       temp[item] = true;
       this.setState({editBoard: temp});
     }
-    if (this.state.editBoard[item] == true) {
-      hashHistory.push('/:' + boardId + '/:' + boardName);
+    if (this.state.editBoard[item] === true) {
+      HashRouter.push('/:' + boardId + '/:' + boardName);
     }
   }
   render() {
@@ -71,7 +72,7 @@ export class Boards extends React.Component {
           <li key={index}>
             <span onClick={() => this.showBoard(null, temp._id, temp.title, temp._id)}>
               <input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
-                disabled={(this.state.editBoard[temp._id] == undefined) ? true : this.state.editBoard[temp._id] }
+                disabled={(this.state.editBoard[temp._id] === undefined) ? true : this.state.editBoard[temp._id] }
                 onChange={(evt) => this.onAddInputChanged(evt)}
                 onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>
             </span>
@@ -98,7 +99,11 @@ export class Boards extends React.Component {
 const mapStateToProps = (state, props) => ({
   boards: state.boards
 });
-const mapDispatchToProps = (dispatch, props) => (dispatch(actions.getBoards()), {
+const mapDispatchToProps = (dispatch, props) => ({
+    //get all boards
+    getBoards: () => {
+      dispatch(actions.getBoards())
+    },
     //dispatch to delete board
     deleteBoard: (boardId) => {
       dispatch(actions.deleteBoards(boardId));
@@ -108,9 +113,9 @@ const mapDispatchToProps = (dispatch, props) => (dispatch(actions.getBoards()), 
       dispatch(actions.createBoards({title: props.boardTitle}));
     },
     //dispatch update to board name if enter key is press in field
-    updateBoard: () => {
-      if(events.charCode==13) {
-        dispatch(actions.updateBoards(events.target.id, {title: events.target.value}));
+    updateBoard: (evt) => {
+      if(evt.charCode === 13) {
+        dispatch(actions.updateBoards(evt.target.id, {title: evt.target.value}));
       }
     }
 });

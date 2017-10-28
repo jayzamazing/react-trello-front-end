@@ -1,5 +1,4 @@
-'use strict';
-import {normalize,arrayOf} from 'normalizr';
+import {normalize} from 'normalizr';
 import {boardArray, boardsSchema} from '../board-schema';
 
 

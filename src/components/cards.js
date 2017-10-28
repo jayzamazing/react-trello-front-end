@@ -18,7 +18,7 @@ export class Cards extends React.Component {
   //keep track of text
   onAddInputChanged(event) {
     //if the addCards input is being used
-    if (event.target.name == 'addCards') {
+    if (event.target.name === 'addCards') {
       this.setState({text: event.target.value});
     //otherwise assume we are editing cards name
     } else {
@@ -45,7 +45,7 @@ export class Cards extends React.Component {
   }
   //deal with the user hitting enter from the input and updating the cards
   handleKeyPress(events) {
-    if(events.charCode == 13) {
+    if(events.charCode === 13) {
       var temp = this.state.editCards;
       temp[events.target.id] = true;
       this.setState({editCards: temp});
@@ -61,16 +61,17 @@ export class Cards extends React.Component {
   render() {
     var cardslist = this.props.cardslist[Object.keys(this.props.cardslist).find(item => {
         //if the id of props.cardslist matches cardslistid
-      return this.props.cardslist[item]._id == this.props.cardslistId;
+      return this.props.cardslist[item]._id === this.props.cardslistId;
     })];
     //function to render multiple cards
     var cards = Object.keys(this.props.cards).map((item, index) => {
+      let cardsHtml;
       if (cardslist.cards.indexOf(this.props.cards[item]._id) > -1) {
         var temp = this.props.cards[item];
-        return (
+        cardsHtml = (
           <li key={index}>
             <input type="text" id={temp._id} value={this.state.cards[temp._id] ? this.state.cards[temp._id].text : temp.text}
-              disabled={(this.state.editCards[temp._id] == undefined) ? true : this.state.editCards[temp._id]}
+              disabled={(this.state.editCards[temp._id] === undefined) ? true : this.state.editCards[temp._id]}
               onChange={() => this.onAddInputChanged}
               onKeyPress={(evt) => this.props.updateCards(evt)} name="cardsName"/>
             <input type="button" value="Delete Card"
@@ -80,6 +81,7 @@ export class Cards extends React.Component {
           </li>
         );
       }
+      return cardsHtml;
     });
     return (
       <div>
@@ -101,7 +103,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cards
-  deleteCards: () => {
+  deleteCards: (cardId) => {
     dispatch(actions.deleteCards(cardId));
   },
   //dispatch to add a new cards
@@ -109,10 +111,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(actions.createCards({text: this.state.text, cardslistId: props.cardslistId}))
   },
   //dispatch update to cards name if enter key is pressed
-  updateCards: () => {
-    if(events.charCode==13) {
-      dispatch(actions.updateCards(cardsId, {text: cardsText}));
+  updateCards: (evt) => {
+    if(evt.charCode === 13) {
+      dispatch(actions.updateCards(evt.target.id, {text: evt.target.value}));
     }
   }
 });
-export default connect(mapStateToProps)(Cards);
+export default connect(mapStateToProps, mapDispatchToProps)(Cards);

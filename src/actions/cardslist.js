@@ -1,4 +1,3 @@
-'use strict';
 import {normalize} from 'normalizr';
 import {cardsListSchema} from '../board-schema';
 

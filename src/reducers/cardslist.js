@@ -43,5 +43,7 @@ export default (state, action) => {
     return deleteCardslist(state, action);
   case UPDATE_CARDSLIST_SUCCESS:
     return updateCardslist(state, action);
+  default:
+    return state;
   }
 };

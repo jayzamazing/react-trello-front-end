@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import Cards from './cards';
 import {connect} from 'react-redux';
@@ -21,7 +20,7 @@ export class Cardslist extends React.Component {
   //keep track of text
   onAddInputChanged(event) {
     //if the addCardslist input is being used
-    if (event.target.name == 'addCardslist') {
+    if (event.target.name === 'addCardslist') {
       this.setState({cardslistTitle: event.target.value});
       //otherwise assume we are editing cardslist name
     } else {
@@ -45,7 +44,7 @@ export class Cardslist extends React.Component {
   }
   //deal with the user hitting enter from the input and updating the cardslist
   handleKeyPress(events) {
-    if (events.charCode == 13) {
+    if (events.charCode === 13) {
       var temp = this.state.editCardslist;
       temp[events.target.id] = true;
       this.setState({editCardslist: temp});
@@ -64,17 +63,18 @@ export class Cardslist extends React.Component {
       //iterate over props.boards and get the item that matches the boardid
       var board = this.props.boards[Object.keys(this.props.boards).find(item => {
           //if the id of props.boards matches boardid
-        return this.props.boards[item]._id == boardId;
+        return this.props.boards[item]._id === boardId;
       })];
       //function to render multiple cardslist
       var cardslist = Object.keys(this.props.cardslist).map((item, index) => {
+        let cardslistHtml;
         if (board.cardslist.indexOf(this.props.cardslist[item]._id) > -1) {
           var temp = this.props.cardslist[item];
-          return (
+          cardslistHtml =  (
             <li key={index}>
               <input type="text" id={temp._id} value={this.state.cardslist[temp._id]
                 ? this.state.cardslist[temp._id].title
-                : temp.title} disabled={(this.state.editCardslist[temp._id] == undefined)
+                : temp.title} disabled={(this.state.editCardslist[temp._id] === undefined)
                 ? true
                 : this.state.editCardslist[temp._id]} onChange={() => this.onAddInputChanged}
                 onKeyPress={(evt) => this.props.updateCardslist(evt)} name="cardslistName"/>
@@ -84,6 +84,7 @@ export class Cardslist extends React.Component {
             </li>
           );
         }
+        return cardslistHtml;
       });
     }
     return (
@@ -122,10 +123,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     }));
   },
   //dispatch update to cardslist name if enter key is pressed
-  updateCardslist: () => {
-    if(events.charCode==13) {
-      dispatch(actions.updateCardslist(events.target.id, {
-        title: events.target.value
+  updateCardslist: (evt) => {
+    if(evt.charCode === 13) {
+      dispatch(actions.updateCardslist(evt.target.id, {
+        title: evt.target.value
       }));
     }
   }

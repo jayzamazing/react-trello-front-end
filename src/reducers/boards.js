@@ -43,5 +43,7 @@ export default (state, action) => {
     return deleteBoard(state, action);
   case UPDATE_BOARD_SUCCESS:
     return updateBoard(state, action);
+  default:
+    return state;
   }
 };

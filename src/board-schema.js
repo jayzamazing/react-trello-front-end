@@ -1,7 +1,7 @@
 /*
 * Schema representing Boards
 */
-import { normalize, schema, arrayOf } from 'normalizr';
+import { schema } from 'normalizr';
 
 //define schema items
 const boardsSchema = new schema.Entity('boards', {}, { idAttribute: '_id' });
