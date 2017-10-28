@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { HashRouter } from 'react-router-dom';
 import CreateItems from './create-items';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
@@ -60,7 +59,7 @@ export class Boards extends React.Component {
       this.setState({editBoard: temp});
     }
     if (this.state.editBoard[item] === true) {
-      HashRouter.push('/:' + boardId + '/:' + boardName);
+      this.props.history.push('/:' + boardId + '/:' + boardName);
     }
   }
   render() {
