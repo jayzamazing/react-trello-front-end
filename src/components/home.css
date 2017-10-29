@@ -1,3 +1,46 @@
 .home-nav {
-  background-color: black;
+  background-color: #0079bf;
+  padding: 2%;
+}
+.logo img {
+  height: 2.5em;
+}
+.nav-left {
+  float: left;
+}
+.nav-right {
+  float: right;
+}
+.nav-right button {
+  margin-left: 15px;
+}
+.login-btn {
+  background-color: #0067a3;
+}
+.sign-up-btn {
+  background-color: #61bd4f;
+}
+.text-center {
+  text-align: center;
+}
+main {
+  padding: 30px 15px;
+}
+.wrapper {
+  margin-top: 100px;
+}
+.wrapper-2 {
+  margin-top: 50px;
+}
+.wrapper-3 {
+  margin-top: 25px;
+}
+a {
+  color: white;
+}
+a:active, a:hover {
+  text-decoration: none;
+}
+.a-login {
+  text-decoration: underline;
 }
