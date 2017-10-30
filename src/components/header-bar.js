@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {setCurrentUser, setAuthToken} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import './header.css';
+import logo from '../img/trello-logo-white.svg';
+import {Link} from 'react-router-dom';
 
 export class HeaderBar extends React.Component {
     logOut() {
@@ -14,9 +16,22 @@ export class HeaderBar extends React.Component {
         // Only render the log out button if we are logged in
         let buttons;
         if (this.props.loggedIn) {
-          buttons = <button onClick={() => this.logOut()}>Log out</button>;
+          buttons = (
+            <div className="nav-right">
+              <button onClick={() => this.logOut()}>Log out</button>
+            </div>
+          );
         } else {
-          buttons = <button className="btn login-btn"><Link to="/login">Log In</Link></button><button className="btn sign-up-btn"><Link to="/registration">Sign Up</Link></button>;
+          buttons = (
+            <div className="nav-right">
+              <Link to="/login">
+                <button className="btn login-btn">Log In</button>
+              </Link>
+              <Link to="/register">
+              <button className="btn sign-up-btn">Sign Up</button>
+              </Link>
+            </div>
+          );
         }
         return (
             <header className="container-fluid header-bar">
@@ -26,9 +41,7 @@ export class HeaderBar extends React.Component {
                     <img src={logo} alt="Logo"></img>
                   </Link>
                 </div>
-                <div className="nav-right">
                   {buttons}
-                </div>
               </nav>
             </header>
         );

@@ -1,14 +1,14 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
-import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
+import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Input from './input';
 import {createUser} from '../actions/users';
-import {userLogin} from '../actions/auth';
+import {login} from '../actions/auth';
 
 export class RegistrationForm extends React.Component {
   onSubmit(values) {
-      const {username, password, firstName, lastName} = values;
-      const user = {username, password, name};
+      const {username, password, fullName} = values;
+      const user = {username, password, fullName};
       return this.props
           .dispatch(createUser(user))
           .then(() => this.props.dispatch(login(username, password)));
@@ -20,8 +20,8 @@ export class RegistrationForm extends React.Component {
             onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
             )}>
-            <label htmlFor="name">name</label>
-            <Field component={Input} type="text" name="name" />
+            <label htmlFor="fullName">name</label>
+            <Field component={Input} type="text" name="fullName" />
             <label htmlFor="username">Username</label>
             <Field
                 component={Input}

@@ -30,7 +30,7 @@ export const login = (username, password) => dispatch => {
     // auth field
     const token = btoa(`${username}:${password}`);
     return (
-        fetch(`${API_BASE_URL}/auth/login`, {
+        fetch(`${BASE_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 // Provide our username and password as login credentials
@@ -59,7 +59,7 @@ export const login = (username, password) => dispatch => {
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/auth/refresh`, {
+    return fetch(`${BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
             // Provide our existing token as credentials to get a new one

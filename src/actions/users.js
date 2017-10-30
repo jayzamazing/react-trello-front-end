@@ -12,13 +12,12 @@ export const createUser = user => dispatch => {
   }).then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .catch(err => {
-    const {reason, message, location} = err;
-    return Promise.reject(
-      return Promise.reject(
-        new SubmissionError({
-          [location]: message
-        });;
-      );
-    );
+      const {reason, message, location} = err;
+      if (reason === 'ValidationError') {
+          // Convert ValidationErrors into SubmissionErrors for Redux Form
+          return Promise.reject(new SubmissionError({
+              [location]: message
+          }));
+      }
   });
 }
