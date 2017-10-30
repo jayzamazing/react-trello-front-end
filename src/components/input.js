@@ -1,4 +1,5 @@
 import React from 'react';
+import './input.css'
 
 export default class Input extends React.Component {
     componentDidUpdate(prevProps) {
@@ -6,7 +7,6 @@ export default class Input extends React.Component {
             this.input.focus();
         }
     }
-
     render() {
         let error;
         if (this.props.meta.touched && this.props.meta.error) {
@@ -19,9 +19,8 @@ export default class Input extends React.Component {
                 <div className="form-warning">{this.props.meta.warning}</div>
             );
         }
-
         return (
-            <div className="form-input">
+            <div className={this.props.type === 'checkbox' ? 'form-input inline-block space' : 'form-input'}>
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
                     {error}

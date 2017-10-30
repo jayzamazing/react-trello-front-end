@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import RegistrationForm from './registration-form';
+import './registration.css';
 
 export function RegistrationPage(props) {
     // If we are logged in (which happens automatically when registration
@@ -10,10 +11,14 @@ export function RegistrationPage(props) {
         return <Redirect to="/dashboard" />;
     }
     return (
-        <div className="home">
-            <h2>Create a Trello Account</h2>
-            <RegistrationForm />
-            <Link to="/">Login</Link>
+        <div className="registration container">
+          <div className="row">
+            <div className="col-centered form-area">
+              <h2>Create a Trello Account</h2>
+              <RegistrationForm />
+              <p>Already have an account? <Link to="/">Log in.</Link></p>
+            </div>
+          </div>
         </div>
     );
 }

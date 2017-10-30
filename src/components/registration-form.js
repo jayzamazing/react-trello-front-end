@@ -4,6 +4,7 @@ import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Input from './input';
 import {createUser} from '../actions/users';
 import {login} from '../actions/auth';
+import './registration-form.css';
 
 export class RegistrationForm extends React.Component {
   onSubmit(values) {
@@ -20,7 +21,7 @@ export class RegistrationForm extends React.Component {
             onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
             )}>
-            <label htmlFor="fullName">name</label>
+            <label htmlFor="fullName">Name</label>
             <Field component={Input} type="text" name="fullName" />
             <label htmlFor="username">Username</label>
             <Field
@@ -36,18 +37,18 @@ export class RegistrationForm extends React.Component {
                 name="password"
                 validate={[required, length({min: 10, max: 72}), isTrimmed]}
             />
-          <label htmlFor="acceptTerms">I accept the <a>Terms of Service</a> and <a>Privacy Policy</a></label>
             <Field
                 component={Input}
                 type="checkbox"
                 name="acceptTerms"
                 validate={[required]}
             />
-            <button
-                type="submit"
-                disabled={this.props.pristine || this.props.submitting}>
-                Create New Account
-            </button>
+          <label htmlFor="acceptTerms">I accept the <a>Terms of Service</a> and <a>Privacy Policy</a></label>
+          <button className="block"
+              type="submit"
+              disabled={this.props.pristine || this.props.submitting}>
+              Create New Account
+          </button>
         </form>
     );
   }

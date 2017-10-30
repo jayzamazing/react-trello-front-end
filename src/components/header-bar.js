@@ -34,7 +34,7 @@ export class HeaderBar extends React.Component {
           );
         }
         return (
-            <header className="container-fluid header-bar">
+            <header className={this.props.location.pathname === '/register' ? 'invisible' : 'container-fluid header-bar'}>
               <nav className="row home-nav">
                 <div className="nav-left">
                   <Link to="/" className="logo">

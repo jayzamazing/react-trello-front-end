@@ -45,7 +45,7 @@ export class App extends React.Component {
   render() {
     return (
       <div>
-        <HeaderBar />
+        <HeaderBar location={this.props.location} />
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={RegistrationPage} />

@@ -20,3 +20,6 @@
 .sign-up-btn {
   background-color: #61bd4f;
 }
+.invisible {
+  visibility: hidden;
+}
