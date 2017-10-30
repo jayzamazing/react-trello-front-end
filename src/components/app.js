@@ -12,7 +12,8 @@ export default class App extends React.Component {
     return (
       <div>
         <Route exact path="/" component={Home} />
-        <Route exact path="register" component={RegistrationPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/boards" component={Boards} />
         <Route exact path="/board/:boardId" component={Cardslist} />
       </div>

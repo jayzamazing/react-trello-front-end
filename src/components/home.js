@@ -6,24 +6,6 @@ import './home.css';
 export default function Home() {
   return (
     <section>
-      <header className="container-fluid">
-        <nav className="row home-nav">
-          <div className="nav-left">
-            <Link to="/" className="logo">
-              <img src={logo} alt="Logo"></img>
-            </Link>
-          </div>
-          <div className="nav-right">
-            <button className="btn login-btn">
-              <Link to="/login">Log In</Link>
-            </button>
-            <button className="btn sign-up-btn">
-              <Link to="/registration">Sign Up</Link>
-            </button>
-          </div>
-
-        </nav>
-      </header>
       <main className="container">
         <div className="row wrapper">
           <div className="text-center">

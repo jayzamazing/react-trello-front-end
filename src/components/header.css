@@ -1,0 +1,22 @@
+.home-nav {
+  background-color: #0079bf;
+  padding: 2%;
+}
+.logo img {
+  height: 2.5em;
+}
+.nav-left {
+  float: left;
+}
+.nav-right {
+  float: right;
+}
+.nav-right button {
+  margin-left: 15px;
+}
+.login-btn {
+  background-color: #0067a3;
+}
+.sign-up-btn {
+  background-color: #61bd4f;
+}
