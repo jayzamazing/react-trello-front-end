@@ -4,6 +4,7 @@ import {Route} from 'react-router-dom';
 import Home from './home';
 import Boards from './boards';
 import Cardslist from './cardslist';
+import RegistrationPage from './registration-page';
 
 
 export default class App extends React.Component {
@@ -11,6 +12,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Route exact path="/" component={Home} />
+        <Route exact path="register" component={RegistrationPage} />
         <Route exact path="/boards" component={Boards} />
         <Route exact path="/board/:boardId" component={Cardslist} />
       </div>

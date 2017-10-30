@@ -2,13 +2,15 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
 import Input from './input';
+import {createUser} from '../actions/users';
+import {userLogin} from '../actions/auth';
 
 export class RegistrationForm extends React.Component {
   onSubmit(values) {
       const {username, password, firstName, lastName} = values;
-      const user = {username, password, firstName, lastName};
+      const user = {username, password, name};
       return this.props
-          .dispatch(registerUser(user))
+          .dispatch(createUser(user))
           .then(() => this.props.dispatch(login(username, password)));
   }
   render() {
@@ -18,10 +20,8 @@ export class RegistrationForm extends React.Component {
             onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
             )}>
-            <label htmlFor="firstName">First name</label>
-            <Field component={Input} type="text" name="firstName" />
-            <label htmlFor="lastName">Last name</label>
-            <Field component={Input} type="text" name="lastName" />
+            <label htmlFor="name">name</label>
+            <Field component={Input} type="text" name="name" />
             <label htmlFor="username">Username</label>
             <Field
                 component={Input}
@@ -36,17 +36,17 @@ export class RegistrationForm extends React.Component {
                 name="password"
                 validate={[required, length({min: 10, max: 72}), isTrimmed]}
             />
-            <label htmlFor="passwordConfirm">Confirm password</label>
+          <label htmlFor="acceptTerms">I accept the <a>Terms of Service</a> and <a>Privacy Policy</a></label>
             <Field
                 component={Input}
-                type="password"
-                name="passwordConfirm"
-                validate={[required, nonEmpty, matches('password')]}
+                type="checkbox"
+                name="acceptTerms"
+                validate={[required]}
             />
             <button
                 type="submit"
                 disabled={this.props.pristine || this.props.submitting}>
-                Register
+                Create New Account
             </button>
         </form>
     );
