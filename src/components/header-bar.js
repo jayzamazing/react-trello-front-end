@@ -33,8 +33,18 @@ export class HeaderBar extends React.Component {
             </div>
           );
         }
+        //used to hide the header when on certain pages
+        let visibility = () => {
+          const temp1 = this.props.location.pathname === '/register' ? false : true;
+          const temp2 = this.props.location.pathname === '/login' ? false : true;
+          if (temp1 && temp2) {
+            return 'container-fluid header-bar';
+          } else {
+            return 'invisible';
+          }
+        }
         return (
-            <header className={this.props.location.pathname === '/register' ? 'invisible' : 'container-fluid header-bar'}>
+            <header className={visibility()}>
               <nav className="row home-nav">
                 <div className="nav-left">
                   <Link to="/" className="logo">

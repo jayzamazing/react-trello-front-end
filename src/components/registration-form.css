@@ -1,3 +1,12 @@
 .block {
   display: block;
 }
+.input-field {
+  width: 340px;
+}
+.inline-block {
+  display: inline-block;
+}
+.space {
+  margin: 20px 5px 0px 0px;
+}

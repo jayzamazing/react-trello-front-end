@@ -1,5 +1,4 @@
 import React from 'react';
-import './input.css'
 
 export default class Input extends React.Component {
     componentDidUpdate(prevProps) {
@@ -20,13 +19,13 @@ export default class Input extends React.Component {
             );
         }
         return (
-            <div className={this.props.type === 'checkbox' ? 'form-input inline-block space' : 'form-input'}>
-                <label htmlFor={this.props.input.name}>
+            <div className={this.props.divClass}>
+                <label htmlFor={this.props.input.name} className={this.props.labelclass}>
                     {this.props.label}
                     {error}
                     {warning}
                 </label>
-                <input
+                <input className={this.props.inputClass}
                     {...this.props.input}
                     id={this.props.input.name}
                     type={this.props.type}

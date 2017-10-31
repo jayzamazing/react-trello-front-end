@@ -22,13 +22,20 @@ export class RegistrationForm extends React.Component {
                 this.onSubmit(values)
             )}>
             <label htmlFor="fullName">Name</label>
-            <Field component={Input} type="text" name="fullName" />
+            <Field
+              component={Input}
+              type="text"
+              name="fullName"
+              validate={[required, nonEmpty, isTrimmed]}
+              inputClass="input-field form-control"
+            />
             <label htmlFor="username">Username</label>
             <Field
                 component={Input}
                 type="text"
                 name="username"
                 validate={[required, nonEmpty, isTrimmed]}
+                inputClass="input-field form-control"
             />
             <label htmlFor="password">Password</label>
             <Field
@@ -36,15 +43,19 @@ export class RegistrationForm extends React.Component {
                 type="password"
                 name="password"
                 validate={[required, length({min: 10, max: 72}), isTrimmed]}
+                inputClass="input-field form-control"
             />
             <Field
                 component={Input}
                 type="checkbox"
                 name="acceptTerms"
                 validate={[required]}
+                divClass="inline-block space"
             />
-          <label htmlFor="acceptTerms">I accept the <a>Terms of Service</a> and <a>Privacy Policy</a></label>
-          <button className="block"
+          <label htmlFor="acceptTerms">
+            I accept the <a>Terms of Service</a> and <a>Privacy Policy</a>
+          </label>
+          <button className="block btn"
               type="submit"
               disabled={this.props.pristine || this.props.submitting}>
               Create New Account

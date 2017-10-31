@@ -5,7 +5,7 @@ import Home from './home';
 import Boards from './boards';
 import Cardslist from './cardslist';
 import RegistrationPage from './registration-page';
-import Login from './login';
+import Login from './login-page';
 import HeaderBar from './header-bar';
 import {refreshAuthToken} from '../actions/auth';
 
