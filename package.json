@@ -1,8 +1,7 @@
 {
   "name": "client",
-  "version": "3.19.7",
+  "version": "3.20.8",
   "private": true,
-  "proxy": "http://localhost:8080",
   "homepage": "https://github.com/jayzamazing/react-trello#readme",
   "license": "MIT",
   "repository": {

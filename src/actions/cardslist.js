@@ -1,6 +1,6 @@
 import {normalize} from 'normalizr';
 import {cardsListSchema} from '../board-schema';
-
+import {BASE_URL} from '../config';
 /*
 * action to tell store that a cardslist has been created
 * @params data - data to be sent to store
@@ -21,7 +21,7 @@ export const createCardslistSuccess = cardslist => {
 * @dispatch createCardslistSuccess or passed in action
 */
 export const createCardslist = (postData, action = createCardslistSuccess) => dispatch => {
-  return fetch('/cardslist', {
+  return fetch(`${BASE_URL}/cardslist`, {
     method: "POST",
     body: postData
   })
@@ -49,7 +49,7 @@ export const deleteCardslistSuccess = id => {
 * @dispatch deleteCardslistSuccess or passed in action
 */
 export const deleteCardslist = (id, action = deleteCardslistSuccess) => dispatch => {
-  return fetch(`/cardslist/${id}`, {
+  return fetch(`${BASE_URL}/cardslist/${id}`, {
     method: 'DELETE'
   })
     .then((res) => {
@@ -80,7 +80,7 @@ export const updateCardslistSuccess = function(id, cardslist) {
 * @dispatch updateCardslistSuccess or passed in action
 */
 export const updateCardslist = (id, postData, action = updateCardslistSuccess) => dispatch => {
-  return fetch(`/cardslist/${id}`, {
+  return fetch(`${BASE_URL}/cardslist/${id}`, {
     method: 'PUT',
     body: postData
   })

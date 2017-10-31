@@ -8,11 +8,11 @@ import './registration-form.css';
 
 export class RegistrationForm extends React.Component {
   onSubmit(values) {
-      const {username, password, fullName} = values;
-      const user = {username, password, fullName};
+      const {email, password, fullName} = values;
+      const user = {email, password, fullName};
       return this.props
           .dispatch(createUser(user))
-          .then(() => this.props.dispatch(login(username, password)));
+          .then(() => this.props.dispatch(login(email, password)));
   }
   render() {
     return (
@@ -29,11 +29,11 @@ export class RegistrationForm extends React.Component {
               validate={[required, nonEmpty, isTrimmed]}
               inputClass="input-field form-control"
             />
-            <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
             <Field
                 component={Input}
                 type="text"
-                name="username"
+                name="email"
                 validate={[required, nonEmpty, isTrimmed]}
                 inputClass="input-field form-control"
             />

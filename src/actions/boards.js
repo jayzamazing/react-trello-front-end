@@ -1,6 +1,6 @@
 import {normalize} from 'normalizr';
 import {boardArray, boardsSchema} from '../board-schema';
-
+import {BASE_URL} from '../config';
 
 /*
 * action to tell store that all boards has been retrieved
@@ -22,7 +22,7 @@ export const findBoardsSuccess = boards => {
 * @dispatch findBoardsSuccess or passed in action
 */
 export const getBoards = (action = findBoardsSuccess) => dispatch => {
-  return fetch('/boards')
+  return fetch(`${BASE_URL}/boards`)
     .then((res) => {
       if (!res.ok) return Promise.reject(res.statusText);
       dispatch(action(res.body));
@@ -48,7 +48,7 @@ export const createBoardSuccess = boards => {
 * @dispatch createBoardSuccess or passed in action
 */
 export const createBoards = (postData, action = createBoardSuccess) => dispatch => {
-  return fetch('/boards', {
+  return fetch(`${BASE_URL}/boards`, {
     method: "POST",
     body: postData
   })
@@ -76,7 +76,7 @@ export const deleteBoardSuccess = id => {
 * @dispatch deleteBoardSuccess or passed in action
 */
 export const deleteBoards = (id, action = deleteBoardSuccess) => dispatch => {
-  return fetch(`/boards/${id}`, {
+  return fetch(`${BASE_URL}/boards/${id}`, {
     method: 'DELETE'
   })
     .then((res) => {
@@ -107,7 +107,7 @@ export const updateBoardSuccess = function(id, boards) {
 * @dispatch updateBoardSuccess or passed in action
 */
 export const updateBoards = (id, postData, action = updateBoardSuccess) => dispatch => {
-  return fetch(`/boards/${id}`, {
+  return fetch(`${BASE_URL}/boards/${id}`, {
     method: 'PUT',
     body: postData
   })
