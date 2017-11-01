@@ -21,12 +21,18 @@ export const findBoardsSuccess = boards => {
 * @params findBoardsSuccess or passed in action
 * @dispatch findBoardsSuccess or passed in action
 */
-export const getBoards = (action = findBoardsSuccess) => dispatch => {
-  return fetch(`${BASE_URL}/boards`)
+export const getBoards = (action = findBoardsSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/boards`, {
+    headers: {
+        // Provide our auth token as credentials
+        Authorization: `Bearer ${authToken}`
+    }
+  })
     .then((res) => {
       if (!res.ok) return Promise.reject(res.statusText);
       dispatch(action(res.body));
-    });
+    }).catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a board has been created
@@ -47,10 +53,15 @@ export const createBoardSuccess = boards => {
 * @params createBoardSuccess or passed in action
 * @dispatch createBoardSuccess or passed in action
 */
-export const createBoards = (postData, action = createBoardSuccess) => dispatch => {
+export const createBoards = (postData, action = createBoardSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
   return fetch(`${BASE_URL}/boards`, {
     method: "POST",
-    body: postData
+    body: postData,
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
   })
     .then((res) => {
       if (!res.ok) return Promise.reject(res.statusText);
@@ -75,9 +86,14 @@ export const deleteBoardSuccess = id => {
 * @params deleteBoardSuccess or passed in action
 * @dispatch deleteBoardSuccess or passed in action
 */
-export const deleteBoards = (id, action = deleteBoardSuccess) => dispatch => {
+export const deleteBoards = (id, action = deleteBoardSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
   return fetch(`${BASE_URL}/boards/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
   })
     .then((res) => {
       if (!res.ok) return Promise.reject(res.statusText);
@@ -106,10 +122,15 @@ export const updateBoardSuccess = function(id, boards) {
 * @params updateBoardSuccess or passed in action
 * @dispatch updateBoardSuccess or passed in action
 */
-export const updateBoards = (id, postData, action = updateBoardSuccess) => dispatch => {
+export const updateBoards = (id, postData, action = updateBoardSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
   return fetch(`${BASE_URL}/boards/${id}`, {
     method: 'PUT',
-    body: postData
+    body: postData,
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
   })
     .then((res) => {
       if (!res.ok) return Promise.reject(res.statusText);

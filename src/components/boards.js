@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import CreateItems from './create-items';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
+import {Redirect} from 'react-router-dom';
 //function to render multiple lists of boards
 export class Boards extends React.Component {
   //set up initial data state
@@ -13,6 +14,11 @@ export class Boards extends React.Component {
       editBoard: {},
       boards: {},
       boardTitle: ''
+    }
+  }
+  componentDidMount() {
+    if (!this.props.loggedIn) {
+        return;
     }
     this.props.getBoards();
   }
@@ -63,6 +69,11 @@ export class Boards extends React.Component {
     }
   }
   render() {
+    // Only visible to logged in users
+    if (!this.props.loggedIn) {
+        return <Redirect to="/" />;
+    }
+    console.log(this.props);
     //only execute if there is data
     if (this.props.boards) {
       var list = Object.keys(this.props.boards).map((item, index) => {
@@ -95,9 +106,17 @@ export class Boards extends React.Component {
   }
 };
 //allows subcription to redux updates and access to data stored in redux store
-const mapStateToProps = (state, props) => ({
-  boards: state.boards
-});
+const mapStateToProps = (state, props) => {
+  const {currentUser} = state.auth;
+  return {
+    boards: state.boards,
+    loggedIn: currentUser !== null,
+    username: currentUser ? state.auth.currentUser.username : '',
+    fullName: currentUser
+        ? `${currentUser.fullName}`
+        : ''
+  };
+};
 const mapDispatchToProps = (dispatch, props) => ({
     //get all boards
     getBoards: () => {

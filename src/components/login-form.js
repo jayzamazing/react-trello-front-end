@@ -7,7 +7,7 @@ import './login-form.css';
 
 export class LoginForm extends React.Component {
     onSubmit(values) {
-        return this.props.dispatch(login(values.username, values.password));
+        return this.props.dispatch(login(values.email, values.password));
     }
 
     render() {
@@ -18,8 +18,8 @@ export class LoginForm extends React.Component {
         return (
             <form className="login-form" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 {error}
-                <label htmlFor="username">Email (or username)</label>
-                <Field component={Input} type="text" name="username" id="username"
+                <label htmlFor="email">Email (or username)</label>
+                <Field component={Input} type="text" name="email" id="email"
                     validate={[required, nonEmpty]} inputClass="input-field form-control"/>
                 <label htmlFor="password">Password</label>
                 <Field component={Input} type="password" name="password" id="password"

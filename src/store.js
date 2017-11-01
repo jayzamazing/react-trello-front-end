@@ -5,8 +5,10 @@ import cardsReducer from './reducers/cards';
 import cardslistReducer from './reducers/cardslist';
 import {reducer as formReducer} from 'redux-form';
 import authReducer from './reducers/auth';
+import {loadAuthToken} from './local-storage';
+import {setAuthToken} from './actions/auth';
 
-export default createStore(
+const store = createStore(
   combineReducers({
     boards: boardReducer,
     cards: cardsReducer,
@@ -16,3 +18,12 @@ export default createStore(
   }),
   applyMiddleware(thunk)
 );
+
+// Hydrate the authToken from localStorage if it exist
+const authToken = loadAuthToken();
+if (authToken) {
+    const token = authToken;
+    store.dispatch(setAuthToken(token));
+}
+
+export default store;
