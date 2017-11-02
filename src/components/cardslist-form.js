@@ -74,12 +74,11 @@ export class Cardslist extends React.Component {
           cardslistHtml =  (
             <li key={index}>
               <div className="cardslist-tile">
-                <span className="">
-                  <span className="">{this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
-                    : temp.title}
-                  </span>
+                <h2>{this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
+                  : temp.title}</h2>
+                <div className="">
                   <CardsForm cardslistId={item} key={index} boardId={boardId}/>
-                </span>
+                </div>
               </div>
               {/*<input type="text" id={temp._id} value={this.state.cardslist[temp._id]
                 ? this.state.cardslist[temp._id].title
@@ -103,10 +102,17 @@ export class Cardslist extends React.Component {
         <div className="cardslist-list">
           <ul>
             {cardslist}
+            <li>
+              <div>
+                <a href="#">
+                  Add a list...
+                </a>
+              </div>
+            </li>
           </ul>
-          <input type="button" value="Add Cards list" onClick={() => this.showCreateCardslist()} name="addCardslist"/> {this.state.showCreateCardslist
+          {/*<input type="button" value="Add Cards list" onClick={() => this.showCreateCardslist()} name="addCardslist"/> {this.state.showCreateCardslist
             ? <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)} addItems={() => {this.addCardslist(); this.props.addCardslist();}} name="cardslistInput"/>
-            : null}
+            : null}*/}
         </div>
       </div>
     );
@@ -115,8 +121,8 @@ export class Cardslist extends React.Component {
 };
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state) => ({
-  boards: state.boards.boards,
-  cardslist: state.cardslist.cardslist
+  boards: state.boards,
+  cardslist: state.cardslist
 });
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cardslist

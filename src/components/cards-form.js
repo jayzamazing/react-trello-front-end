@@ -101,8 +101,8 @@ export class Cards extends React.Component {
 };
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state) => ({
-  cardslist: state.cardslist.cardslist,
-  cards: state.cards.cards
+  cardslist: state.cardslist,
+  cards: state.cards
 });
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cards

@@ -118,7 +118,7 @@ export class Boards extends React.Component {
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state, props) => {
   return {
-    boards: state.boards.boards,
+    boards: state.boards,
     loggedIn: state.auth.currentUser !== null
   };
 };

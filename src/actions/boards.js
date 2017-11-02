@@ -9,15 +9,14 @@ import {normalizeResponseErrors} from './utils';
 * @returns action type and boards
 */
 export const FIND_BOARDS_SUCCESS = 'FIND_BOARDS_SUCCESS';
-export const findBoardsSuccess = boards => {
-  let items = {};
-  if (boards) {//grab all boards array with cards and cardslist and normalize it
-    //grab all boards array with cards and cardslist and normalize it
-    items = (normalize(boards, boardArray)).entities;
-  }
+export const findBoardsSuccess = items => {
+  //grab all boards array with cards and cardslist and normalize it
+  const {boards, cardslist, cards} = items ? normalize(items, boardArray).entities : {};
   return {
     type: FIND_BOARDS_SUCCESS,
-    items
+    boards,
+    cardslist,
+    cards
   };
 };
 /*
