@@ -1,0 +1,7 @@
+.cardslist-tile {
+  width: 270px;
+  min-height: 68px;
+}
+.cardslist-list ul {
+  display: flex;
+}

@@ -1,9 +1,10 @@
 import React from 'react';
-import Cards from './cards';
+import CardsForm from './cards-form';
 import {connect} from 'react-redux';
 import * as actions from '../actions/cardslist';
 import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
+import './cardslist-form.css';
 
 //function to render multiple lists of cards
 export class Cardslist extends React.Component {
@@ -72,15 +73,22 @@ export class Cardslist extends React.Component {
           var temp = this.props.cardslist[item];
           cardslistHtml =  (
             <li key={index}>
-              <input type="text" id={temp._id} value={this.state.cardslist[temp._id]
+              <div className="cardslist-tile">
+                <span className="">
+                  <span className="">{this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
+                    : temp.title}
+                  </span>
+                  <CardsForm cardslistId={item} key={index} boardId={boardId}/>
+                </span>
+              </div>
+              {/*<input type="text" id={temp._id} value={this.state.cardslist[temp._id]
                 ? this.state.cardslist[temp._id].title
                 : temp.title} disabled={(this.state.editCardslist[temp._id] === undefined)
                 ? true
                 : this.state.editCardslist[temp._id]} onChange={() => this.onAddInputChanged}
-                onKeyPress={(evt) => this.props.updateCardslist(evt)} name="cardslistName"/>
-              <Cards cardslistId={item} key={index} boardId={boardId}/>
-              <input type="button" value="Delete Cardslist" onClick={() => this.props.deleteCardslist(temp._id)} name="deleteCardslist"/>
-              <input type="button" value="Edit Cardslist" onClick={() => this.editCardslistName(temp._id)} name="editCardslist"/>
+                onKeyPress={(evt) => this.props.updateCardslist(evt)} name="cardslistName"/>*/}
+              {/*<input type="button" value="Delete Cardslist" onClick={() => this.props.deleteCardslist(temp._id)} name="deleteCardslist"/>
+            <input type="button" value="Edit Cardslist" onClick={() => this.editCardslistName(temp._id)} name="editCardslist"/>*/}
             </li>
           );
         }
@@ -92,7 +100,7 @@ export class Cardslist extends React.Component {
         <div className="board-name">
           <h1>{boardName}</h1>
         </div>
-        <div className="board-list">
+        <div className="cardslist-list">
           <ul>
             {cardslist}
           </ul>
@@ -108,7 +116,7 @@ export class Cardslist extends React.Component {
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state) => ({
   boards: state.boards.boards,
-  cardslist: state.cardslist
+  cardslist: state.cardslist.cardslist
 });
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cardslist

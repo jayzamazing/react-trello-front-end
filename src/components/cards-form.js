@@ -70,14 +70,17 @@ export class Cards extends React.Component {
         var temp = this.props.cards[item];
         cardsHtml = (
           <li key={index}>
-            <input type="text" id={temp._id} value={this.state.cards[temp._id] ? this.state.cards[temp._id].text : temp.text}
+            <span>
+              {this.state.cards[temp._id] ? this.state.cards[temp._id].text : temp.text}
+            </span>
+            {/*<input type="text" id={temp._id} value={this.state.cards[temp._id] ? this.state.cards[temp._id].text : temp.text}
               disabled={(this.state.editCards[temp._id] === undefined) ? true : this.state.editCards[temp._id]}
               onChange={() => this.onAddInputChanged}
-              onKeyPress={(evt) => this.props.updateCards(evt)} name="cardsName"/>
-            <input type="button" value="Delete Card"
+              onKeyPress={(evt) => this.props.updateCards(evt)} name="cardsName"/>*/}
+            {/*<input type="button" value="Delete Card"
               onClick={() => this.props.deleteCards(temp._id)} name="deleteCards"/>
               <input type="button" value="Edit Card"
-                onClick={() => this.editCardsText(temp._id)} name="editCards"/>
+                onClick={() => this.editCardsText(temp._id)} name="editCards"/>*/}
           </li>
         );
       }
@@ -88,18 +91,18 @@ export class Cards extends React.Component {
         <ul>
           {cards}
         </ul>
-          <input type="button" value="Add Cards" onClick={() => this.showCreateCards} name="addCards"/>
+          {/*<input type="button" value="Add Cards" onClick={() => this.showCreateCards} name="addCards"/>
           {this.state.showCreateCards ? <CreateItems
               onAddInputChanged={this.onAddInputChanged}
-              addItems={this.addCards} name="addCards"/> : null}
+              addItems={this.addCards} name="addCards"/> : null}*/}
       </div>
     );
   }
 };
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state) => ({
-  cardslist: state.cardslist,
-  cards: state.cards
+  cardslist: state.cardslist.cardslist,
+  cards: state.cards.cards
 });
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cards
