@@ -1,7 +1,7 @@
 import React from 'react';
 
 //create a simple form to submit changes
-export default class CreateItems {
+export default class CreateItems extends React.Component {
   render() {
     return (
       <form className="list-form">

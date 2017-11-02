@@ -1,6 +1,7 @@
 import {normalize} from 'normalizr';
 import {boardArray, boardsSchema} from '../board-schema';
 import {BASE_URL} from '../config';
+import {normalizeResponseErrors} from './utils';
 
 /*
 * action to tell store that all boards has been retrieved
@@ -9,8 +10,11 @@ import {BASE_URL} from '../config';
 */
 export const FIND_BOARDS_SUCCESS = 'FIND_BOARDS_SUCCESS';
 export const findBoardsSuccess = boards => {
-  //grab all boards array with cards and cardslist and normalize it
-  const items = (normalize(boards, boardArray)).entities;
+  let items = {};
+  if (boards) {//grab all boards array with cards and cardslist and normalize it
+    //grab all boards array with cards and cardslist and normalize it
+    items = (normalize(boards, boardArray)).entities;
+  }
   return {
     type: FIND_BOARDS_SUCCESS,
     items
@@ -25,14 +29,20 @@ export const getBoards = (action = findBoardsSuccess) => (dispatch, getState) =>
   const authToken = getState().auth.authToken;
   return fetch(`${BASE_URL}/boards`, {
     headers: {
-        // Provide our auth token as credentials
-        Authorization: `Bearer ${authToken}`
+      Accept: 'application/json',
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
     }
   })
-    .then((res) => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      dispatch(action(res.body));
-    }).catch(err => {console.log(err)});
+    .then(res => {
+      if (res.status === 204) {
+        dispatch(action());
+      }
+      return normalizeResponseErrors(res);
+    })
+    .then(res => res.json())
+    .then(res => dispatch(action(res)))
+    .catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a board has been created

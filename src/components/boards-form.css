@@ -1,0 +1,13 @@
+ul li {
+  list-style: none;
+}
+.board-tile {
+  height: 100px;
+  width: 280px;
+  background: #0067a3;
+  display: block;
+  padding: 15px;
+}
+.boards-form a {
+  color: white;
+}

@@ -11,7 +11,7 @@ export function LoginPage(props) {
     }
 
     return (
-        <div className="home container">
+        <div className="login container">
             <div className="row">
               <div className="col-centered login-area">
                 <h2>Log in to Trello</h2>

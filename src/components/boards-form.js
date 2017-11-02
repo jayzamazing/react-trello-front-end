@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CreateItems from './create-items';
+// import CreateItems from './create-items';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
-import {Redirect} from 'react-router-dom';
+import './boards-form.css'
+import {Link} from 'react-router-dom';
 //function to render multiple lists of boards
 export class Boards extends React.Component {
   //set up initial data state
@@ -17,6 +18,7 @@ export class Boards extends React.Component {
     }
   }
   componentDidMount() {
+    //don't load if not logged in
     if (!this.props.loggedIn) {
         return;
     }
@@ -58,63 +60,66 @@ export class Boards extends React.Component {
     temp[item] = false;
     this.setState({editBoard: temp});
   }
-  showBoard(boardId, boardName, item) {
-    if (this.state.editBoard[item] === undefined) {
-      var temp = this.state.editBoard;
-      temp[item] = true;
-      this.setState({editBoard: temp});
-    }
-    if (this.state.editBoard[item] === true) {
-      this.props.history.push('/:' + boardId + '/:' + boardName);
-    }
-  }
+  // showBoard(boardId, boardName, item) {
+  //   if (this.state.editBoard[item] === undefined) {
+  //     var temp = this.state.editBoard;
+  //     temp[item] = true;
+  //     this.setState({editBoard: temp});
+  //   }
+  //   if (this.state.editBoard[item] === true) {
+  //     this.props.history.push('/:' + boardId + '/:' + boardName);
+  //   }
+  // }
   render() {
-    // Only visible to logged in users
-    if (!this.props.loggedIn) {
-        return <Redirect to="/" />;
-    }
-    console.log(this.props);
     //only execute if there is data
     if (this.props.boards) {
       var list = Object.keys(this.props.boards).map((item, index) => {
         var temp = this.props.boards[item];
         return (
           <li key={index}>
-            <span onClick={() => this.showBoard(null, temp._id, temp.title, temp._id)}>
-              <input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
-                disabled={(this.state.editBoard[temp._id] === undefined) ? true : this.state.editBoard[temp._id] }
-                onChange={(evt) => this.onAddInputChanged(evt)}
-                onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>
-            </span>
-            <input type="button" value="Delete Board" name="deleteBoard"
-              onClick={() => this.props.deleteBoard(temp._id)}/>
-            <input type="button" value="Edit Board" name="editBoard"
-              onClick={() => this.editBoardName(temp._id)}/>
+
+              {/*<span onClick={() => this.showBoard(null, temp._id, temp.title, temp._id)}>*/}
+              {/*<a href={'/:' + temp._id + '/:' + temp.title}>*/}
+              <Link to={'/:' + temp._id + '/:' + temp.title}>
+                <span className="board-tile">
+                  <span className="">{this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}</span>
+                {/*<input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
+                  disabled={(this.state.editBoard[temp._id] === undefined) ? true : this.state.editBoard[temp._id] }
+                  onChange={(evt) => this.onAddInputChanged(evt)}
+                  onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>*/}
+                </span>
+            </Link>
+
           </li>
         );
       });
     }
     return (
-      <div>
+      <div className="boards-form">
         <ul>{list}</ul>
-        <input type="button" value="Add Board" onClick={() => this.showCreateBoard()} name="addBoard"/>
-        {this.state.showCreateBoard ?
-          <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)}
-            addItems={() => {this.addBoard(); this.props.addBoard();}} name="boardInput"/> : null}
+        {/*<input type="button" value="Delete Board" name="deleteBoard"
+          onClick={() => this.props.deleteBoard(temp._id)}/>
+        <input type="button" value="Edit Board" name="editBoard"
+          onClick={() => this.editBoardName(temp._id)}/>*/}
+          {/*<input type="button" value="Create new board..." onClick={() => this.showCreateBoard()} name="addBoard"/>
+          {this.state.showCreateBoard ?
+            <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)}
+              addItems={() => {this.addBoard(); this.props.addBoard();}} name="boardInput"/> : null}*/}
       </div>
     );
   }
 };
+
+
+
+
+
+
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state, props) => {
-  const {currentUser} = state.auth;
   return {
-    boards: state.boards,
-    loggedIn: currentUser !== null,
-    username: currentUser ? state.auth.currentUser.username : '',
-    fullName: currentUser
-        ? `${currentUser.fullName}`
-        : ''
+    boards: state.boards.boards,
+    loggedIn: state.auth.currentUser !== null
   };
 };
 const mapDispatchToProps = (dispatch, props) => ({

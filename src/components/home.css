@@ -13,10 +13,10 @@ main {
 .wrapper-3 {
   margin-top: 25px;
 }
-a {
+.home a {
   color: white;
 }
-a:active, a:hover {
+.home a:active, a:hover {
   text-decoration: none;
 }
 .a-login {

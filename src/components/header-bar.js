@@ -12,13 +12,23 @@ export class HeaderBar extends React.Component {
         this.props.dispatch(setAuthToken(null));
         clearAuthToken();
     }
+    //used to hide the header when on certain pages
+    hideHeader() {
+      const temp1 = this.props.location.pathname === '/register' ? false : true;
+      const temp2 = this.props.location.pathname === '/login' ? false : true;
+      if (temp1 && temp2) {
+        return 'container-fluid header-bar';
+      } else {
+        return 'invisible';
+      }
+    }
     render() {
         // Only render the log out button if we are logged in
         let buttons;
         if (this.props.loggedIn) {
           buttons = (
             <div className="nav-right">
-              <button onClick={() => this.logOut()}>Log out</button>
+              <button className="btn login-btn" onClick={() => this.logOut()}>Log out</button>
             </div>
           );
         } else {
@@ -33,18 +43,8 @@ export class HeaderBar extends React.Component {
             </div>
           );
         }
-        //used to hide the header when on certain pages
-        let visibility = () => {
-          const temp1 = this.props.location.pathname === '/register' ? false : true;
-          const temp2 = this.props.location.pathname === '/login' ? false : true;
-          if (temp1 && temp2) {
-            return 'container-fluid header-bar';
-          } else {
-            return 'invisible';
-          }
-        }
         return (
-            <header className={visibility()}>
+            <header className={this.hideHeader()}>
               <nav className="row home-nav">
                 <div className="nav-left">
                   <Link to="/" className="logo">

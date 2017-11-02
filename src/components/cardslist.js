@@ -58,8 +58,8 @@ export class Cardslist extends React.Component {
   }
   render() {
     if (this.props.cardslist) {
-      var boardName = this.props.params.boardName.replace(':', '');
-      var boardId = this.props.params.boardId.replace(':', '');
+      var boardName = this.props.match.params.board.replace(':', '');
+      var boardId = this.props.match.params.boardId.replace(':', '');
       //iterate over props.boards and get the item that matches the boardid
       var board = this.props.boards[Object.keys(this.props.boards).find(item => {
           //if the id of props.boards matches boardid
@@ -107,7 +107,7 @@ export class Cardslist extends React.Component {
 };
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state) => ({
-  boards: state.boards,
+  boards: state.boards.boards,
   cardslist: state.cardslist
 });
 const mapDispatchToProps = (dispatch, props) => ({
@@ -119,7 +119,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   addCardslist: () => {
     dispatch(actions.createCardslist({
       title: props.cardslistTitle,
-      boardId: props.params.boardId.replace(':', '')
+      boardId: props.match.params.boardId.replace(':', '')
     }));
   },
   //dispatch update to cardslist name if enter key is pressed
