@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Input from './input';
+import Checkbox from './checkbox';
 import {createUser} from '../actions/users';
 import {login} from '../actions/auth';
 import './registration-form.css';
@@ -21,40 +22,40 @@ export class RegistrationForm extends React.Component {
             onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
             )}>
-            <label htmlFor="fullName">Name</label>
             <Field
+              label="Name"
               component={Input}
               type="text"
               name="fullName"
               validate={[required, nonEmpty, isTrimmed]}
               inputClass="input-field form-control"
             />
-          <label htmlFor="email">Email</label>
             <Field
-                component={Input}
-                type="text"
-                name="email"
-                validate={[required, nonEmpty, isTrimmed]}
-                inputClass="input-field form-control"
-            />
-            <label htmlFor="password">Password</label>
-            <Field
-                component={Input}
-                type="password"
-                name="password"
-                validate={[required, length({min: 10, max: 72}), isTrimmed]}
-                inputClass="input-field form-control"
+              label="Email"
+              component={Input}
+              type="text"
+              name="email"
+              validate={[required, nonEmpty, isTrimmed]}
+              inputClass="input-field form-control"
             />
             <Field
-                component={Input}
-                type="checkbox"
-                name="acceptTerms"
-                validate={[required]}
-                divClass="inline-block space"
+              label="Password"
+              component={Input}
+              type="password"
+              name="password"
+              validate={[required, length({min: 10, max: 72}), isTrimmed]}
+              inputClass="input-field form-control"
             />
-          <label htmlFor="acceptTerms">
-            I accept the <a>Terms of Service</a> and <a>Privacy Policy</a>
-          </label>
+            <Field
+              label={["I accept the ", <a href="#" key="0">Terms of Service</a>," and ", <a href="#" key="1">Privacy Policy</a>]}
+              component={Checkbox}
+              type="checkbox"
+              name="acceptTerms"
+              validate={[required]}
+              divClass="inline-block space"
+              inputClass="checkbox-space"
+            />
+
           <button className="block btn"
               type="submit"
               disabled={this.props.pristine || this.props.submitting}>

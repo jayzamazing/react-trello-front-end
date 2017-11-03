@@ -8,5 +8,8 @@
   display: inline-block;
 }
 .space {
-  margin: 20px 5px 0px 0px;
+  margin: 20px 0 0 0;
+}
+.checkbox-space {
+  margin-right: 5px !important;
 }

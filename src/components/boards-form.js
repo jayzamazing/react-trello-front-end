@@ -5,6 +5,7 @@ import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
 import './boards-form.css'
 import {Link} from 'react-router-dom';
+import Modal from 'react-modal';
 //function to render multiple lists of boards
 export class Boards extends React.Component {
   //set up initial data state
@@ -96,7 +97,9 @@ export class Boards extends React.Component {
     }
     return (
       <div className="boards-form">
+        <h3>Personal Boards</h3>
         <ul>{list}</ul>
+        <span class="board-tile">Create new board...</span>
         {/*<input type="button" value="Delete Board" name="deleteBoard"
           onClick={() => this.props.deleteBoard(temp._id)}/>
         <input type="button" value="Edit Board" name="editBoard"
@@ -109,12 +112,6 @@ export class Boards extends React.Component {
     );
   }
 };
-
-
-
-
-
-
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state, props) => {
   return {
