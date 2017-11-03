@@ -16,7 +16,7 @@ export function RegistrationPage(props) {
             <div className="col-centered form-area">
               <h2>Create a Trello Account</h2>
               <RegistrationForm />
-              <p>Already have an account? <Link to="/">Log in.</Link></p>
+              <p>Already have an account? <Link to="/login">Log in.</Link></p>
             </div>
           </div>
         </div>

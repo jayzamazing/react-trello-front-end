@@ -6,6 +6,10 @@ import Immutable from 'seamless-immutable';
 import './boards-form.css'
 import {Link} from 'react-router-dom';
 import Modal from 'react-modal';
+import Input from './input';
+import {Field, reduxForm, focus} from 'redux-form';
+import {required, nonEmpty, length, isTrimmed} from '../validators';
+
 //function to render multiple lists of boards
 export class Boards extends React.Component {
   //set up initial data state
@@ -15,7 +19,8 @@ export class Boards extends React.Component {
       showCreateBoard: false,
       editBoard: {},
       boards: {},
-      boardTitle: ''
+      boardTitle: '',
+      boardsModalIsOpen: false
     }
   }
   componentDidMount() {
@@ -26,27 +31,27 @@ export class Boards extends React.Component {
     this.props.getBoards();
   }
   //keep track of text
-  onAddInputChanged(event) {
-    //if the addBoard input is being used
-    if (event.target.name === 'addBoard') {
-      //store title for board
-      this.setState({boardTitle: event.target.value});
-      //otherwise assume we are editing board name
-    } else {
-      //get boards from state
-      var temp = this.state.boards;
-      //update the title for the selected board
-      var temp2 = Immutable.update(temp,
-        event.target.id,
-        function() {
-          return {
-            title: event.target.value
-          };
-        });
-      //store the updated board title
-      this.setState({boards: temp2});
-    }
-  }
+  // onAddInputChanged(event) {
+  //   //if the addBoard input is being used
+  //   if (event.target.name === 'addBoard') {
+  //     //store title for board
+  //     this.setState({boardTitle: event.target.value});
+  //     //otherwise assume we are editing board name
+  //   } else {
+  //     //get boards from state
+  //     var temp = this.state.boards;
+  //     //update the title for the selected board
+  //     var temp2 = Immutable.update(temp,
+  //       event.target.id,
+  //       function() {
+  //         return {
+  //           title: event.target.value
+  //         };
+  //       });
+  //     //store the updated board title
+  //     this.setState({boards: temp2});
+  //   }
+  // }
   //hide create board when called
   addBoard() {
     this.setState({showCreateBoard: false});
@@ -60,6 +65,12 @@ export class Boards extends React.Component {
     var temp = this.state.editBoard;
     temp[item] = false;
     this.setState({editBoard: temp});
+  }
+  showCreateModal() {
+    this.setState({boardsModalIsOpen: true});
+  }
+  closeModal() {
+    this.setState({boardsModalIsOpen: false});
   }
   // showBoard(boardId, boardName, item) {
   //   if (this.state.editBoard[item] === undefined) {
@@ -86,10 +97,10 @@ export class Boards extends React.Component {
                   <span className="">{this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}</span>
                 {/*<input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
                   disabled={(this.state.editBoard[temp._id] === undefined) ? true : this.state.editBoard[temp._id] }
-                  onChange={(evt) => this.onAddInputChanged(evt)}
+                  TODO onChange={(evt) => this.onAddInputChanged(evt)}
                   onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>*/}
                 </span>
-            </Link>
+              </Link>
 
           </li>
         );
@@ -98,8 +109,53 @@ export class Boards extends React.Component {
     return (
       <div className="boards-form">
         <h3>Personal Boards</h3>
-        <ul>{list}</ul>
-        <span class="board-tile">Create new board...</span>
+        <ul>
+          {list}
+          <li onClick={() => this.showCreateModal()}>
+            <span className="board-tile">
+              Create new board...
+            </span>
+          </li>
+        </ul>
+        <Modal
+          isOpen={this.state.boardsModalIsOpen}
+          onRequestClose={() => this.closeModal()}
+          contentLabel="Create Board Modal"
+          className={{
+            base: 'create-board',
+            afterOpen: 'create-board-after-open',
+            beforeClose: 'create-board-before-close'
+          }}
+          overlayClassName={{
+            base: 'create-board-overlay',
+            afterOpen: 'create-board-overlay-after-open',
+            beforeClose: 'create-board-overlay-before-close'
+          }}
+        >
+          <form className="create-board-input-area"
+            onSubmit={this.props.handleSubmit(values =>
+            this.props.addBoard(values.boardTitle))}>
+            <Field
+              component={Input}
+              type="text"
+              name="boardTitle"
+              validate={[required, nonEmpty, isTrimmed]}
+              inputClass="create-board-input"
+              placeholder="Add board title"
+              labelclass="remove"
+            />
+            <button type="button" className="btn btn-default close-modal-btn"
+              aria-label="close button" onClick={() => this.closeModal()}>
+                <span className="glyphicon glyphicon-remove"
+                  aria-hidden="true"></span>
+              </button>
+            <button className="create-board-btn btn"
+                type="submit"
+                disabled={this.props.pristine || this.props.submitting}>
+                Create Board
+            </button>
+          </form>
+        </Modal>
         {/*<input type="button" value="Delete Board" name="deleteBoard"
           onClick={() => this.props.deleteBoard(temp._id)}/>
         <input type="button" value="Edit Board" name="editBoard"
@@ -129,8 +185,8 @@ const mapDispatchToProps = (dispatch, props) => ({
       dispatch(actions.deleteBoards(boardId));
     },
     //dispatch to add board
-    addBoard: () => {
-      dispatch(actions.createBoards({title: props.boardTitle}));
+    addBoard: (boardTitle) => {
+      dispatch(actions.createBoards({title: boardTitle}));
     },
     //dispatch update to board name if enter key is press in field
     updateBoard: (evt) => {
@@ -139,4 +195,9 @@ const mapDispatchToProps = (dispatch, props) => ({
       }
     }
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Boards);
+Boards = connect(mapStateToProps, mapDispatchToProps)(Boards);
+export default reduxForm({
+  form: 'create board',
+  onSubmitFail: (errors, dispatch) =>
+      dispatch(focus('registration', Object.keys(errors)[0]))
+})(Boards);
