@@ -1,8 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 import './home.css';
 
-export default class Home extends React.Component {
+class HomePage extends React.Component {
   componentWillMount() {
     document.body.style.backgroundColor = "#026aa7";
   }
@@ -10,6 +11,10 @@ export default class Home extends React.Component {
     document.body.style.backgroundColor = null;
   }
   render() {
+    // If we are logged in redirect straight to the user's dashboard
+    if (this.props.loggedIn) {
+        return <Redirect to="/boards" />;
+    }
     return (
       <section>
         <main className="home container">
@@ -36,3 +41,8 @@ export default class Home extends React.Component {
     );
   }
 }
+const mapStateToProps = state => ({
+    loggedIn: state.auth.currentUser !== null
+});
+
+export default connect(mapStateToProps)(HomePage);

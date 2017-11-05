@@ -12,7 +12,8 @@ export function BoardsPage(props) {
     return (
         <div className="boards container">
           <div className="row">
-            <div className="form-area">
+            <div className="boards-area">
+              <h3>Personal Boards</h3>
               <BoardsForm />
             </div>
           </div>

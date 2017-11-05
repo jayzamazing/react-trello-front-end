@@ -108,7 +108,6 @@ export class Boards extends React.Component {
     }
     return (
       <div className="boards-form">
-        <h3>Personal Boards</h3>
         <ul>
           {list}
           <li onClick={() => this.showCreateModal()}>

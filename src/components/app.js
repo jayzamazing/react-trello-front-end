@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
-import Home from './home';
+import HomePage from './home-page';
 import BoardsPage from './boards-page';
 import CardslistPage from './cardslist-page';
 import RegistrationPage from './registration-page';
@@ -46,7 +46,7 @@ export class App extends React.Component {
     return (
       <div>
         <HeaderBar location={this.props.location} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/boards" component={BoardsPage} />
