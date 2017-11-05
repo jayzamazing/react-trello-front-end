@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
 import './boards-form.css'
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Modal from 'react-modal';
 import Input from './input';
 import {Field, reduxForm, focus} from 'redux-form';
@@ -133,7 +133,7 @@ export class Boards extends React.Component {
         >
           <form className="create-board-input-area"
             onSubmit={this.props.handleSubmit(values =>
-            this.props.addBoard(values.boardTitle))}>
+            {this.props.addBoard(values.boardTitle); this.closeModal()})}>
             <Field
               component={Input}
               type="text"
@@ -185,7 +185,15 @@ const mapDispatchToProps = (dispatch, props) => ({
     },
     //dispatch to add board
     addBoard: (boardTitle) => {
-      dispatch(actions.createBoards({title: boardTitle}));
+      dispatch(actions.createBoards({title: boardTitle}))
+      .then((res) => {
+        const keys = Object.keys(res.boards);
+        //'/:' + temp._id + '/:' + temp.title
+        const title = res.boards[keys[0]].title;
+        // console.log(props);
+        // return {"/:" + keys[0] + "/:" + title}
+        props.history.push("/:" + keys[0] + "/:" + title);
+      });
     },
     //dispatch update to board name if enter key is press in field
     updateBoard: (evt) => {
@@ -194,7 +202,7 @@ const mapDispatchToProps = (dispatch, props) => ({
       }
     }
 });
-Boards = connect(mapStateToProps, mapDispatchToProps)(Boards);
+Boards = withRouter(connect(mapStateToProps, mapDispatchToProps)(Boards));
 export default reduxForm({
   form: 'create board',
   onSubmitFail: (errors, dispatch) =>

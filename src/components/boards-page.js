@@ -10,9 +10,9 @@ export function BoardsPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <div className="boards container">
+        <div className="boards container-fluid">
           <div className="row">
-            <div className="boards-area">
+            <div className="boards-area col-xs-12">
               <h3>Personal Boards</h3>
               <BoardsForm />
             </div>

@@ -8,11 +8,18 @@ ul {
   flex-wrap: wrap;
 }
 .board-tile {
+  display: block;
+  padding: 15px;
+}
+.boards-form li {
   height: 100px;
   width: 280px;
   background: #0067a3;
-  display: block;
-  padding: 15px;
+}
+@media only screen and (max-width: 750px) {
+  .boards-form li  {
+    width: 100%;
+  }
 }
 .boards-form a {
   color: white;
