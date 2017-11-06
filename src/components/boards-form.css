@@ -64,7 +64,7 @@ ul {
   background-color: unset;
   box-shadow: unset;
 }
-.remove .form-error {
+.create-board-input-area .remove, .create-board-input-area .form-error {
   display: none;
 }
 .create-board-btn {

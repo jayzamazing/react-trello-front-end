@@ -147,7 +147,7 @@ export class Boards extends React.Component {
               aria-label="close button" onClick={() => this.closeModal()}>
                 <span className="glyphicon glyphicon-remove"
                   aria-hidden="true"></span>
-              </button>
+            </button>
             <button className="create-board-btn btn"
                 type="submit"
                 disabled={this.props.pristine || this.props.submitting}>
@@ -186,12 +186,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     //dispatch to add board
     addBoard: (boardTitle) => {
       dispatch(actions.createBoards({title: boardTitle}))
+      //after dispatch, grab the created board and redirect to it
       .then((res) => {
         const keys = Object.keys(res.boards);
-        //'/:' + temp._id + '/:' + temp.title
         const title = res.boards[keys[0]].title;
-        // console.log(props);
-        // return {"/:" + keys[0] + "/:" + title}
         props.history.push("/:" + keys[0] + "/:" + title);
       });
     },
@@ -206,5 +204,5 @@ Boards = withRouter(connect(mapStateToProps, mapDispatchToProps)(Boards));
 export default reduxForm({
   form: 'create board',
   onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('registration', Object.keys(errors)[0]))
+      dispatch(focus('create-board-input-area', Object.keys(errors)[0]))
 })(Boards);

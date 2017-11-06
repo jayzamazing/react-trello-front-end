@@ -5,6 +5,9 @@ import * as actions from '../actions/cardslist';
 import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
 import './cardslist-form.css';
+import {Field, reduxForm, focus} from 'redux-form';
+import Input from './input';
+import {required, nonEmpty, length, isTrimmed} from '../validators';
 
 //function to render multiple lists of cards
 export class Cardslist extends React.Component {
@@ -19,22 +22,22 @@ export class Cardslist extends React.Component {
     }
   }
   //keep track of text
-  onAddInputChanged(event) {
-    //if the addCardslist input is being used
-    if (event.target.name === 'addCardslist') {
-      this.setState({cardslistTitle: event.target.value});
-      //otherwise assume we are editing cardslist name
-    } else {
-      //get cardslist from state
-      var temp = this.state.cardslist;
-      //update the title for the selected cardslist
-      var temp2 = Immutable.update(temp, event.target.id, function() {
-        return {title: event.target.value};
-      });
-      //store the updated cardslist title
-      this.setState({cardslist: temp2});
-    }
-  }
+  // onAddInputChanged(event) {
+  //   //if the addCardslist input is being used
+  //   if (event.target.name === 'addCardslist') {
+  //     this.setState({cardslistTitle: event.target.value});
+  //     //otherwise assume we are editing cardslist name
+  //   } else {
+  //     //get cardslist from state
+  //     var temp = this.state.cardslist;
+  //     //update the title for the selected cardslist
+  //     var temp2 = Immutable.update(temp, event.target.id, function() {
+  //       return {title: event.target.value};
+  //     });
+  //     //store the updated cardslist title
+  //     this.setState({cardslist: temp2});
+  //   }
+  // }
   //hide the following input
   addCardslist() {
     this.setState({showCreateCardslist: false});
@@ -44,19 +47,20 @@ export class Cardslist extends React.Component {
     this.setState({showCreateCardslist: true});
   }
   //deal with the user hitting enter from the input and updating the cardslist
-  handleKeyPress(events) {
-    if (events.charCode === 13) {
-      var temp = this.state.editCardslist;
-      temp[events.target.id] = true;
-      this.setState({editCardslist: temp});
-    }
-  }
+  // handleKeyPress(events) {
+  //   if (events.charCode === 13) {
+  //     var temp = this.state.editCardslist;
+  //     temp[events.target.id] = true;
+  //     this.setState({editCardslist: temp});
+  //   }
+  // }
   //set variable to enable the editing of the cardslist name
-  editCardslistName(item) {
-    var temp = this.state.editCardslist;
-    temp[item] = false;
-    this.setState({editCardslist: temp});
-  }
+  // editCardslistName(item) {
+  //   var temp = this.state.editCardslist;
+  //   temp[item] = false;
+  //   this.setState({editCardslist: temp});
+  // }
+
   render() {
     if (this.props.cardslist) {
       var boardName = this.props.match.params.board.replace(':', '');
@@ -102,17 +106,48 @@ export class Cardslist extends React.Component {
         <div className="cardslist-list">
           <ul>
             {cardslist}
-            <li>
-              <div>
-                <a href="#">
+            <div className="create-cardslist">
+              {this.state.showCreateCardslist
+              ? null
+              : <span value="Add Cards list" onClick={() => this.showCreateCardslist()}
+                name="addCardslist" id="addCardslist" className="addCardslist">
                   Add a list...
-                </a>
-              </div>
-            </li>
+                </span>}
+                {this.state.showCreateCardslist
+                ? <form className="create-cardslist-area"
+                  onSubmit={this.props.handleSubmit(values => {
+                    this.props.addCardslist(values.cardslistTitle);
+                    this.addCardslist();
+                  })}>
+                    <Field
+                      component={Input}
+                      type="text"
+                      name="cardslistTitle"
+                      validate={[required, nonEmpty, isTrimmed]}
+                      placeholder="Add a list"
+                      labelclass="remove"
+                      inputClass="addCardslist"
+                    />
+                    <button className="create-cardslist-btn btn btn-success"
+                      type="submit"
+                      disabled={this.props.pristine || this.props.submitting}>
+                      Save
+                    </button>
+                    <button type="button" className="btn btn-default close-cardslist-btn"
+                      aria-label="close button" onClick={() => this.addCardslist()}>
+                        <span className="glyphicon glyphicon-remove"
+                          aria-hidden="true"></span>
+                    </button>
+                  </form>
+                : null}
+
+            </div>
           </ul>
-          {/*<input type="button" value="Add Cards list" onClick={() => this.showCreateCardslist()} name="addCardslist"/> {this.state.showCreateCardslist
-            ? <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)} addItems={() => {this.addCardslist(); this.props.addCardslist();}} name="cardslistInput"/>
-            : null}*/}
+          {/*
+            <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)} addItems={() => {this.addCardslist(); this.props.addCardslist();}} name="cardslistInput"/>
+            inputClass={}
+            labelclass={}
+            */}
         </div>
       </div>
     );
@@ -130,9 +165,9 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(actions.deleteCardslist(cardslistId));
   },
   //dispatch to add a new cardslist
-  addCardslist: () => {
+  addCardslist: (cardslistTitle) => {
     dispatch(actions.createCardslist({
-      title: props.cardslistTitle,
+      title: cardslistTitle,
       boardId: props.match.params.boardId.replace(':', '')
     }));
   },
@@ -146,4 +181,9 @@ const mapDispatchToProps = (dispatch, props) => ({
   }
 });
 //connects component to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(Cardslist);
+Cardslist = connect(mapStateToProps, mapDispatchToProps)(Cardslist);
+export default reduxForm({
+  form: 'create cardslist',
+  onSubmitFail: (errors, dispatch) =>
+      dispatch(focus('registration', Object.keys(errors)[0]))
+})(Cardslist);

@@ -5,3 +5,31 @@
 .cardslist-list ul {
   display: flex;
 }
+.create-cardslist-area .remove, .create-cardslist-area .form-error {
+  display: none;
+}
+#addCardslist {
+  background-color: #0067a3;
+  color: #E2E4E6;
+}
+.addCardslist {
+  width: 250px;
+  display: block;
+  height: 25px;
+}
+.create-cardslist .remove, .create-cardslist .form-error {
+  display: none;
+}
+.create-cardslist-btn, .close-cardslist-btn {
+  margin-top: 5px;
+}
+.create-cardslist-area {
+  width: 260px;
+  height: 75px;
+  background-color: #E2E4E6;
+  padding: 5px;
+}
+.close-cardslist-btn {
+  border: unset;
+  background-color: unset;
+}
