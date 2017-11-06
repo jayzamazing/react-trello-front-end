@@ -2,6 +2,7 @@ import React from 'react';
 import CardsForm from './cards-form';
 import {connect} from 'react-redux';
 import * as actions from '../actions/cardslist';
+import {updateBoardSuccess} from '../actions/boards';
 import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
 import './cardslist-form.css';
@@ -115,8 +116,9 @@ export class Cardslist extends React.Component {
                 </span>}
                 {this.state.showCreateCardslist
                 ? <form className="create-cardslist-area"
-                  onSubmit={this.props.handleSubmit(values => {
-                    this.props.addCardslist(values.cardslistTitle);
+                  onSubmit={
+                    this.props.handleSubmit(values => {
+                    this.props.addCardslist(values.cardslistTitle, boardId, board);
                     this.addCardslist();
                   })}>
                     <Field
@@ -165,11 +167,17 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(actions.deleteCardslist(cardslistId));
   },
   //dispatch to add a new cardslist
-  addCardslist: (cardslistTitle) => {
+  addCardslist: (cardslistTitle, boardId, board) => {
     dispatch(actions.createCardslist({
       title: cardslistTitle,
       boardId: props.match.params.boardId.replace(':', '')
-    }));
+    }))
+    .then((res) => {
+      const keys = Object.keys(res.cardslist);
+      const mutableBoard = board.cardslist.asMutable();
+      mutableBoard.push(keys[0]);
+      dispatch(updateBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
+    });
   },
   //dispatch update to cardslist name if enter key is pressed
   updateCardslist: (evt) => {

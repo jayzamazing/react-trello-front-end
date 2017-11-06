@@ -9,14 +9,14 @@ const initialRepositoryState = Immutable({});
 * params state- old state before merge
 * params action.cardslistid- Cardslist to delete
 */
-export const deleteCardslist= (state, {cardslistId}) => state.without(cardslistId);
+export const deleteCardslist = (state, {cardslistId}) => state.without(cardslistId);
 
 /*
 * Function called when UPDATE_CARDSLIST_SUCCESS is called to update cardslsit with a new cardslist
 * params state- old state before merge
 * params action.items.cardslsit- cardslist to update
 */
-export const updateCardslist= (state, {cardslist}) => state.merge(cardslist, {deep: true});
+export const updateCardslist = (state, {cardslist}) => state.merge(cardslist, {deep: true});
 
 /*
 * Function to deal with using various reducer functions

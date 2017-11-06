@@ -9,7 +9,7 @@ const initialRepositoryState = Immutable({});
 * params state- old state before merge
 * params action.boardid- board to delete
 */
-export const deleteBoard = (state, action) => (state, {boardId}) => state.without(boardId);
+export const deleteBoard = (state, {boardId}) => state.without(boardId);
 
 /*
 * Function called when UPDATE_BOARD_SUCCESS is called to update boards with a new board

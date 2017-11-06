@@ -66,7 +66,7 @@ export class Cards extends React.Component {
     //function to render multiple cards
     var cards = Object.keys(this.props.cards).map((item, index) => {
       let cardsHtml;
-      if (cardslist.cards.indexOf(this.props.cards[item]._id) > -1) {
+      if (cardslist.cards && cardslist.cards.indexOf(this.props.cards[item]._id) > -1) {
         var temp = this.props.cards[item];
         cardsHtml = (
           <li key={index}>
