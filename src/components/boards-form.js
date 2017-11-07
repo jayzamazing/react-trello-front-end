@@ -192,12 +192,6 @@ const mapDispatchToProps = (dispatch, props) => ({
         const title = res.boards[keys[0]].title;
         props.history.push("/:" + keys[0] + "/:" + title);
       });
-    },
-    //dispatch update to board name if enter key is press in field
-    updateBoard: (evt) => {
-      if(evt.charCode === 13) {
-        dispatch(actions.updateBoards(evt.target.id, {title: evt.target.value}));
-      }
     }
 });
 Boards = withRouter(connect(mapStateToProps, mapDispatchToProps)(Boards));

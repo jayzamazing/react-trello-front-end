@@ -119,6 +119,7 @@ export const deleteBoards = (id, action = deleteBoardSuccess) => (dispatch, getS
 */
 export const UPDATE_BOARD_SUCCESS = 'UPDATE_BOARD_SUCCESS';
 export const updateBoardSuccess = function(id, items) {
+  items._id = id;
   const {boards} = items ? normalize(items, boardsSchema).entities : {};
   return {
     type: UPDATE_BOARD_SUCCESS,
@@ -137,10 +138,13 @@ export const updateBoards = (id, postData, action = updateBoardSuccess) => (disp
   const authToken = getState().auth.authToken;
   return fetch(`${BASE_URL}/boards/${id}`, {
     method: 'PUT',
-    body: postData,
+    body: JSON.stringify({
+      ...postData
+    }),
     headers: {
       // Provide our auth token as credentials
       Authorization: `Bearer ${authToken}`,
+      "Content-Type": 'application/json',
       Accept: 'application/json'
     }
   })

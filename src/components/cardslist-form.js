@@ -2,13 +2,15 @@ import React from 'react';
 import CardsForm from './cards-form';
 import {connect} from 'react-redux';
 import * as actions from '../actions/cardslist';
-import {updateBoardSuccess} from '../actions/boards';
+import * as boardActions from '../actions/boards';
 import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
 import './cardslist-form.css';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty, length, isTrimmed} from '../validators';
+import Modal from 'react-modal';
+import {withRouter} from 'react-router-dom';
 
 //function to render multiple lists of cards
 export class Cardslist extends React.Component {
@@ -19,7 +21,8 @@ export class Cardslist extends React.Component {
       showCreateCardslist: false,
       editCardslist: {},
       cardslist: {},
-      cardslistTitle: ''
+      cardslistTitle: '',
+      boardsModalIsOpen: false
     }
   }
   //keep track of text
@@ -46,6 +49,12 @@ export class Cardslist extends React.Component {
   //set the variable to show the create cardslist inputs
   showCreateCardslist() {
     this.setState({showCreateCardslist: true});
+  }
+  showUpdateModal() {
+    this.setState({boardsModalIsOpen: true});
+  }
+  closeModal() {
+    this.setState({boardsModalIsOpen: false});
   }
   //deal with the user hitting enter from the input and updating the cardslist
   // handleKeyPress(events) {
@@ -103,7 +112,7 @@ export class Cardslist extends React.Component {
       <div className="cardslist-form">
         <div className="cardslist-list">
           <div className="board-name">
-            <h1>{boardName}</h1>
+            <span onClick={() => this.showUpdateModal()}><h1>{boardName}</h1></span>
           </div>
           <ul>
             {cardslist}
@@ -151,6 +160,48 @@ export class Cardslist extends React.Component {
             labelclass={}
             */}
         </div>
+        <Modal
+          isOpen={this.state.boardsModalIsOpen}
+          onRequestClose={() => this.closeModal()}
+          contentLabel="Update Board Modal"
+          className={{
+            base: 'update-board',
+            afterOpen: 'update-board-after-open',
+            beforeClose: 'update-board-before-close'
+          }}
+          overlayClassName={{
+            base: 'update-board-overlay',
+            afterOpen: 'update-board-overlay-after-open',
+            beforeClose: 'update-board-overlay-before-close'
+          }}>
+          <form className="update-board-input-area"
+            onSubmit={this.props.handleSubmit(values =>
+            {this.props.updateBoard(boardId, values.boardTitle); this.closeModal()})}>
+            <span className="center-text"><h5>Rename Board</h5></span>
+              <button type="button" className="btn btn-default close-modal-btn"
+                aria-label="close button" onClick={() => this.closeModal()}>
+                  <span className="glyphicon glyphicon-remove"
+                    aria-hidden="true"></span>
+              </button>
+            <hr/>
+
+            <Field
+              component={Input}
+              type="text"
+              name="boardTitle"
+              validate={[required, nonEmpty, isTrimmed]}
+              inputClass="update-board-input"
+              placeholder="Update board title"
+              label="Name"
+              labelclass="update-label"
+            />
+            <button className="update-board-btn btn btn-success"
+                type="submit"
+                disabled={this.props.pristine || this.props.submitting}>
+                Rename
+            </button>
+          </form>
+        </Modal>
       </div>
     );
   }
@@ -176,7 +227,7 @@ const mapDispatchToProps = (dispatch, props) => ({
       const keys = Object.keys(res.cardslist);
       const mutableBoard = board.cardslist.asMutable();
       mutableBoard.push(keys[0]);
-      dispatch(updateBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
+      dispatch(boardActions.updateBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
     });
   },
   //dispatch update to cardslist name if enter key is pressed
@@ -186,10 +237,18 @@ const mapDispatchToProps = (dispatch, props) => ({
         title: evt.target.value
       }));
     }
+  },
+  updateBoard: (boardId, boardName) => {
+    dispatch(boardActions.updateBoards(boardId, {title: boardName}))
+    .then((res) => {
+      const keys = Object.keys(res.boards);
+      const title = res.boards[keys[0]].title;
+      props.history.push("/:" + keys[0] + "/:" + title);
+    });
   }
 });
 //connects component to redux store
-Cardslist = connect(mapStateToProps, mapDispatchToProps)(Cardslist);
+Cardslist = withRouter(connect(mapStateToProps, mapDispatchToProps)(Cardslist));
 export default reduxForm({
   form: 'create cardslist',
   onSubmitFail: (errors, dispatch) =>
