@@ -10,9 +10,9 @@ export function CardslistPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <div className="cardslist container">
+        <div className="cardslist container-fluid">
           <div className="row">
-            <div className="form-area">
+            <div className="cardslist-form-area">
               <CardslistForm match={props.match}/>
             </div>
           </div>

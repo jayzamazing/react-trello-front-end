@@ -8,6 +8,7 @@ import RegistrationPage from './registration-page';
 import Login from './login-page';
 import HeaderBar from './header-bar';
 import {refreshAuthToken} from '../actions/auth';
+import './app.css';
 
 export class App extends React.Component {
   componentDidMount() {
@@ -44,7 +45,7 @@ export class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="route-wrapper">
         <HeaderBar location={this.props.location} />
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={Login} />

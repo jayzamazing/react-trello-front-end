@@ -100,11 +100,11 @@ export class Cardslist extends React.Component {
       });
     }
     return (
-      <div className="board">
-        <div className="board-name">
-          <h1>{boardName}</h1>
-        </div>
+      <div className="cardslist-form">
         <div className="cardslist-list">
+          <div className="board-name">
+            <h1>{boardName}</h1>
+          </div>
           <ul>
             {cardslist}
             <div className="create-cardslist">
@@ -115,7 +115,7 @@ export class Cardslist extends React.Component {
                   Add a list...
                 </span>}
                 {this.state.showCreateCardslist
-                ? <form className="create-cardslist-area"
+                ? <form className="create-cardslist-area cardslist-tile"
                   onSubmit={
                     this.props.handleSubmit(values => {
                     this.props.addCardslist(values.cardslistTitle, boardId, board);

@@ -1,8 +1,8 @@
-ul li {
+.boards-form ul li {
   list-style: none;
   margin: 0 10px 10px 0;
 }
-ul {
+.boards-form ul {
   padding: 0;
   display: flex;
   flex-wrap: wrap;

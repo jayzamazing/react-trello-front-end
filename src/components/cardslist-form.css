@@ -1,9 +1,24 @@
+.cardslist-list {
+  overflow-y: auto;
+  height: 100%;
+}
 .cardslist-tile {
   width: 270px;
-  min-height: 68px;
+  display: block;
+  background-color: #E2E4E6;
+  padding: 2px;
+  border-radius: 3px;
+}
+.cardslist-tile h2 {
+  margin: 5px 0 5px 0;
 }
 .cardslist-list ul {
+  padding-left: 0;
   display: flex;
+}
+.cardslist-list ul li {
+  list-style: none;
+  margin: 0 10px 10px 0;
 }
 .create-cardslist-area .remove, .create-cardslist-area .form-error {
   display: none;
@@ -11,6 +26,7 @@
 #addCardslist {
   background-color: #0067a3;
   color: #E2E4E6;
+  border-radius: 3px;
 }
 .addCardslist {
   width: 250px;
@@ -32,4 +48,7 @@
 .close-cardslist-btn {
   border: unset;
   background-color: unset;
+}
+.cardslist-form {
+  height: 100%;
 }
