@@ -8,6 +8,7 @@ import {Immutable} from 'seamless-immutable';
 import './cardslist-form.css';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
+import Textarea from './textarea';
 import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Modal from 'react-modal';
 import {withRouter} from 'react-router-dom';
@@ -24,11 +25,12 @@ export class Cardslist extends React.Component {
       cardslistTitle: '',
       boardsModalIsOpen: false
     }
+    this.submitUpdateCardslist = this.submitUpdateCardslist.bind(this);
   }
   //keep track of text
   // onAddInputChanged(event) {
-  //   //if the addCardslist input is being used
-  //   if (event.target.name === 'addCardslist') {
+  //   //if the updateCardslist input is being used
+  //   if (event.target.name === 'updateCardslist') {
   //     this.setState({cardslistTitle: event.target.value});
   //     //otherwise assume we are editing cardslist name
   //   } else {
@@ -43,18 +45,41 @@ export class Cardslist extends React.Component {
   //   }
   // }
   //hide the following input
-  addCardslist() {
+  hideCreateCardslist() {
     this.setState({showCreateCardslist: false});
   }
   //set the variable to show the create cardslist inputs
   showCreateCardslist() {
     this.setState({showCreateCardslist: true});
   }
+  //set the variable for opening the update boards title
   showUpdateModal() {
     this.setState({boardsModalIsOpen: true});
   }
+  //close the modal for updating the modal
   closeModal() {
     this.setState({boardsModalIsOpen: false});
+  }
+  /*
+  * deal with enter key being pressed. if the value is different from its initial
+  * value, then update it in the db and blur out the field.
+  */
+  submitUpdateCardslist(events, _id, boardId, board) {
+    if (events.charCode === 13 && events.target.value !== events.target.defaultValue) {
+      events.preventDefault();
+      events.target.blur();
+      this.props.updateCardslist(_id, events.target.value, boardId, board);
+    }
+  }
+  /*
+  * deal with on blur event for the updatecardslist form
+  * if the textarea value has changed, then it will persist to the db
+  */
+  blurUpdateCardslist(events, _id, boardId, board) {
+    //check that the value is different from the initial value
+    if (events.target.value !== events.target.defaultValue) {
+      this.props.updateCardslist(_id, events.target.value, boardId, board);
+    }
   }
   //deal with the user hitting enter from the input and updating the cardslist
   // handleKeyPress(events) {
@@ -85,11 +110,26 @@ export class Cardslist extends React.Component {
         let cardslistHtml;
         if (board.cardslist && board.cardslist.indexOf(this.props.cardslist[item]._id) > -1) {
           var temp = this.props.cardslist[item];
+          //TODO - figure out where cards is getting dropped after update
           cardslistHtml =  (
             <li key={index}>
               <div className="cardslist-tile">
-                <h2>{this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
-                  : temp.title}</h2>
+                <div className="update-cardslist">
+                  <form className="update-cardslist-area"
+                    ref={'cardslupdateCardslistFormistTitle-' + index}>
+                      <Field
+                        component={Textarea}
+                        ref={'cardslistTitle-' + index}
+                        name={'cardslistTitle-' + index}
+                        validate={[required, nonEmpty, isTrimmed]}
+                        textareaClass="updateCardslist"
+                        defaultValue={this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
+                          : temp.title}
+                        onKeyPress={(e) => this.submitUpdateCardslist(e, temp._id, boardId, board)}
+                        onBlur={(e) => this.blurUpdateCardslist(e, temp._id, boardId, board)}
+                      />
+                    </form>
+                </div>
                 <div className="">
                   <CardsForm cardslistId={item} key={index} boardId={boardId}/>
                 </div>
@@ -109,7 +149,7 @@ export class Cardslist extends React.Component {
       });
     }
     return (
-      <div className="cardslist-form">
+      <div className="cardslist-form col-xs-12">
         <div className="cardslist-list">
           <div className="board-name">
             <span onClick={() => this.showUpdateModal()}><h1>{boardName}</h1></span>
@@ -120,15 +160,15 @@ export class Cardslist extends React.Component {
               {this.state.showCreateCardslist
               ? null
               : <span value="Add Cards list" onClick={() => this.showCreateCardslist()}
-                name="addCardslist" id="addCardslist" className="addCardslist">
+                name="createCardslist" id="createCardslist" className="createCardslist">
                   Add a list...
                 </span>}
                 {this.state.showCreateCardslist
                 ? <form className="create-cardslist-area cardslist-tile"
                   onSubmit={
                     this.props.handleSubmit(values => {
-                    this.props.addCardslist(values.cardslistTitle, boardId, board);
-                    this.addCardslist();
+                    this.props.createCardslist(values.cardslistTitle, boardId, board);
+                    this.hideCreateCardslist();
                   })}>
                     <Field
                       component={Input}
@@ -137,7 +177,7 @@ export class Cardslist extends React.Component {
                       validate={[required, nonEmpty, isTrimmed]}
                       placeholder="Add a list"
                       labelclass="remove"
-                      inputClass="addCardslist"
+                      inputClass="updateCardslist"
                     />
                     <button className="create-cardslist-btn btn btn-success"
                       type="submit"
@@ -145,17 +185,16 @@ export class Cardslist extends React.Component {
                       Save
                     </button>
                     <button type="button" className="btn btn-default close-cardslist-btn"
-                      aria-label="close button" onClick={() => this.addCardslist()}>
+                      aria-label="close button" onClick={() => this.hideCreateCardslist()}>
                         <span className="glyphicon glyphicon-remove"
                           aria-hidden="true"></span>
                     </button>
                   </form>
                 : null}
-
             </div>
           </ul>
           {/*
-            <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)} addItems={() => {this.addCardslist(); this.props.addCardslist();}} name="cardslistInput"/>
+            <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)} addItems={() => {this.updateCardslist(); this.props.updateCardslist();}} name="cardslistInput"/>
             inputClass={}
             labelclass={}
             */}
@@ -218,10 +257,22 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(actions.deleteCardslist(cardslistId));
   },
   //dispatch to add a new cardslist
-  addCardslist: (cardslistTitle, boardId, board) => {
+  createCardslist: (cardslistTitle, boardId, board) => {
     dispatch(actions.createCardslist({
       title: cardslistTitle,
-      boardId: props.match.params.boardId.replace(':', '')
+      boardId: boardId
+    }))
+    .then((res) => {
+      const keys = Object.keys(res.cardslist);
+      const mutableBoard = board.cardslist.asMutable();
+      mutableBoard.push(keys[0]);
+      dispatch(boardActions.createBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
+    });
+  },
+  //dispatch update to cardslist name if enter key is pressed
+  updateCardslist: (cardslistId, cardslistTitle, boardId, board) => {
+    dispatch(actions.updateCardslist(cardslistId, {
+      title: cardslistTitle
     }))
     .then((res) => {
       const keys = Object.keys(res.cardslist);
@@ -229,14 +280,6 @@ const mapDispatchToProps = (dispatch, props) => ({
       mutableBoard.push(keys[0]);
       dispatch(boardActions.updateBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
     });
-  },
-  //dispatch update to cardslist name if enter key is pressed
-  updateCardslist: (evt) => {
-    if(evt.charCode === 13) {
-      dispatch(actions.updateCardslist(evt.target.id, {
-        title: evt.target.value
-      }));
-    }
   },
   updateBoard: (boardId, boardName) => {
     dispatch(boardActions.updateBoards(boardId, {title: boardName}))
@@ -250,7 +293,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 //connects component to redux store
 Cardslist = withRouter(connect(mapStateToProps, mapDispatchToProps)(Cardslist));
 export default reduxForm({
-  form: 'create cardslist',
+  form: 'cardslist',
   onSubmitFail: (errors, dispatch) =>
       dispatch(focus('registration', Object.keys(errors)[0]))
 })(Cardslist);

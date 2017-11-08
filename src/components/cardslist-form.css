@@ -8,6 +8,7 @@
   background-color: #E2E4E6;
   padding: 2px;
   border-radius: 3px;
+  padding: 5px;
 }
 .cardslist-tile h2 {
   margin: 5px 0 5px 0;
@@ -27,6 +28,7 @@
   background-color: #0067a3;
   color: #E2E4E6;
   border-radius: 3px;
+  padding: 4px;
 }
 .addCardslist {
   width: 250px;
@@ -110,4 +112,17 @@
 }
 .center-text {
   text-align: center;
+}
+.update-cardslist form {
+  margin-left: -5px;
+}
+.updateCardslist {
+  background-color: #E2E4E6;
+  height: 25px;
+  border: unset;
+  resize: none;
+  z-index: 9999;
+}
+.updateCardslist:focus {
+  background-color: white;
 }

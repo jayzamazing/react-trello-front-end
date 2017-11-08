@@ -77,11 +77,12 @@ export const deleteCardslist = (id, action = deleteCardslistSuccess) => (dispatc
 * @returns action type and cardslist
 */
 export const UPDATE_CARDSLIST_SUCCESS = 'UPDATE_CARDSLIST_SUCCESS';
-export const updateCardslistSuccess = function(id, cardslist) {
-  const items = (normalize(cardslist, cardsListSchema)).entities;
+export const updateCardslistSuccess = (id, items) => {
+  items._id = id;
+  const {cardslist} = items ? (normalize(items, cardsListSchema)).entities : {};
   return {
     type: UPDATE_CARDSLIST_SUCCESS,
-    items,
+    cardslist,
     cardslistId: id
   };
 };
@@ -96,14 +97,17 @@ export const updateCardslist = (id, postData, action = updateCardslistSuccess) =
   const authToken = getState().auth.authToken;
   return fetch(`${BASE_URL}/cardslist/${id}`, {
     method: 'PUT',
-    body: postData,
+    body: JSON.stringify({
+      ...postData
+    }),
     headers: {
       // Provide our auth token as credentials
       Authorization: `Bearer ${authToken}`,
+      "Content-Type": 'application/json',
       Accept: 'application/json'
     }
   })
   .then((res) => normalizeResponseErrors(res))
   .then(res => res.json())
-  .then((res) => dispatch(action(id, postData)));
+  .then((res) => dispatch(action(id, res)));
 };

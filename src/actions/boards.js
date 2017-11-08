@@ -118,7 +118,7 @@ export const deleteBoards = (id, action = deleteBoardSuccess) => (dispatch, getS
 * @returns action type and boards
 */
 export const UPDATE_BOARD_SUCCESS = 'UPDATE_BOARD_SUCCESS';
-export const updateBoardSuccess = function(id, items) {
+export const updateBoardSuccess = (id, items) => {
   items._id = id;
   const {boards} = items ? normalize(items, boardsSchema).entities : {};
   return {
@@ -150,5 +150,5 @@ export const updateBoards = (id, postData, action = updateBoardSuccess) => (disp
   })
   .then((res) => normalizeResponseErrors(res))
   .then(res => res.json())
-  .then((res) => dispatch(action(id, postData)));
+  .then((res) => dispatch(action(id, res)));
 };
