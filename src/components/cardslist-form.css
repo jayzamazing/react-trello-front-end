@@ -134,3 +134,35 @@
 .updateCardslist:focus {
   background-color: white;
 }
+.options-modal {
+  width: 300px;
+  height: 100px;
+  margin: 137px 0;
+  background-color: white;
+  color: black;
+  border-radius: 3px;
+  border: 1px solid #D6DADC;
+}
+.options-modal:focus {
+  outline: none;
+}
+.options-modal-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  float: none;
+  top: -33px;
+}
+.options-modal-input-area h5 {
+  margin: 0;
+}
+.options-modal-input-area hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.options-modal-input {
+  border: none;
+}
+.close-options-btn {
+  margin: -34px -6px 0px 0px;
+}

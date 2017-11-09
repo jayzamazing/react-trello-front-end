@@ -19,6 +19,7 @@ export class Cardslist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      optionsModalOpen: false,
       showCreateCardslist: false,
       editCardslist: {},
       cardslist: {},
@@ -59,6 +60,12 @@ export class Cardslist extends React.Component {
   //close the modal for updating the modal
   closeModal() {
     this.setState({boardsModalIsOpen: false});
+  }
+  showOptionsModal() {
+    this.setState({optionsModalOpen: true});
+  }
+  closeOptionsModal() {
+    this.setState({optionsModalOpen: false});
   }
   /*
   * deal with enter key being pressed. if the value is different from its initial
@@ -226,7 +233,6 @@ export class Cardslist extends React.Component {
                     aria-hidden="true"></span>
               </button>
             <hr/>
-
             <Field
               component={Input}
               type="text"
@@ -243,6 +249,28 @@ export class Cardslist extends React.Component {
                 Rename
             </button>
           </form>
+        </Modal>
+        <Modal
+          isOpen={this.state.optionsModalOpen}
+          onRequestClose={() => this.closeOptionsModal()}
+          contentLabel="Show Options Modal" className={{
+            base: 'options-modal',
+            afterOpen: 'options-modal-after-open',
+            beforeClose: 'options-modal-before-close'
+          }}
+          overlayClassName={{
+            base: 'options-modal-overlay',
+            afterOpen: 'options-modal-overlay-after-open',
+            beforeClose: 'options-modal-overlay-before-close'
+          }}>
+            <span className="center-text"><h5>List Actions</h5></span>
+              <button type="button" className="btn btn-default close-modal-btn close-options-btn"
+                aria-label="close button" onClick={() => this.closeOptionsModal()}>
+                  <span className="glyphicon glyphicon-remove"
+                    aria-hidden="true"></span>
+              </button>
+            <hr/>
+            <span></span>
         </Modal>
       </div>
     );
