@@ -24,13 +24,13 @@
 .create-cardslist-area .remove, .create-cardslist-area .form-error {
   display: none;
 }
-#addCardslist {
+#createCardslist {
   background-color: #0067a3;
   color: #E2E4E6;
   border-radius: 3px;
   padding: 4px;
 }
-.addCardslist {
+.createCardslist {
   width: 250px;
   display: block;
   height: 25px;
@@ -68,7 +68,7 @@
   width: 100%;
   position: absolute;
   float: none;
-  top: 0;
+  top: -33px;
 }
 .update-board-input-area {
   width: 300px;
@@ -113,8 +113,16 @@
 .center-text {
   text-align: center;
 }
+.update-cardslist {
+  position: relative;
+}
 .update-cardslist form {
   margin-left: -5px;
+}
+.cardslist-tile-options {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .updateCardslist {
   background-color: #E2E4E6;

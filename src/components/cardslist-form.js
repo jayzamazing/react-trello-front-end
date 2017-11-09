@@ -53,7 +53,7 @@ export class Cardslist extends React.Component {
     this.setState({showCreateCardslist: true});
   }
   //set the variable for opening the update boards title
-  showUpdateModal() {
+  showUpdateBoardModal() {
     this.setState({boardsModalIsOpen: true});
   }
   //close the modal for updating the modal
@@ -110,13 +110,12 @@ export class Cardslist extends React.Component {
         let cardslistHtml;
         if (board.cardslist && board.cardslist.indexOf(this.props.cardslist[item]._id) > -1) {
           var temp = this.props.cardslist[item];
-          //TODO - figure out where cards is getting dropped after update
           cardslistHtml =  (
             <li key={index}>
               <div className="cardslist-tile">
                 <div className="update-cardslist">
                   <form className="update-cardslist-area"
-                    ref={'cardslupdateCardslistFormistTitle-' + index}>
+                    ref={'updateCardslistForm-' + index}>
                       <Field
                         component={Textarea}
                         ref={'cardslistTitle-' + index}
@@ -128,7 +127,11 @@ export class Cardslist extends React.Component {
                         onKeyPress={(e) => this.submitUpdateCardslist(e, temp._id, boardId, board)}
                         onBlur={(e) => this.blurUpdateCardslist(e, temp._id, boardId, board)}
                       />
-                    </form>
+                  </form>
+                  <div>
+                    <span onClick={() => this.showOptionsModal()} className="glyphicon glyphicon-option-horizontal cardslist-tile-options">
+                    </span>
+                  </div>
                 </div>
                 <div className="">
                   <CardsForm cardslistId={item} key={index} boardId={boardId}/>
@@ -152,7 +155,7 @@ export class Cardslist extends React.Component {
       <div className="cardslist-form col-xs-12">
         <div className="cardslist-list">
           <div className="board-name">
-            <span onClick={() => this.showUpdateModal()}><h1>{boardName}</h1></span>
+            <span onClick={() => this.showUpdateBoardModal()}><h1>{boardName}</h1></span>
           </div>
           <ul>
             {cardslist}
