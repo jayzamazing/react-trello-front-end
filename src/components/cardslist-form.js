@@ -3,6 +3,7 @@ import CardsForm from './cards-form';
 import {connect} from 'react-redux';
 import * as actions from '../actions/cardslist';
 import * as boardActions from '../actions/boards';
+import * as cardActions from '../actions/cards';
 import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
 import './cardslist-form.css';
@@ -60,12 +61,6 @@ export class Cardslist extends React.Component {
   //close the modal for updating the modal
   closeModal() {
     this.setState({boardsModalIsOpen: false});
-  }
-  showOptionsModal() {
-    this.setState({optionsModalOpen: true});
-  }
-  closeOptionsModal() {
-    this.setState({optionsModalOpen: false});
   }
   /*
   * deal with enter key being pressed. if the value is different from its initial
@@ -136,7 +131,7 @@ export class Cardslist extends React.Component {
                       />
                   </form>
                   <div>
-                    <span onClick={() => this.showOptionsModal()} className="glyphicon glyphicon-option-horizontal cardslist-tile-options">
+                    <span onClick={() => this.showOptionsModal()} className="glyphicon glyphicon-minus cardslist-delete">
                     </span>
                   </div>
                 </div>
@@ -164,7 +159,7 @@ export class Cardslist extends React.Component {
           <div className="board-name">
             <span onClick={() => this.showUpdateBoardModal()}><h1>{boardName}</h1></span>
           </div>
-          <ul>
+          <ul className="cardslist-list-ul">
             {cardslist}
             <div className="create-cardslist">
               {this.state.showCreateCardslist
@@ -233,6 +228,7 @@ export class Cardslist extends React.Component {
                     aria-hidden="true"></span>
               </button>
             <hr/>
+
             <Field
               component={Input}
               type="text"
@@ -249,28 +245,6 @@ export class Cardslist extends React.Component {
                 Rename
             </button>
           </form>
-        </Modal>
-        <Modal
-          isOpen={this.state.optionsModalOpen}
-          onRequestClose={() => this.closeOptionsModal()}
-          contentLabel="Show Options Modal" className={{
-            base: 'options-modal',
-            afterOpen: 'options-modal-after-open',
-            beforeClose: 'options-modal-before-close'
-          }}
-          overlayClassName={{
-            base: 'options-modal-overlay',
-            afterOpen: 'options-modal-overlay-after-open',
-            beforeClose: 'options-modal-overlay-before-close'
-          }}>
-            <span className="center-text"><h5>List Actions</h5></span>
-              <button type="button" className="btn btn-default close-modal-btn close-options-btn"
-                aria-label="close button" onClick={() => this.closeOptionsModal()}>
-                  <span className="glyphicon glyphicon-remove"
-                    aria-hidden="true"></span>
-              </button>
-            <hr/>
-            <span></span>
         </Modal>
       </div>
     );
@@ -297,7 +271,7 @@ const mapDispatchToProps = (dispatch, props) => ({
       const keys = Object.keys(res.cardslist);
       const mutableBoard = board.cardslist.asMutable();
       mutableBoard.push(keys[0]);
-      dispatch(boardActions.createBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
+      dispatch(boardActions.updateBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
     });
   },
   //dispatch update to cardslist name if enter key is pressed
@@ -326,5 +300,5 @@ Cardslist = withRouter(connect(mapStateToProps, mapDispatchToProps)(Cardslist));
 export default reduxForm({
   form: 'cardslist',
   onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('registration', Object.keys(errors)[0]))
+      dispatch(focus('cardslist-form', Object.keys(errors)[0]))
 })(Cardslist);

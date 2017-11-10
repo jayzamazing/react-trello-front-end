@@ -1,9 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/cards';
-import CreateItems from './create-items';
+import * as cardslistActions from '../actions/cardslist';
+// import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
-//component to store list of cards and text
+import {Field, reduxForm, focus} from 'redux-form';
+import {required, nonEmpty, length, isTrimmed} from '../validators';
+import Input from './input';
+import './cards-form.css';
+//component to store list of cards and title
 export class Cards extends React.Component {
   //set up initial data state
   constructor(props) {
@@ -12,14 +17,14 @@ export class Cards extends React.Component {
       showCreateCards: false,
       editCards: {},
       cards: {},
-      text: ''
+      title: ''
     }
   }
-  //keep track of text
+  //keep track of title
   onAddInputChanged(event) {
     //if the addCards input is being used
     if (event.target.name === 'addCards') {
-      this.setState({text: event.target.value});
+      this.setState({title: event.target.value});
     //otherwise assume we are editing cards name
     } else {
       //get cards from state
@@ -29,7 +34,7 @@ export class Cards extends React.Component {
       event.target.id,
       function() {
         return {
-          text: event.target.value
+          title: event.target.value
         };
       });
       //store the updated cards
@@ -40,6 +45,11 @@ export class Cards extends React.Component {
   addCards() {
     this.setState({showCreateCards: false});
   }
+  //hide the following input
+  hideCreateCards() {
+    this.setState({showCreateCards: false});
+  }
+  //set the variable to show the create cardslist inputs
   showCreateCards() {
     this.setState({showCreateCards: true});
   }
@@ -52,8 +62,8 @@ export class Cards extends React.Component {
       this.updateCards(events.target.id, events.target.value);
     }
   }
-  //set variable to enable the editing of the cards text
-  editCardsText(item) {
+  //set variable to enable the editing of the cards title
+  editCardstitle(item) {
     var temp = this.state.editCards;
     temp[item] = false;
     this.setState({editCards: temp});
@@ -71,25 +81,65 @@ export class Cards extends React.Component {
         cardsHtml = (
           <li key={index}>
             <span>
-              {this.state.cards[temp._id] ? this.state.cards[temp._id].text : temp.text}
+              {this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}
             </span>
-            {/*<input type="text" id={temp._id} value={this.state.cards[temp._id] ? this.state.cards[temp._id].text : temp.text}
+            {/*<input type="title" id={temp._id} value={this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}
               disabled={(this.state.editCards[temp._id] === undefined) ? true : this.state.editCards[temp._id]}
               onChange={() => this.onAddInputChanged}
               onKeyPress={(evt) => this.props.updateCards(evt)} name="cardsName"/>*/}
             {/*<input type="button" value="Delete Card"
               onClick={() => this.props.deleteCards(temp._id)} name="deleteCards"/>
               <input type="button" value="Edit Card"
-                onClick={() => this.editCardsText(temp._id)} name="editCards"/>*/}
+                onClick={() => this.editCardstitle(temp._id)} name="editCards"/>*/}
           </li>
         );
       }
       return cardsHtml;
     });
     return (
-      <div>
-        <ul>
+      <div className="cards-form">
+        <ul className="cards-list-ul">
           {cards}
+          <li>
+          <div className="create-cards">
+            {this.state.showCreateCards
+            ? null
+            : <div className="create-cards-link">
+              <span value="Add Cards" onClick={() => this.showCreateCards()}
+                name="createcards" id="createcards" className="createcards">
+                  Add a card...
+              </span>
+              </div>}
+              {this.state.showCreateCards
+              ? <form className="create-cards-area cards-tile"
+                onSubmit={
+                  this.props.handleSubmit(values => {
+                  this.props.createCards(values.cardsTitle, values.cardsText, cardslist._id, cardslist);
+                  this.hideCreateCards();
+                })}>
+                  <Field
+                    component={Input}
+                    type="text"
+                    name="cardsTitle"
+                    validate={[required, nonEmpty, isTrimmed]}
+                    placeholder="Add a card"
+                    labelclass="remove"
+                    inputClass="addcards"
+                  />
+                  <button className="create-cards-btn btn btn-success"
+                    type="submit"
+                    disabled={this.props.pristine || this.props.submitting}>
+                    Add
+                  </button>
+                  <button type="button" className="btn btn-default close-cards-btn"
+                    aria-label="close button" onClick={() => this.hideCreateCards()}>
+                      <span className="glyphicon glyphicon-remove"
+                        aria-hidden="true"></span>
+                  </button>
+                </form>
+              : null}
+          </div>
+          </li>
         </ul>
           {/*<input type="button" value="Add Cards" onClick={() => this.showCreateCards} name="addCards"/>
           {this.state.showCreateCards ? <CreateItems
@@ -105,19 +155,34 @@ const mapStateToProps = (state) => ({
   cards: state.cards
 });
 const mapDispatchToProps = (dispatch, props) => ({
+  createCards: (cardsTitle, cardsText, cardslistId, cardslist) => {
+    dispatch(actions.createCards({
+      title: cardsTitle,
+      cardslistId: cardslistId,
+      cardsText: cardsText
+    }))
+    .then(res => {
+      const keys = Object.keys(res.cards);
+      const mutableCardslist = cardslist.cards.asMutable();
+      mutableCardslist.push(keys[0]);
+      dispatch(cardslistActions.updateCardslistSuccess(cardslistId, {_id: cardslistId, cards: mutableCardslist}));
+    });
+  },
   //dispatch to delete a cards
   deleteCards: (cardId) => {
     dispatch(actions.deleteCards(cardId));
   },
-  //dispatch to add a new cards
-  addCardslist: () => {
-    dispatch(actions.createCards({text: this.state.text, cardslistId: props.cardslistId}))
-  },
   //dispatch update to cards name if enter key is pressed
   updateCards: (evt) => {
     if(evt.charCode === 13) {
-      dispatch(actions.updateCards(evt.target.id, {text: evt.target.value}));
+      dispatch(actions.updateCards(evt.target.id, {title: evt.target.value}));
     }
   }
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Cards);
+//connects component to redux store
+Cards = connect(mapStateToProps, mapDispatchToProps)(Cards);
+export default reduxForm({
+  form: 'cards',
+  onSubmitFail: (errors, dispatch) =>
+      dispatch(focus('cards-form', Object.keys(errors)[0]))
+})(Cards);

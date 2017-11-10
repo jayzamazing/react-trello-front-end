@@ -68,7 +68,7 @@ export const deleteCardslist = (id, action = deleteCardslistSuccess) => (dispatc
     }
   })
   .then((res) => normalizeResponseErrors(res))
-    .then((res) => dispatch(action(id)));
+  .then((res) => dispatch(action(id)));
 };
 /*
 * action to tell store that a cardslist has been updated
@@ -79,7 +79,7 @@ export const deleteCardslist = (id, action = deleteCardslistSuccess) => (dispatc
 export const UPDATE_CARDSLIST_SUCCESS = 'UPDATE_CARDSLIST_SUCCESS';
 export const updateCardslistSuccess = (id, items) => {
   items._id = id;
-  const {cardslist} = items ? (normalize(items, cardsListSchema)).entities : {};
+  const {cardslist} = items ? normalize(items, cardsListSchema).entities : {};
   return {
     type: UPDATE_CARDSLIST_SUCCESS,
     cardslist,

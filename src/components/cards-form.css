@@ -1,0 +1,12 @@
+.cards-list-ul {
+  display: block;
+  padding: 0;
+}
+.create-cards-link:hover {
+  background-color: white;
+  text-decoration: underline;
+}
+.close-cards-btn {
+  border: unset;
+  background: unset;
+}
