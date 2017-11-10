@@ -73,3 +73,11 @@
   background: #F8F9F9;
   color: #B6BBBF;
 }
+.boards-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.boards-list {
+  position: relative;
+}

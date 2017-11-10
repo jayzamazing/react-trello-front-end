@@ -28,7 +28,11 @@ export default (state = initialRepositoryState, action) => {
   case FIND_BOARDS_SUCCESS:
   case CREATE_BOARD_SUCCESS:
   case UPDATE_BOARD_SUCCESS:
-    return updateBoard(state, action);
+    if (action.boards) {
+      return updateBoard(state, action);
+    } else {
+      return state;
+    }
   case DELETE_BOARD_SUCCESS:
     return deleteBoard(state, action);
   default:

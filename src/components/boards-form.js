@@ -88,20 +88,21 @@ export class Boards extends React.Component {
       var list = Object.keys(this.props.boards).map((item, index) => {
         var temp = this.props.boards[item];
         return (
-          <li key={index}>
+          <li key={index} className="boards-list">
 
               {/*<span onClick={() => this.showBoard(null, temp._id, temp.title, temp._id)}>*/}
               {/*<a href={'/:' + temp._id + '/:' + temp.title}>*/}
               <Link to={'/:' + temp._id + '/:' + temp.title}>
-                <span className="board-tile">
+                <div className="board-tile">
                   <span className="">{this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}</span>
                 {/*<input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
                   disabled={(this.state.editBoard[temp._id] === undefined) ? true : this.state.editBoard[temp._id] }
                   TODO onChange={(evt) => this.onAddInputChanged(evt)}
                   onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>*/}
-                </span>
+                </div>
               </Link>
-
+              <span onClick={() => this.props.deleteBoard(temp._id)} className="glyphicon glyphicon-minus boards-delete">
+              </span>
           </li>
         );
       });
