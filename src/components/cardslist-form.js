@@ -13,6 +13,9 @@ import Textarea from './textarea';
 import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Modal from 'react-modal';
 import {withRouter} from 'react-router-dom';
+import CreateCardslistForm from './create-cardslist-form';
+import UpdateCardslistForm from './update-cardslist-form';
+import UpdateBoardForm from './update-board-form';
 
 //function to render multiple lists of cards
 export class Cardslist extends React.Component {
@@ -28,6 +31,13 @@ export class Cardslist extends React.Component {
       boardsModalIsOpen: false
     }
     this.submitUpdateCardslist = this.submitUpdateCardslist.bind(this);
+    this.createCardslistSubmit = this.createCardslistSubmit.bind(this);
+    this.submitUpdateCardslist = this.submitUpdateCardslist.bind(this);
+    this.blurUpdateCardslist = this.blurUpdateCardslist.bind(this);
+    this.submitUpdateCardslist = this.submitUpdateCardslist.bind(this);
+    this.updateBoardSubmit = this.updateBoardSubmit.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.hideCreateCardslist = this.hideCreateCardslist.bind(this);
   }
   //keep track of text
   // onAddInputChanged(event) {
@@ -83,6 +93,15 @@ export class Cardslist extends React.Component {
       this.props.updateCardslist(_id, events.target.value, boardId, board);
     }
   }
+  createCardslistSubmit(cardslistTitle, boardId, board) {
+    this.props.createCardslist(cardslistTitle, boardId, board);
+    this.props.reset();
+    this.hideCreateCardslist();
+  }
+  updateBoardSubmit(boardId, boardTitle) {
+    this.props.updateBoard(boardId, boardTitle);
+    this.closeModal();
+  }
   //deal with the user hitting enter from the input and updating the cardslist
   // handleKeyPress(events) {
   //   if (events.charCode === 13) {
@@ -116,22 +135,12 @@ export class Cardslist extends React.Component {
             <li key={index}>
               <div className="cardslist-tile">
                 <div className="update-cardslist">
-                  <form className="update-cardslist-area"
-                    ref={'updateCardslistForm-' + index}>
-                      <Field
-                        component={Textarea}
-                        ref={'cardslistTitle-' + index}
-                        name={'cardslistTitle-' + index}
-                        validate={[required, nonEmpty, isTrimmed]}
-                        textareaClass="updateCardslist"
-                        defaultValue={this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
-                          : temp.title}
-                        onKeyPress={(e) => this.submitUpdateCardslist(e, temp._id, boardId, board)}
-                        onBlur={(e) => this.blurUpdateCardslist(e, temp._id, boardId, board)}
-                      />
-                  </form>
+                  <UpdateCardslistForm onKeyPress={this.submitUpdateCardslist}
+                    onBlur={this.blurUpdateCardslist}
+                    defaultValue={this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
+                      : temp.title} boardId={boardId} board={board} index={index} _id={temp._id}/>
                   <div>
-                    <span onClick={() => this.showOptionsModal()} className="glyphicon glyphicon-minus cardslist-delete">
+                    <span onClick={() => this.props.deleteCardslist(temp._id)} className="glyphicon glyphicon-minus cardslist-delete">
                     </span>
                   </div>
                 </div>
@@ -169,32 +178,7 @@ export class Cardslist extends React.Component {
                   Add a list...
                 </span>}
                 {this.state.showCreateCardslist
-                ? <form className="create-cardslist-area cardslist-tile"
-                  onSubmit={
-                    this.props.handleSubmit(values => {
-                    this.props.createCardslist(values.cardslistTitle, boardId, board);
-                    this.hideCreateCardslist();
-                  })}>
-                    <Field
-                      component={Input}
-                      type="text"
-                      name="cardslistTitle"
-                      validate={[required, nonEmpty, isTrimmed]}
-                      placeholder="Add a list"
-                      labelclass="remove"
-                      inputClass="updateCardslist"
-                    />
-                    <button className="create-cardslist-btn btn btn-success"
-                      type="submit"
-                      disabled={this.props.pristine || this.props.submitting}>
-                      Save
-                    </button>
-                    <button type="button" className="btn btn-default close-cardslist-btn"
-                      aria-label="close button" onClick={() => this.hideCreateCardslist()}>
-                        <span className="glyphicon glyphicon-remove"
-                          aria-hidden="true"></span>
-                    </button>
-                  </form>
+                ? <CreateCardslistForm onSubmit={this.createCardslistSubmit} boardId={boardId} board={board} close={this.hideCreateCardslist}/>
                 : null}
             </div>
           </ul>
@@ -204,48 +188,8 @@ export class Cardslist extends React.Component {
             labelclass={}
             */}
         </div>
-        <Modal
-          isOpen={this.state.boardsModalIsOpen}
-          onRequestClose={() => this.closeModal()}
-          contentLabel="Update Board Modal"
-          className={{
-            base: 'update-board',
-            afterOpen: 'update-board-after-open',
-            beforeClose: 'update-board-before-close'
-          }}
-          overlayClassName={{
-            base: 'update-board-overlay',
-            afterOpen: 'update-board-overlay-after-open',
-            beforeClose: 'update-board-overlay-before-close'
-          }}>
-          <form className="update-board-input-area"
-            onSubmit={this.props.handleSubmit(values =>
-            {this.props.updateBoard(boardId, values.boardTitle); this.closeModal()})}>
-            <span className="center-text"><h5>Rename Board</h5></span>
-              <button type="button" className="btn btn-default close-modal-btn"
-                aria-label="close button" onClick={() => this.closeModal()}>
-                  <span className="glyphicon glyphicon-remove"
-                    aria-hidden="true"></span>
-              </button>
-            <hr/>
-
-            <Field
-              component={Input}
-              type="text"
-              name="boardTitle"
-              validate={[required, nonEmpty, isTrimmed]}
-              inputClass="update-board-input"
-              placeholder="Update board title"
-              label="Name"
-              labelclass="update-label"
-            />
-            <button className="update-board-btn btn btn-success"
-                type="submit"
-                disabled={this.props.pristine || this.props.submitting}>
-                Rename
-            </button>
-          </form>
-        </Modal>
+        <UpdateBoardForm isOpen={this.state.boardsModalIsOpen} closeModal={this.closeModal}
+          onSubmit={this.updateBoardSubmit} boardId={boardId}/>
       </div>
     );
   }
@@ -269,7 +213,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     }))
     .then((res) => {
       const keys = Object.keys(res.cardslist);
-      const mutableBoard = board.cardslist.asMutable();
+      let mutableBoard = [];
+      if (board.cardslist) {
+        mutableBoard = board.cardslist.asMutable();
+      }
       mutableBoard.push(keys[0]);
       dispatch(boardActions.updateBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
     });
@@ -281,7 +228,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     }))
     .then((res) => {
       const keys = Object.keys(res.cardslist);
-      const mutableBoard = board.cardslist.asMutable();
+      let mutableBoard = [];
+      if (board.cardslist) {
+        mutableBoard = board.cardslist.asMutable();
+      }
       mutableBoard.push(keys[0]);
       dispatch(boardActions.updateBoardSuccess(boardId, {_id: boardId, cardslist: mutableBoard}));
     });
@@ -296,9 +246,4 @@ const mapDispatchToProps = (dispatch, props) => ({
   }
 });
 //connects component to redux store
-Cardslist = withRouter(connect(mapStateToProps, mapDispatchToProps)(Cardslist));
-export default reduxForm({
-  form: 'cardslist',
-  onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('cardslist-form', Object.keys(errors)[0]))
-})(Cardslist);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cardslist));

@@ -8,6 +8,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Input from './input';
 import './cards-form.css';
+import CreateCardsForm from './create-cards-form';
 //component to store list of cards and title
 export class Cards extends React.Component {
   //set up initial data state
@@ -19,6 +20,7 @@ export class Cards extends React.Component {
       cards: {},
       title: ''
     }
+    this.hideCreateCards = this.hideCreateCards.bind(this);
   }
   //keep track of title
   onAddInputChanged(event) {
@@ -68,6 +70,10 @@ export class Cards extends React.Component {
     temp[item] = false;
     this.setState({editCards: temp});
   }
+  createCardsSubmit(cardsTitle, cardsText, _id, cardslist) {
+    this.props.createCards(cardsTitle, cardsText, _id, cardslist);
+    this.hideCreateCards();
+  }
   render() {
     var cardslist = this.props.cardslist[Object.keys(this.props.cardslist).find(item => {
         //if the id of props.cardslist matches cardslistid
@@ -111,32 +117,7 @@ export class Cards extends React.Component {
               </span>
               </div>}
               {this.state.showCreateCards
-              ? <form className="create-cards-area cards-tile"
-                onSubmit={
-                  this.props.handleSubmit(values => {
-                  this.props.createCards(values.cardsTitle, values.cardsText, cardslist._id, cardslist);
-                  this.hideCreateCards();
-                })}>
-                  <Field
-                    component={Input}
-                    type="text"
-                    name="cardsTitle"
-                    validate={[required, nonEmpty, isTrimmed]}
-                    placeholder="Add a card"
-                    labelclass="remove"
-                    inputClass="addcards"
-                  />
-                  <button className="create-cards-btn btn btn-success"
-                    type="submit"
-                    disabled={this.props.pristine || this.props.submitting}>
-                    Add
-                  </button>
-                  <button type="button" className="btn btn-default close-cards-btn"
-                    aria-label="close button" onClick={() => this.hideCreateCards()}>
-                      <span className="glyphicon glyphicon-remove"
-                        aria-hidden="true"></span>
-                  </button>
-                </form>
+              ? <CreateCardsForm onSubmit={this.createCardsSubmit} cardslist={cardslist} close={this.hideCreateCards}/>
               : null}
           </div>
           </li>
@@ -163,7 +144,10 @@ const mapDispatchToProps = (dispatch, props) => ({
     }))
     .then(res => {
       const keys = Object.keys(res.cards);
-      const mutableCardslist = cardslist.cards.asMutable();
+      let mutableCardslist = [];
+      if (cardslist.cards) {
+        mutableCardslist = cardslist.cards.asMutable();
+      }
       mutableCardslist.push(keys[0]);
       dispatch(cardslistActions.updateCardslistSuccess(cardslistId, {_id: cardslistId, cards: mutableCardslist}));
     });
@@ -180,9 +164,9 @@ const mapDispatchToProps = (dispatch, props) => ({
   }
 });
 //connects component to redux store
-Cards = connect(mapStateToProps, mapDispatchToProps)(Cards);
-export default reduxForm({
-  form: 'cards',
-  onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('cards-form', Object.keys(errors)[0]))
-})(Cards);
+export default connect(mapStateToProps, mapDispatchToProps)(Cards);
+// export default reduxForm({
+//   form: 'cards',
+//   onSubmitFail: (errors, dispatch) =>
+//       dispatch(focus('cards-form', Object.keys(errors)[0]))
+// })(Cards);

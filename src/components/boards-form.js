@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 // import CreateItems from './create-items';
+import CreateBoardForm from './create-board-form';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
 import './boards-form.css'
@@ -22,6 +23,8 @@ export class Boards extends React.Component {
       boardTitle: '',
       boardsModalIsOpen: false
     }
+    this.createBoardModalSubmit = this.createBoardModalSubmit.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
   componentDidMount() {
     //don't load if not logged in
@@ -57,20 +60,24 @@ export class Boards extends React.Component {
     this.setState({showCreateBoard: false});
   }
   //set the variable to show the create board inputs
-  showCreateBoard() {
-    this.setState({showCreateBoard: true});
-  }
+  // showCreateBoard() {
+  //   this.setState({showCreateBoard: true});
+  // }
   //set variable to enable the editing of the boards name
-  editBoardName(item) {
-    var temp = this.state.editBoard;
-    temp[item] = false;
-    this.setState({editBoard: temp});
-  }
+  // editBoardName(item) {
+  //   var temp = this.state.editBoard;
+  //   temp[item] = false;
+  //   this.setState({editBoard: temp});
+  // }
   showCreateModal() {
     this.setState({boardsModalIsOpen: true});
   }
   closeModal() {
     this.setState({boardsModalIsOpen: false});
+  }
+  createBoardModalSubmit(boardTitle) {
+    this.props.addBoard(boardTitle);
+    this.closeModal();
   }
   // showBoard(boardId, boardName, item) {
   //   if (this.state.editBoard[item] === undefined) {
@@ -117,45 +124,8 @@ export class Boards extends React.Component {
             </span>
           </li>
         </ul>
-        <Modal
-          isOpen={this.state.boardsModalIsOpen}
-          onRequestClose={() => this.closeModal()}
-          contentLabel="Create Board Modal"
-          className={{
-            base: 'create-board',
-            afterOpen: 'create-board-after-open',
-            beforeClose: 'create-board-before-close'
-          }}
-          overlayClassName={{
-            base: 'create-board-overlay',
-            afterOpen: 'create-board-overlay-after-open',
-            beforeClose: 'create-board-overlay-before-close'
-          }}
-        >
-          <form className="create-board-input-area"
-            onSubmit={this.props.handleSubmit(values =>
-            {this.props.addBoard(values.boardTitle); this.closeModal()})}>
-            <Field
-              component={Input}
-              type="text"
-              name="boardTitle"
-              validate={[required, nonEmpty, isTrimmed]}
-              inputClass="create-board-input"
-              placeholder="Add board title"
-              labelclass="remove"
-            />
-            <button type="button" className="btn btn-default close-modal-btn"
-              aria-label="close button" onClick={() => this.closeModal()}>
-                <span className="glyphicon glyphicon-remove"
-                  aria-hidden="true"></span>
-            </button>
-            <button className="create-board-btn btn"
-                type="submit"
-                disabled={this.props.pristine || this.props.submitting}>
-                Create Board
-            </button>
-          </form>
-        </Modal>
+        <CreateBoardForm isOpen={this.state.boardsModalIsOpen} closeModal={this.closeModal}
+          onSubmit={this.createBoardModalSubmit} closeModal={this.closeModal}/>
         {/*<input type="button" value="Delete Board" name="deleteBoard"
           onClick={() => this.props.deleteBoard(temp._id)}/>
         <input type="button" value="Edit Board" name="editBoard"
@@ -195,9 +165,4 @@ const mapDispatchToProps = (dispatch, props) => ({
       });
     }
 });
-Boards = withRouter(connect(mapStateToProps, mapDispatchToProps)(Boards));
-export default reduxForm({
-  form: 'create board',
-  onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('create-board-input-area', Object.keys(errors)[0]))
-})(Boards);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Boards));
