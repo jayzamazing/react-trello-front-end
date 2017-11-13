@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-// import CreateItems from './create-items';
 import CreateBoardForm from './create-board-form';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
@@ -33,42 +32,10 @@ export class Boards extends React.Component {
     }
     this.props.getBoards();
   }
-  //keep track of text
-  // onAddInputChanged(event) {
-  //   //if the addBoard input is being used
-  //   if (event.target.name === 'addBoard') {
-  //     //store title for board
-  //     this.setState({boardTitle: event.target.value});
-  //     //otherwise assume we are editing board name
-  //   } else {
-  //     //get boards from state
-  //     var temp = this.state.boards;
-  //     //update the title for the selected board
-  //     var temp2 = Immutable.update(temp,
-  //       event.target.id,
-  //       function() {
-  //         return {
-  //           title: event.target.value
-  //         };
-  //       });
-  //     //store the updated board title
-  //     this.setState({boards: temp2});
-  //   }
-  // }
   //hide create board when called
   addBoard() {
     this.setState({showCreateBoard: false});
   }
-  //set the variable to show the create board inputs
-  // showCreateBoard() {
-  //   this.setState({showCreateBoard: true});
-  // }
-  //set variable to enable the editing of the boards name
-  // editBoardName(item) {
-  //   var temp = this.state.editBoard;
-  //   temp[item] = false;
-  //   this.setState({editBoard: temp});
-  // }
   showCreateModal() {
     this.setState({boardsModalIsOpen: true});
   }
@@ -79,16 +46,6 @@ export class Boards extends React.Component {
     this.props.addBoard(boardTitle);
     this.closeModal();
   }
-  // showBoard(boardId, boardName, item) {
-  //   if (this.state.editBoard[item] === undefined) {
-  //     var temp = this.state.editBoard;
-  //     temp[item] = true;
-  //     this.setState({editBoard: temp});
-  //   }
-  //   if (this.state.editBoard[item] === true) {
-  //     this.props.history.push('/:' + boardId + '/:' + boardName);
-  //   }
-  // }
   render() {
     //only execute if there is data
     if (this.props.boards) {
@@ -96,16 +53,9 @@ export class Boards extends React.Component {
         var temp = this.props.boards[item];
         return (
           <li key={index} className="boards-list">
-
-              {/*<span onClick={() => this.showBoard(null, temp._id, temp.title, temp._id)}>*/}
-              {/*<a href={'/:' + temp._id + '/:' + temp.title}>*/}
               <Link to={'/:' + temp._id + '/:' + temp.title}>
                 <div className="board-tile">
                   <span className="">{this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}</span>
-                {/*<input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
-                  disabled={(this.state.editBoard[temp._id] === undefined) ? true : this.state.editBoard[temp._id] }
-                  TODO onChange={(evt) => this.onAddInputChanged(evt)}
-                  onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>*/}
                 </div>
               </Link>
               <span onClick={() => this.props.deleteBoard(temp._id)} className="glyphicon glyphicon-minus boards-delete">
@@ -126,14 +76,6 @@ export class Boards extends React.Component {
         </ul>
         <CreateBoardForm isOpen={this.state.boardsModalIsOpen} closeModal={this.closeModal}
           onSubmit={this.createBoardModalSubmit} closeModal={this.closeModal}/>
-        {/*<input type="button" value="Delete Board" name="deleteBoard"
-          onClick={() => this.props.deleteBoard(temp._id)}/>
-        <input type="button" value="Edit Board" name="editBoard"
-          onClick={() => this.editBoardName(temp._id)}/>*/}
-          {/*<input type="button" value="Create new board..." onClick={() => this.showCreateBoard()} name="addBoard"/>
-          {this.state.showCreateBoard ?
-            <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)}
-              addItems={() => {this.addBoard(); this.props.addBoard();}} name="boardInput"/> : null}*/}
       </div>
     );
   }

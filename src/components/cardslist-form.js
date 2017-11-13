@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../actions/cardslist';
 import * as boardActions from '../actions/boards';
 import * as cardActions from '../actions/cards';
-import CreateItems from './create-items';
+// import CreateItems from './create-items';
 import {Immutable} from 'seamless-immutable';
 import './cardslist-form.css';
 import {Field, reduxForm, focus} from 'redux-form';

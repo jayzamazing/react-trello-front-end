@@ -21,6 +21,7 @@ export class Cards extends React.Component {
       title: ''
     }
     this.hideCreateCards = this.hideCreateCards.bind(this);
+    this.createCardsSubmit = this.createCardsSubmit.bind(this);
   }
   //keep track of title
   onAddInputChanged(event) {
