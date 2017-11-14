@@ -9,6 +9,7 @@ import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Input from './input';
 import './cards-form.css';
 import CreateCardsForm from './create-cards-form';
+import UpdateCardsForm from './update-cards-form';
 //component to store list of cards and title
 export class Cards extends React.Component {
   //set up initial data state
@@ -56,15 +57,6 @@ export class Cards extends React.Component {
   showCreateCards() {
     this.setState({showCreateCards: true});
   }
-  //deal with the user hitting enter from the input and updating the cards
-  handleKeyPress(events) {
-    if(events.charCode === 13) {
-      var temp = this.state.editCards;
-      temp[events.target.id] = true;
-      this.setState({editCards: temp});
-      this.updateCards(events.target.id, events.target.value);
-    }
-  }
   //set variable to enable the editing of the cards title
   editCardstitle(item) {
     var temp = this.state.editCards;
@@ -75,6 +67,7 @@ export class Cards extends React.Component {
     this.props.createCards(cardsTitle, cardsText, _id, cardslist);
     this.hideCreateCards();
   }
+  //defaultValue={this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}
   render() {
     var cardslist = this.props.cardslist[Object.keys(this.props.cardslist).find(item => {
         //if the id of props.cardslist matches cardslistid
@@ -87,17 +80,14 @@ export class Cards extends React.Component {
         var temp = this.props.cards[item];
         cardsHtml = (
           <li key={index}>
-            <span>
-              {this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}
-            </span>
-            {/*<input type="title" id={temp._id} value={this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}
-              disabled={(this.state.editCards[temp._id] === undefined) ? true : this.state.editCards[temp._id]}
-              onChange={() => this.onAddInputChanged}
-              onKeyPress={(evt) => this.props.updateCards(evt)} name="cardsName"/>*/}
-            {/*<input type="button" value="Delete Card"
-              onClick={() => this.props.deleteCards(temp._id)} name="deleteCards"/>
-              <input type="button" value="Edit Card"
-                onClick={() => this.editCardstitle(temp._id)} name="editCards"/>*/}
+            <div className="cards-tile">
+              <div className="update-card">
+                <UpdateCardsForm index={index}
+                  _id={temp._id} card={{['title-' + index]: this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}}
+                  index={index}/>
+              </div>
+
+            </div>
           </li>
         );
       }
@@ -134,7 +124,8 @@ export class Cards extends React.Component {
 //allows subcription to redux updates and access to data stored in redux store
 const mapStateToProps = (state) => ({
   cardslist: state.cardslist,
-  cards: state.cards
+  cards: state.cards,
+  loadCards: state.loadCards
 });
 const mapDispatchToProps = (dispatch, props) => ({
   createCards: (cardsTitle, cardsText, cardslistId, cardslist) => {
@@ -158,10 +149,11 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(actions.deleteCards(cardId));
   },
   //dispatch update to cards name if enter key is pressed
-  updateCards: (evt) => {
-    if(evt.charCode === 13) {
-      dispatch(actions.updateCards(evt.target.id, {title: evt.target.value}));
-    }
+  updateCards: (cardsId, cardsTitle, cardsText) => {
+    dispatch(actions.createCards(cardsId, {
+      title: cardsTitle,
+      cardsText: cardsText
+    }));
   }
 });
 //connects component to redux store

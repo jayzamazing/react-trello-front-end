@@ -13,8 +13,8 @@ const store = createStore(
     boards: boardReducer,
     cards: cardsReducer,
     cardslist: cardslistReducer,
-    form: formReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
   }),
   applyMiddleware(thunk)
 );

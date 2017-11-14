@@ -30,32 +30,11 @@ export class Cardslist extends React.Component {
       cardslistTitle: '',
       boardsModalIsOpen: false
     }
-    this.submitUpdateCardslist = this.submitUpdateCardslist.bind(this);
     this.createCardslistSubmit = this.createCardslistSubmit.bind(this);
-    this.submitUpdateCardslist = this.submitUpdateCardslist.bind(this);
-    this.blurUpdateCardslist = this.blurUpdateCardslist.bind(this);
-    this.submitUpdateCardslist = this.submitUpdateCardslist.bind(this);
     this.updateBoardSubmit = this.updateBoardSubmit.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.hideCreateCardslist = this.hideCreateCardslist.bind(this);
   }
-  //keep track of text
-  // onAddInputChanged(event) {
-  //   //if the updateCardslist input is being used
-  //   if (event.target.name === 'updateCardslist') {
-  //     this.setState({cardslistTitle: event.target.value});
-  //     //otherwise assume we are editing cardslist name
-  //   } else {
-  //     //get cardslist from state
-  //     var temp = this.state.cardslist;
-  //     //update the title for the selected cardslist
-  //     var temp2 = Immutable.update(temp, event.target.id, function() {
-  //       return {title: event.target.value};
-  //     });
-  //     //store the updated cardslist title
-  //     this.setState({cardslist: temp2});
-  //   }
-  // }
   //hide the following input
   hideCreateCardslist() {
     this.setState({showCreateCardslist: false});
@@ -72,27 +51,6 @@ export class Cardslist extends React.Component {
   closeModal() {
     this.setState({boardsModalIsOpen: false});
   }
-  /*
-  * deal with enter key being pressed. if the value is different from its initial
-  * value, then update it in the db and blur out the field.
-  */
-  submitUpdateCardslist(events, _id, boardId, board) {
-    if (events.charCode === 13 && events.target.value !== events.target.defaultValue) {
-      events.preventDefault();
-      events.target.blur();
-      this.props.updateCardslist(_id, events.target.value, boardId, board);
-    }
-  }
-  /*
-  * deal with on blur event for the updatecardslist form
-  * if the textarea value has changed, then it will persist to the db
-  */
-  blurUpdateCardslist(events, _id, boardId, board) {
-    //check that the value is different from the initial value
-    if (events.target.value !== events.target.defaultValue) {
-      this.props.updateCardslist(_id, events.target.value, boardId, board);
-    }
-  }
   createCardslistSubmit(cardslistTitle, boardId, board) {
     this.props.createCardslist(cardslistTitle, boardId, board);
     this.props.reset();
@@ -102,20 +60,6 @@ export class Cardslist extends React.Component {
     this.props.updateBoard(boardId, boardTitle);
     this.closeModal();
   }
-  //deal with the user hitting enter from the input and updating the cardslist
-  // handleKeyPress(events) {
-  //   if (events.charCode === 13) {
-  //     var temp = this.state.editCardslist;
-  //     temp[events.target.id] = true;
-  //     this.setState({editCardslist: temp});
-  //   }
-  // }
-  //set variable to enable the editing of the cardslist name
-  // editCardslistName(item) {
-  //   var temp = this.state.editCardslist;
-  //   temp[item] = false;
-  //   this.setState({editCardslist: temp});
-  // }
 
   render() {
     if (this.props.cardslist) {
@@ -135,10 +79,7 @@ export class Cardslist extends React.Component {
             <li key={index}>
               <div className="cardslist-tile">
                 <div className="update-cardslist">
-                  <UpdateCardslistForm onKeyPress={this.submitUpdateCardslist}
-                    onBlur={this.blurUpdateCardslist}
-                    defaultValue={this.state.cardslist[temp._id] ? this.state.cardslist[temp._id].title
-                      : temp.title} boardId={boardId} board={board} index={index} _id={temp._id}/>
+                  <UpdateCardslistForm boardId={boardId} board={board} index={index} _id={temp._id}/>
                   <div>
                     <span onClick={() => this.props.deleteCardslist(temp._id)} className="glyphicon glyphicon-minus cardslist-delete">
                     </span>
