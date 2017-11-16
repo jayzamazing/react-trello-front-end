@@ -40,6 +40,7 @@ export function UpdateBoardForm(props) {
           placeholder="Update board title"
           label="Name"
           labelclass="update-label"
+          defaultValue={props.boardName}
         />
         <button className="update-board-btn btn btn-success"
             type="submit"

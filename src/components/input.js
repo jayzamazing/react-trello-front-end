@@ -7,6 +7,7 @@ export default class Input extends React.Component {
         }
     }
     render() {
+        const Element = this.props.element || 'input';
         let error;
         if (this.props.meta.touched && this.props.meta.error) {
             error = <div className="form-error">{this.props.meta.error}</div>;
@@ -25,12 +26,13 @@ export default class Input extends React.Component {
                     {error}
                     {warning}
                 </label>
-                <input className={this.props.inputClass}
-                    {...this.props.input}
-                    id={this.props.input.name}
+                <Element className={this.props.inputClass}
+                    name={this.props.input.name}
                     type={this.props.type}
                     ref={input => (this.input = input)}
                     placeholder={this.props.placeholder}
+                    defaultValue={this.props.defaultValue || ''}
+                    onChange={this.props.input.onChange}
                 />
             </div>
         );

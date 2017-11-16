@@ -130,7 +130,7 @@ export class Cardslist extends React.Component {
             */}
         </div>
         <UpdateBoardForm isOpen={this.state.boardsModalIsOpen} closeModal={this.closeModal}
-          onSubmit={this.updateBoardSubmit} boardId={boardId}/>
+          onSubmit={this.updateBoardSubmit} boardId={boardId} boardName={boardName}/>
       </div>
     );
   }
