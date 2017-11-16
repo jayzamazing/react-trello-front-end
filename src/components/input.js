@@ -27,12 +27,11 @@ export default class Input extends React.Component {
                     {warning}
                 </label>
                 <Element className={this.props.inputClass}
+                    {...this.props.input}
                     name={this.props.input.name}
                     type={this.props.type}
                     ref={input => (this.input = input)}
                     placeholder={this.props.placeholder}
-                    defaultValue={this.props.defaultValue || ''}
-                    onChange={this.props.input.onChange}
                 />
             </div>
         );

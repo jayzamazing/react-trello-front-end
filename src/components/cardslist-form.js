@@ -129,8 +129,23 @@ export class Cardslist extends React.Component {
             labelclass={}
             */}
         </div>
-        <UpdateBoardForm isOpen={this.state.boardsModalIsOpen} closeModal={this.closeModal}
+        <Modal
+          isOpen={this.state.boardsModalIsOpen}
+          onRequestClose={() => this.closeModal()}
+          contentLabel="Update Board Modal"
+          className={{
+            base: 'update-board',
+            afterOpen: 'update-board-after-open',
+            beforeClose: 'update-board-before-close'
+          }}
+          overlayClassName={{
+            base: 'update-board-overlay',
+            afterOpen: 'update-board-overlay-after-open',
+            beforeClose: 'update-board-overlay-before-close'
+          }}>
+        <UpdateBoardForm
           onSubmit={this.updateBoardSubmit} boardId={boardId} boardName={boardName}/>
+        </Modal>
       </div>
     );
   }

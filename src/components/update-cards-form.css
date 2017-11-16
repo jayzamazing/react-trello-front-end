@@ -1,0 +1,13 @@
+.updateCards {
+  border: unset;
+  resize: none;
+  background-color: unset;
+  width: 100%;
+}
+.updateCards:focus {
+  background-color: white;
+}
+.update-cards-area {
+  background-color: white;
+  border-radius: 5px;
+}

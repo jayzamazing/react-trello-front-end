@@ -5,6 +5,7 @@ import {required, nonEmpty, length, isTrimmed} from '../validators';
 import {connect} from 'react-redux';
 import {updateCards} from '../actions/cards';
 import {submitUpdate, blurUpdate} from './utils';
+import './update-cards-form.css';
 
 export class UpdateCardsForm extends React.Component {
   render() {
