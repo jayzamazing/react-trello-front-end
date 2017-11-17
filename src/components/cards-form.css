@@ -2,6 +2,12 @@
   display: block;
   padding: 0;
 }
+.cards-list-ul li {
+  margin: 10px 0 !important;
+}
+.cards-tile {
+  position: relative;
+}
 .create-cards-link:hover {
   background-color: #CDD2D4;
   text-decoration: underline;

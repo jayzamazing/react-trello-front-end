@@ -115,11 +115,6 @@ export class Cardslist extends React.Component {
                 : null}
             </div>
           </ul>
-          {/*
-            <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)} addItems={() => {this.updateCardslist(); this.props.updateCardslist();}} name="cardslistInput"/>
-            inputClass={}
-            labelclass={}
-            */}
         </div>
         <Modal
           isOpen={this.state.boardsModalIsOpen}
@@ -198,6 +193,18 @@ const mapDispatchToProps = (dispatch, props) => ({
       const keys = Object.keys(res.boards);
       const title = res.boards[keys[0]].title;
       props.history.push("/:" + keys[0] + "/:" + title);
+    });
+  },
+  //dispatch to delete a card
+  deleteCards: (cardsId, cardslistId, cardslist) => {
+    dispatch(cardActions.deleteCards(cardsId))
+    .then(() => {
+      let mutableCardslist = [];
+      if (cardslist.cardslist) {
+        mutableCardslist = cardslist.cards.asMutable();
+      }
+      mutableCardslist.splice(mutableCardslist.indexOf(cardsId), 1);
+      dispatch(actions.updateCardslistSuccess(cardslistId, mutableCardslist));
     });
   }
 });

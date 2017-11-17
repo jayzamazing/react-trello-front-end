@@ -32,9 +32,9 @@ export class Cards extends React.Component {
     //otherwise assume we are editing cards name
     } else {
       //get cards from state
-      var temp = this.state.cards;
+      var cardsItems = this.state.cards;
       //update the title for the selected cards
-      var temp2 = Immutable.update(temp,
+      var updatedCardsItems = Immutable.update(cardsItems,
       event.target.id,
       function() {
         return {
@@ -42,7 +42,7 @@ export class Cards extends React.Component {
         };
       });
       //store the updated cards
-      this.setState({cardslist: temp2});
+      this.setState({cardslist: updatedCardsItems});
     }
   }
    //hide the following input
@@ -59,34 +59,38 @@ export class Cards extends React.Component {
   }
   //set variable to enable the editing of the cards title
   editCardstitle(item) {
-    var temp = this.state.editCards;
-    temp[item] = false;
-    this.setState({editCards: temp});
+    var editCards = this.state.editCards;
+    editCards[item] = false;
+    this.setState({editCards: editCards});
   }
   createCardsSubmit(cardsTitle, cardsText, _id, cardslist) {
     this.props.createCards(cardsTitle, cardsText, _id, cardslist);
     this.hideCreateCards();
   }
-  //defaultValue={this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}
+
   render() {
     var cardslist = this.props.cardslist[Object.keys(this.props.cardslist).find(item => {
         //if the id of props.cardslist matches cardslistid
       return this.props.cardslist[item]._id === this.props.cardslistId;
     })];
+    var cardsItems = this.props.cards;
     //function to render multiple cards
-    var cards = Object.keys(this.props.cards).map((item, index) => {
+    var cards = Object.keys(cardsItems).map((item, index) => {
       let cardsHtml;
-      if (cardslist.cards && cardslist.cards.indexOf(this.props.cards[item]._id) > -1) {
-        var temp = this.props.cards[item];
+      if (cardslist.cards && cardslist.cards.indexOf(cardsItems[item]._id) > -1) {
+        var cardsItem = cardsItems[item];
         cardsHtml = (
           <li key={index}>
             <div className="cards-tile">
               <div className="update-card">
                 <UpdateCardsForm index={index}
-                  _id={temp._id} card={{['title-' + index]: this.state.cards[temp._id] ? this.state.cards[temp._id].title : temp.title}}
+                  _id={cardsItem._id} card={{['title-' + index]: this.state.cards[cardsItem._id] ? this.state.cards[cardsItem._id].title : cardsItem.title}}
                   index={index}/>
               </div>
-
+              <div>
+                <span onClick={() => this.props.deleteCards(cardsItem._id, cardsItem.cardslistId, cardslist)} className="glyphicon glyphicon-minus cardslist-delete">
+                </span>
+              </div>
             </div>
           </li>
         );
