@@ -81,7 +81,7 @@ export class Cardslist extends React.Component {
                 <div className="update-cardslist">
                   <UpdateCardslistForm boardId={boardId} board={board} index={index} _id={cardslistItem._id}/>
                   <div>
-                    <span onClick={() => this.props.deleteCardslist(cardslistItem._id, board)} className="glyphicon glyphicon-minus cardslist-delete">
+                    <span onClick={() => this.props.deleteCardslist(cardslistItem._id, boardId, board)} className="glyphicon glyphicon-minus cardslist-delete">
                     </span>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cardslist
-  deleteCardslist: (cardslistId, board) => {
+  deleteCardslist: (cardslistId, boardId, board) => {
     dispatch(actions.deleteCardslist(cardslistId))
     .then(() => {
       let mutableBoard = [];
@@ -158,7 +158,7 @@ const mapDispatchToProps = (dispatch, props) => ({
         mutableBoard = board.cardslist.asMutable();
       }
       mutableBoard.splice(mutableBoard.indexOf(cardslistId), 1);
-      dispatch(boardActions.updateBoardSuccess(board, mutableBoard));
+      dispatch(boardActions.updateBoardSuccess(boardId, mutableBoard));
     });
   },
   //dispatch to add a new cardslist

@@ -14,7 +14,7 @@ export class UpdateCardslistForm extends React.Component {
         onSubmit={this.props.handleSubmit(values =>
         {this.props.updateCardslist(this.props._id, values[this.props._id].title ? values[this.props._id].title : values[this.props._id], this.props.boardId, this.props.board);})}>
           <Field
-            format={(data) => data.title}
+            format={(data) => data ? data.title : this.props.initialValues[this.props._id].title}
             component={Textarea}
             name={this.props._id}
             validate={[required, nonEmpty]}
