@@ -33,13 +33,14 @@ export const getBoards = (action = findBoardsSuccess) => (dispatch, getState) =>
       Authorization: `Bearer ${authToken}`
     }
   })
-    .then(res => {
-      if (res.status === 204) {
-        dispatch(action());
+    .then(res => normalizeResponseErrors(res))
+    .then(res =>  {
+      if (res.status !== 204) {
+        return res.json();
+      } else {
+        return;
       }
-      return normalizeResponseErrors(res);
     })
-    .then(res => res.json())
     .then(res => dispatch(action(res)))
     .catch(err => {console.log(err)});
 };
