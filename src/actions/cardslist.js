@@ -67,8 +67,9 @@ export const deleteCardslist = (id, action = deleteCardslistSuccess) => (dispatc
       Authorization: `Bearer ${authToken}`
     }
   })
-  .then((res) => normalizeResponseErrors(res))
-  .then((res) => dispatch(action(id)));
+  .then(res => normalizeResponseErrors(res))
+  .then(() => dispatch(action(id)))
+  .catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a cardslist has been updated
@@ -109,5 +110,6 @@ export const updateCardslist = (id, postData, action = updateCardslistSuccess) =
   })
   .then((res) => normalizeResponseErrors(res))
   .then(res => res.json())
-  .then((res) => dispatch(action(id, res)));
+  .then((res) => dispatch(action(id, res)))
+  .catch(err => {console.log(err)});
 };

@@ -53,7 +53,6 @@ export class Cardslist extends React.Component {
   }
   createCardslistSubmit(cardslistTitle, boardId, board) {
     this.props.createCardslist(cardslistTitle, boardId, board);
-    this.props.reset();
     this.hideCreateCardslist();
   }
   updateBoardSubmit(boardId, boardTitle) {
@@ -70,18 +69,19 @@ export class Cardslist extends React.Component {
           //if the id of props.boards matches boardid
         return this.props.boards[item]._id === boardId;
       })];
+      const cardslistItems = this.props.cardslist;
       //function to render multiple cardslist
-      var cardslist = Object.keys(this.props.cardslist).map((item, index) => {
+      var cardslist = Object.keys(cardslistItems).map((item, index) => {
         let cardslistHtml;
-        if (board.cardslist && board.cardslist.indexOf(this.props.cardslist[item]._id) > -1) {
-          var temp = this.props.cardslist[item];
+        if (board.cardslist && board.cardslist.indexOf(item) > -1) {
+          let cardslistItem = cardslistItems[item];
           cardslistHtml =  (
             <li key={index}>
               <div className="cardslist-tile">
                 <div className="update-cardslist">
-                  <UpdateCardslistForm boardId={boardId} board={board} index={index} _id={temp._id}/>
+                  <UpdateCardslistForm boardId={boardId} board={board} index={index} _id={cardslistItem._id}/>
                   <div>
-                    <span onClick={() => this.props.deleteCardslist(temp._id)} className="glyphicon glyphicon-minus cardslist-delete">
+                    <span onClick={() => this.props.deleteCardslist(cardslistItem._id, board)} className="glyphicon glyphicon-minus cardslist-delete">
                     </span>
                   </div>
                 </div>
@@ -89,14 +89,6 @@ export class Cardslist extends React.Component {
                   <CardsForm cardslistId={item} key={index} boardId={boardId}/>
                 </div>
               </div>
-              {/*<input type="text" id={temp._id} value={this.state.cardslist[temp._id]
-                ? this.state.cardslist[temp._id].title
-                : temp.title} disabled={(this.state.editCardslist[temp._id] === undefined)
-                ? true
-                : this.state.editCardslist[temp._id]} onChange={() => this.onAddInputChanged}
-                onKeyPress={(evt) => this.props.updateCardslist(evt)} name="cardslistName"/>*/}
-              {/*<input type="button" value="Delete Cardslist" onClick={() => this.props.deleteCardslist(temp._id)} name="deleteCardslist"/>
-            <input type="button" value="Edit Cardslist" onClick={() => this.editCardslistName(temp._id)} name="editCardslist"/>*/}
             </li>
           );
         }
@@ -158,8 +150,16 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch, props) => ({
   //dispatch to delete a cardslist
-  deleteCardslist: (cardslistId) => {
-    dispatch(actions.deleteCardslist(cardslistId));
+  deleteCardslist: (cardslistId, board) => {
+    dispatch(actions.deleteCardslist(cardslistId))
+    .then(() => {
+      let mutableBoard = [];
+      if (board.cardslist) {
+        mutableBoard = board.cardslist.asMutable();
+      }
+      mutableBoard.splice(mutableBoard.indexOf(cardslistId), 1);
+      dispatch(boardActions.updateBoardSuccess(board, mutableBoard));
+    });
   },
   //dispatch to add a new cardslist
   createCardslist: (cardslistTitle, boardId, board) => {
@@ -167,7 +167,7 @@ const mapDispatchToProps = (dispatch, props) => ({
       title: cardslistTitle,
       boardId: boardId
     }))
-    .then((res) => {
+    .then(res => {
       const keys = Object.keys(res.cardslist);
       let mutableBoard = [];
       if (board.cardslist) {
