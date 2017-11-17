@@ -9,7 +9,7 @@
 }
 .board-tile {
   display: block;
-  padding: 15px;
+  padding: 10px;
 }
 .boards-form li {
   height: 100px;
@@ -22,6 +22,9 @@
   }
 }
 .boards-form a {
+  color: white;
+}
+.board-create {
   color: white;
 }
 .create-board {
@@ -49,13 +52,17 @@
 }
 .create-board-input {
   border: none;
+  border-radius: 3px;
+  width: 200px;
+  height: 27px;
 }
 .close-modal-btn {
   position: relative;
   float: right;
   border: none;
   background-color: unset;
-  margin: -31px -10px 0px 0px;
+  margin: -36px -10px 0px 0px;
+  color: white;
 }
 .close-modal-btn:hover, .close-modal-btn:focus:active,
 .close-modal-btn:focus, .close-modal-btn:active {
@@ -66,17 +73,34 @@
 .create-board-input-area .remove, .create-board-input-area .form-error {
   display: none;
 }
+.create-board-input-area {
+  border-radius: 3px;
+}
 .create-board-btn {
   position: absolute;
   top: 155px;
   margin-left: -10px;
   background: #F8F9F9;
   color: #B6BBBF;
+  opacity: unset !important;
+}
+.create-board-btn:hover {
+  color: #B6BBBF;
+}
+.create-board-btn:enabled {
+  color: white;
+  background-color: #5AAC44;
+}
+.create-board-btn:enabled:active,
+.create-board-btn:enabled:focus,
+.create-board-btn:enabled:hover {
+  background-color: #49852E;
 }
 .boards-delete {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 10px;
+  color: white;
 }
 .boards-list {
   position: relative;

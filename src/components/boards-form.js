@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import CreateBoardForm from './create-board-form';
 import * as actions from '../actions/boards';
 import Immutable from 'seamless-immutable';
-import './boards-form.css'
+import './boards-form.css';
 import {Link, withRouter} from 'react-router-dom';
 import Modal from 'react-modal';
 import Input from './input';
@@ -69,7 +69,7 @@ export class Boards extends React.Component {
       <ul>
         {list}
         <li onClick={() => this.showCreateModal()}>
-          <span className="board-tile">
+          <span className="board-tile board-create">
             Create new board...
           </span>
         </li>
