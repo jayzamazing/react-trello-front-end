@@ -1,6 +1,6 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
-import Input from './input';
+import Textarea from './textarea';
 import {required, nonEmpty, length, isTrimmed} from '../validators';
 
 export function CreateCardsForm(props) {
@@ -11,13 +11,11 @@ export function CreateCardsForm(props) {
         props.onSubmit(values.cardsTitle, values.cardsText, props.cardslist._id, props.cardslist)
       })}>
         <Field
-          component={Input}
-          type="text"
+          component={Textarea}
           name="cardsTitle"
           validate={[required, nonEmpty, isTrimmed]}
           placeholder="Add a card"
-          labelclass="remove"
-          inputClass="addcards"
+          textareaClass="addcards"
         />
         <button className="create-cards-btn btn btn-success"
           type="submit"

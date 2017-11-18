@@ -33,6 +33,7 @@
   width: 250px;
   display: block;
   height: 25px;
+  cursor: pointer;
 }
 .create-cardslist .remove, .create-cardslist .form-error {
   display: none;
@@ -49,6 +50,11 @@
 .close-cardslist-btn {
   border: unset;
   background-color: unset;
+  color: #999;
+}
+.close-cardslist-btn .glyphicon {
+  font-size: 20px;
+  font-weight: 100;
 }
 .cardslist-form {
   height: 100%;
@@ -129,7 +135,17 @@
   border: unset;
   resize: none;
   z-index: 9999;
+  width: 240px;
 }
 .updateCardslist:focus {
   background-color: white;
+}
+.updateCardslist-input {
+  background-color: #E2E4E6;
+  height: 25px;
+  resize: none;
+  z-index: 9999;
+  width: 100%;
+  boder-width: 1px;
+  border-radius: 6px;
 }

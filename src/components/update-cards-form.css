@@ -2,7 +2,7 @@
   border: unset;
   resize: none;
   background-color: unset;
-  width: 220px;
+  width: 237px;
 }
 .updateCards:focus {
   background-color: white;
@@ -10,4 +10,5 @@
 .update-cards-area {
   background-color: white;
   border-radius: 5px;
+  width: 237px;
 }

@@ -68,7 +68,7 @@ export class Boards extends React.Component {
     return (<div className="boards-form">
       <ul>
         {list}
-        <li onClick={() => this.showCreateModal()}>
+        <li className="boards-list" onClick={() => this.showCreateModal()}>
           <span className="board-tile board-create">
             Create new board...
           </span>

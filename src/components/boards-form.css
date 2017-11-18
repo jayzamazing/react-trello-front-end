@@ -1,3 +1,6 @@
+.board-name h1 {
+  display: inline-block;
+}
 .boards-form ul li {
   list-style: none;
   margin: 0 10px 10px 0;
@@ -10,6 +13,8 @@
 .board-tile {
   display: block;
   padding: 10px;
+  height: 100%;
+  cursor: pointer;
 }
 .boards-form li {
   height: 100px;
@@ -23,9 +28,12 @@
 }
 .boards-form a {
   color: white;
+  display: block;
+  height: 100%;
 }
 .board-create {
   color: white;
+  border-radius: 5px;
 }
 .create-board {
   width: 400px;
@@ -56,7 +64,7 @@
   width: 200px;
   height: 27px;
 }
-.close-modal-btn {
+.create-board-input-area .close-modal-btn {
   position: relative;
   float: right;
   border: none;
@@ -64,8 +72,8 @@
   margin: -36px -10px 0px 0px;
   color: white;
 }
-.close-modal-btn:hover, .close-modal-btn:focus:active,
-.close-modal-btn:focus, .close-modal-btn:active {
+.create-board-input-area .close-modal-btn:hover, .create-board-input-area .close-modal-btn:focus:active,
+.create-board-input-area .close-modal-btn:focus, .create-board-input-area .close-modal-btn:active {
   border: none;
   background-color: unset;
   box-shadow: unset;
@@ -104,4 +112,5 @@
 }
 .boards-list {
   position: relative;
+  border-radius: 5px;
 }

@@ -56,7 +56,7 @@ export class RegistrationForm extends React.Component {
               inputClass="checkbox-space"
             />
 
-          <button className="block btn"
+          <button className="block btn btn-success"
               type="submit"
               disabled={this.props.pristine || this.props.submitting}>
               Create New Account

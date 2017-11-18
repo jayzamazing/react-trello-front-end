@@ -17,7 +17,7 @@ export function CreateCardslistForm(props) {
           validate={[required, nonEmpty, isTrimmed]}
           placeholder="Add a list"
           labelclass="remove"
-          inputClass="updateCardslist"
+          inputClass="updateCardslist-input"
         />
         <button className="create-cardslist-btn btn btn-success"
           type="submit"

@@ -106,12 +106,13 @@ export class Cardslist extends React.Component {
             <div className="create-cardslist">
               {this.state.showCreateCardslist
               ? null
-              : <span value="Add Cards list" onClick={() => this.showCreateCardslist()}
+              : <span onClick={() => this.showCreateCardslist()}
                 name="createCardslist" id="createCardslist" className="createCardslist">
                   Add a list...
                 </span>}
                 {this.state.showCreateCardslist
-                ? <CreateCardslistForm onSubmit={this.createCardslistSubmit} boardId={boardId} board={board} close={this.hideCreateCardslist}/>
+                ? <CreateCardslistForm onSubmit={this.createCardslistSubmit}
+                boardId={boardId} board={board} close={this.hideCreateCardslist}/>
                 : null}
             </div>
           </ul>
@@ -131,7 +132,7 @@ export class Cardslist extends React.Component {
             beforeClose: 'update-board-overlay-before-close'
           }}>
         <UpdateBoardForm
-          onSubmit={this.updateBoardSubmit} boardId={boardId} boardName={boardName}/>
+          onSubmit={this.updateBoardSubmit} boardId={boardId} boardName={boardName} closeModal={this.closeModal}/>
         </Modal>
       </div>
     );

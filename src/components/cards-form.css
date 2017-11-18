@@ -8,6 +8,10 @@
 .cards-tile {
   position: relative;
 }
+.createcards {
+  display: block;
+  cursor: pointer;
+}
 .create-cards-link:hover {
   background-color: #CDD2D4;
   text-decoration: underline;
@@ -15,4 +19,8 @@
 .close-cards-btn {
   border: unset;
   background: unset;
+}
+.addcards {
+  width: 100%;
+  resize: vertical;
 }

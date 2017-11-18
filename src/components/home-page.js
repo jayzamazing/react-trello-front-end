@@ -20,7 +20,7 @@ class HomePage extends React.Component {
         <main className="home container">
           <div className="row wrapper">
             <div className="text-center">
-              <h1>Welcome to Jays Trello!</h1>
+              <h1>Welcome to Trello!</h1>
             </div>
             <div className="text-center wrapper-2">
               <h3>This is a simple project that emulates some of trello's functionality.</h3>
