@@ -8,6 +8,7 @@ import RegistrationPage from './registration-page';
 import Login from './login-page';
 import HeaderBar from './header-bar';
 import {refreshAuthToken} from '../actions/auth';
+import FooterBar from './footer';
 import './app.css';
 
 export class App extends React.Component {
@@ -52,6 +53,7 @@ export class App extends React.Component {
         <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/boards" component={BoardsPage} />
         <Route exact path="/:boardId/:board" component={CardslistPage} />
+        <FooterBar location={this.props.location} />
       </div>
     );
   };

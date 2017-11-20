@@ -14,12 +14,12 @@ export class HeaderBar extends React.Component {
     }
     //used to hide the header when on certain pages
     hideHeader() {
-      const temp1 = this.props.location.pathname === '/register' ? false : true;
-      const temp2 = this.props.location.pathname === '/login' ? false : true;
-      if (temp1 && temp2) {
-        return 'container-fluid header-bar';
-      } else {
+      const temp1 = this.props.location.pathname === '/register' ? true : false;
+      const temp2 = this.props.location.pathname === '/login' ? true : false;
+      if (temp1 || temp2) {
         return 'invisible';
+      } else {
+        return 'container-fluid header-bar';
       }
     }
     render() {
