@@ -1,0 +1,84 @@
+.update-cards-modal {
+  width: 400px;
+  height: 140px;
+  margin: 50px auto 0 auto;
+  background-color: #EDEFF0;
+  padding: 5px;
+}
+.update-cards-modal .close-modal-btn {
+  margin: -5px -6px 0px 0px;
+}
+.update-cards-modal:focus {
+  outline: none;
+}
+.update-cards-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  float: none;
+  top: 0;
+}
+.update-cards-modal-input-area {
+  width: 300px;
+  height: 100px;
+  background-color: #0067a3;
+  padding: 10px;
+  color: black;
+}
+.update-cards-modal-input {
+  border: none;
+  border-radius: 3px;
+  width: 200px;
+  height: 27px;
+}
+.update-cards-modal-input-area .close-modal-btn {
+  position: relative;
+  float: right;
+  border: none;
+  background-color: unset;
+  margin: -36px -10px 0px 0px;
+  color: white;
+}
+.update-cards-modal-input-area .close-modal-btn:hover, .update-cards-modal-input-area .close-modal-btn:focus:active,
+.update-cards-modal-input-area .close-modal-btn:focus, .update-cards-modal-input-area .close-modal-btn:active {
+  border: none;
+  background-color: unset;
+  box-shadow: unset;
+}
+.update-cards-modal-input-area .remove, .update-cards-modal-input-area .form-error {
+  display: none;
+}
+.update-cards-modal-input-area {
+  border-radius: 3px;
+}
+.update-cards-modal-btn {
+  position: absolute;
+  top: 155px;
+  margin-left: -10px;
+  background: #F8F9F9;
+  color: #B6BBBF;
+  opacity: unset !important;
+}
+.update-cards-modal-btn:hover {
+  color: #B6BBBF;
+}
+.update-cards-modal-btn:enabled {
+  color: white;
+  background-color: #5AAC44;
+}
+.update-cards-modal-btn:enabled:active,
+.update-cards-modal-btn:enabled:focus,
+.update-cards-modal-btn:enabled:hover {
+  background-color: #49852E;
+}
+.update-cards-modal .update-cardstitle-area {
+  background-color: unset;
+  border-radius: 5px;
+  width: 345px;
+  color: black;
+  margin-bottom: 10px;
+}
+.update-cards-modal .updateCardsTitle {
+  width: 345px;
+}

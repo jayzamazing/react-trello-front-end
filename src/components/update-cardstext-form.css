@@ -1,0 +1,16 @@
+.updateCardsDetails {
+  color: black;
+  width: 90%;
+}
+
+.updateCardsText {
+  border: unset;
+  resize: unset;
+  width: 345px;
+  height: 75px;
+  border-radius: 5px;
+}
+.updateCardsText:focus, .updateCardsText:active {
+  background-color: white;
+  border: 1px solid black;
+}

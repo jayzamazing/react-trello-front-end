@@ -16,6 +16,8 @@ export default class Textarea extends React.Component {
                     placeholder={this.props.placeholder}
                     onKeyPress={this.props.onKeyPress}
                     onBlur={this.props.input.onBlur}
+                    disabled={this.props.disabled}
+                    onFocus={e => e.preventDefault}
                 >
                 </textarea>
             </div>

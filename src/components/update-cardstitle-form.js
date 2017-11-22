@@ -5,22 +5,25 @@ import {required, nonEmpty, length, isTrimmed} from '../validators';
 import {connect} from 'react-redux';
 import {updateCards} from '../actions/cards';
 import {submitUpdate, blurUpdate} from './utils';
-import './update-cards-form.css';
+import './update-cardstitle-form.css';
 
-export class UpdateCardsForm extends React.Component {
+export class UpdateCardsTitleForm extends React.Component {
   render() {
     return (
-      <form className="update-cards-area" ref="updatecardsform"
-      onSubmit={this.props.handleSubmit(values =>
-      {this.props.updateCards(this.props._id, values[this.props._id].title ? values[this.props._id].title : values[this.props._id]);})}>
+
+      <form className="update-cardstitle-area" ref={"updatecardsform-"}
+      onSubmit={
+        this.props.handleSubmit(values => this.props.updateCards(this.props._id, values.title ? values.title : values[this.props._id]))
+      }>
           <Field
-            format={(data) => data.title}
+            format={(data) => data ? data.title : this.props.initialValues[this.props._id].title}
             component={Textarea}
             name={this.props._id}
             validate={[required, nonEmpty]}
-            textareaClass="updateCards"
+            textareaClass="updateCardsTitle"
             onKeyPress={e => submitUpdate(e)}
-            onBlur={() => blurUpdate(this, 'updatecardsform')}
+            onBlur={() => blurUpdate(this, 'updatecardsform-')}
+            disabled={this.props.disabled}
           />
       </form>
     );
@@ -32,17 +35,15 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   //dispatch update to cards name if enter key is pressed
-  updateCards: (cardsId, cardsTitle, cardsText) => {
+  updateCards: (cardsId, cardsTitle) => {
     dispatch(updateCards(cardsId, {
-      title: cardsTitle,
-      cardsText: cardsText
+      title: cardsTitle
     }));
   }
 });
-UpdateCardsForm = reduxForm({
-    form: 'updatecards',
+UpdateCardsTitleForm = reduxForm({
     enableReinitialize : true,
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('updatecards', Object.keys(errors)[0]))
-})(UpdateCardsForm);
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateCardsForm);
+})(UpdateCardsTitleForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateCardsTitleForm);

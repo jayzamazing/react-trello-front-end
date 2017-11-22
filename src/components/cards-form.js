@@ -9,7 +9,7 @@ import {required, nonEmpty, length, isTrimmed} from '../validators';
 import Input from './input';
 import './cards-form.css';
 import CreateCardsForm from './create-cards-form';
-import UpdateCardsForm from './update-cards-form';
+import UpdateCards from './update-cards';
 //component to store list of cards and title
 export class Cards extends React.Component {
   //set up initial data state
@@ -83,13 +83,8 @@ export class Cards extends React.Component {
           <li key={index}>
             <div className="cards-tile">
               <div className="update-card">
-                <UpdateCardsForm index={index}
-                  _id={cardsItem._id} card={{['title-' + index]: this.state.cards[cardsItem._id] ? this.state.cards[cardsItem._id].title : cardsItem.title}}
-                  index={index}/>
-              </div>
-              <div>
-                <span onClick={() => this.props.deleteCards(cardsItem._id, cardsItem.cardslistId, cardslist)} className="glyphicon glyphicon-minus cardslist-delete">
-                </span>
+                <UpdateCards index={index}
+                  _id={cardsItem._id} card={{['title-' + index]: this.state.cards[cardsItem._id] ? this.state.cards[cardsItem._id].title : cardsItem.title}}/>
               </div>
             </div>
           </li>
