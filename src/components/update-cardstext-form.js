@@ -11,14 +11,14 @@ export class UpdateCardsTextForm extends React.Component {
   render() {
     return (
       <form className="update-cardstext-area" ref="updatecardstextform"
-      onSubmit={this.props.handleSubmit(values => this.props.updateCards(this.props._id, values.text))}>
+      onSubmit={this.props.handleSubmit(values => this.props.updateCards(this.props._id, values.text ? values.text : values[this.props._id]))}>
           <Field
-            format={(data) => data ? data.text : this.props.initialValues.text}
+            format={(data) => data.text}
             component={Textarea}
             name={this.props._id}
             validate={[required, nonEmpty]}
             textareaClass="updateCardsText"
-            onKeyPress={e => submitUpdate(e)}
+            onKeyPress={e => submitUpdate(e, this.props.initialValues[this.props._id].asMutable(), 'text')}
             onBlur={() => blurUpdate(this, 'updatecardstextform')}
           />
       </form>
@@ -26,7 +26,7 @@ export class UpdateCardsTextForm extends React.Component {
   }
 }
 const mapStateToProps = (state, props) => ({
-  initialValues: state.cards[props._id]
+  initialValues: state.cards
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -38,7 +38,6 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 UpdateCardsTextForm = reduxForm({
-    form: 'updatecards',
     enableReinitialize : true,
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('updatecards', Object.keys(errors)[0]))

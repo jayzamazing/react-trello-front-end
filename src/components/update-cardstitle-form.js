@@ -11,18 +11,18 @@ export class UpdateCardsTitleForm extends React.Component {
   render() {
     return (
 
-      <form className="update-cardstitle-area" ref={"updatecardsform-"}
+      <form className="update-cardstitle-area" ref="updatecardsform"
       onSubmit={
         this.props.handleSubmit(values => this.props.updateCards(this.props._id, values.title ? values.title : values[this.props._id]))
       }>
           <Field
-            format={(data) => data ? data.title : this.props.initialValues[this.props._id].title}
+            format={(data) => data.title}
             component={Textarea}
             name={this.props._id}
             validate={[required, nonEmpty]}
             textareaClass="updateCardsTitle"
-            onKeyPress={e => submitUpdate(e)}
-            onBlur={() => blurUpdate(this, 'updatecardsform-')}
+            onKeyPress={e => submitUpdate(e, this.props.initialValues[this.props._id].asMutable(), 'title')}
+            onBlur={() => blurUpdate(this, 'updatecardsform')}
             disabled={this.props.disabled}
           />
       </form>
