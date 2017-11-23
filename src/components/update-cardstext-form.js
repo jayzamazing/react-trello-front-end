@@ -11,7 +11,10 @@ export class UpdateCardsTextForm extends React.Component {
   render() {
     return (
       <form className="update-cardstext-area" ref="updatecardstextform"
-      onSubmit={this.props.handleSubmit(values => this.props.updateCards(this.props._id, values.text ? values.text : values[this.props._id]))}>
+        onSubmit={
+          this.props.handleSubmit(values => this.props.updateCards(this.props._id,
+            values[this.props._id].text ? values[this.props._id].text :
+            values.text ? values.text : values[this.props._id]))}>
           <Field
             format={(data) => data.text}
             component={Textarea}

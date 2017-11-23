@@ -13,10 +13,13 @@ export class UpdateCardsTitleForm extends React.Component {
 
       <form className="update-cardstitle-area" ref="updatecardsform"
       onSubmit={
-        this.props.handleSubmit(values => this.props.updateCards(this.props._id, values.title ? values.title : values[this.props._id]))
-      }>
+        this.props.handleSubmit(values => this.props.updateCards(this.props._id,
+          values[this.props._id].title ? values[this.props._id].title :
+          values.title ? values.title : values[this.props._id]))}>
           <Field
-            format={(data) => data.title}
+            format={(data) => {
+              return data.title ? data.title : data
+            }}
             component={Textarea}
             name={this.props._id}
             validate={[required, nonEmpty]}
