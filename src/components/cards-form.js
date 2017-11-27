@@ -84,7 +84,8 @@ export class Cards extends React.Component {
             <div className="cards-tile">
               <div className="update-card">
                 <UpdateCards index={index} deleteCards={this.props.deleteCards} updateCards={this.props.updateCards}
-                  _id={cardsItem._id} card={{['title-' + index]: this.state.cards[cardsItem._id] ? this.state.cards[cardsItem._id].title : cardsItem.title}}/>
+                  _id={cardsItem._id} card={{['title-' + index]: this.state.cards[cardsItem._id] ? this.state.cards[cardsItem._id].title : cardsItem.title}}
+                  cardslistId={this.props.cardslist._id} cardslist={this.props.cardslist}/>
               </div>
             </div>
           </li>
@@ -144,8 +145,16 @@ const mapDispatchToProps = (dispatch, props) => ({
     });
   },
   //dispatch to delete a cards
-  deleteCards: (cardId) => {
-    dispatch(actions.deleteCards(cardId));
+  deleteCards: (cardId, cardslistId, cardslist) => {
+    dispatch(actions.deleteCards(cardId))
+    .then(() => {
+      let mutableCardslist = [];
+      if (cardslist.cardslist) {
+        mutableCardslist = cardslist.cards.asMutable();
+      }
+      mutableCardslist.splice(mutableCardslist.indexOf(cardId), 1);
+      dispatch(cardslistActions.updateCardslistSuccess(cardslistId, mutableCardslist));
+    });
   },
   //dispatch update to cards name if enter key is pressed
   updateCards: (cardsId, body) => {

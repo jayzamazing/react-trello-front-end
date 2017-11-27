@@ -68,7 +68,8 @@ export const deleteCards = (id, action = deleteCardsSuccess) => (dispatch, getSt
     }
   })
   .then((res) => normalizeResponseErrors(res))
-  .then((res) => dispatch(action(id)));
+  .then(() => dispatch(action(id)))
+  .catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a cards has been updated

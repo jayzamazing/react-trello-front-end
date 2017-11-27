@@ -38,7 +38,7 @@ export default class UpdateCards extends React.Component {
         </span>
         <UpdateCardsModal _id={this.props._id} isOpen={this.state.editCardsModalIsOpen}
           closeModal={this.closeModal} index={this.props.index} deleteCards={this.props.deleteCards}
-          updateCards={this.props.updateCards}/>
+          updateCards={this.props.updateCards} cardslistId={this.props.cardslist._id} cardslist={this.props.cardslist}/>
       </div>
     );
   }
