@@ -17,10 +17,7 @@ export class UpdateCardsTitleForm extends React.Component {
           values[this.props._id].title ? values[this.props._id].title :
           values.title ? values.title : values[this.props._id]))}>
           <Field
-            format={(data) => {
-              let temp = this;
-              return data ? data.title : this.props.initialValues[this.props._id].title
-            }}
+            format={(data) => data ? data.title : this.props.initialValues[this.props._id].title}
             component={Textarea}
             name={this.props._id}
             validate={[required, nonEmpty]}

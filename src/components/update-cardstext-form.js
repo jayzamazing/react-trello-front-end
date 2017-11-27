@@ -16,7 +16,7 @@ export class UpdateCardsTextForm extends React.Component {
             values[this.props._id].text ? values[this.props._id].text :
             values.text ? values.text : values[this.props._id]))}>
           <Field
-            format={(data) => data.text}
+            format={(data) => data ? data.text : this.props.initialValues[this.props._id].text}
             component={Textarea}
             name={this.props._id}
             validate={[required, nonEmpty]}
