@@ -23,7 +23,11 @@ export default function UpdateCardsModal(props) {
         <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </button>
         <UpdateCardsTitleForm index={props.index} _id={props._id} form={props._id + '-2'}/>
+        <span onClick={() => props.deleteCards(props._id)} className="glyphicon glyphicon-minus cards-delete">
+        </span>
         <UpdateCardsTextForm _id={props._id} form={props._id + '-3'}/>
+        <span onClick={() => props.updateCards(props._id, {text: ''})} className="glyphicon glyphicon-minus cards-update">
+        </span>
       </Modal>
   );
 }

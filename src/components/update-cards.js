@@ -37,7 +37,8 @@ export default class UpdateCards extends React.Component {
         <span onClick={() => this.enableEdit()} className="glyphicon glyphicon-pencil edit-cards">
         </span>
         <UpdateCardsModal _id={this.props._id} isOpen={this.state.editCardsModalIsOpen}
-          closeModal={this.closeModal} index={this.props.index}/>
+          closeModal={this.closeModal} index={this.props.index} deleteCards={this.props.deleteCards}
+          updateCards={this.props.updateCards}/>
       </div>
     );
   }

@@ -83,7 +83,7 @@ export class Cards extends React.Component {
           <li key={index}>
             <div className="cards-tile">
               <div className="update-card">
-                <UpdateCards index={index}
+                <UpdateCards index={index} deleteCards={this.props.deleteCards} updateCards={this.props.updateCards}
                   _id={cardsItem._id} card={{['title-' + index]: this.state.cards[cardsItem._id] ? this.state.cards[cardsItem._id].title : cardsItem.title}}/>
               </div>
             </div>
@@ -148,11 +148,8 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(actions.deleteCards(cardId));
   },
   //dispatch update to cards name if enter key is pressed
-  updateCards: (cardsId, cardsTitle, cardsText) => {
-    dispatch(actions.createCards(cardsId, {
-      title: cardsTitle,
-      cardsText: cardsText
-    }));
+  updateCards: (cardsId, body) => {
+    dispatch(actions.updateCards(cardsId, body));
   }
 });
 //connects component to redux store

@@ -4,6 +4,7 @@
   margin: 50px auto 0 auto;
   background-color: #EDEFF0;
   padding: 5px;
+  position: relative;
 }
 .update-cards-modal .close-modal-btn {
   margin: -5px -6px 0px 0px;
@@ -81,4 +82,16 @@
 }
 .update-cards-modal .updateCardsTitle {
   width: 345px;
+}
+.cards-delete {
+  position: absolute;
+  top: 7px;
+  right: 30px;
+  color: black;
+}
+.cards-update {
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  color: black;
 }
