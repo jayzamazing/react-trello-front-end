@@ -1,7 +1,7 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import Input from './input';
-import {required, nonEmpty, length, isTrimmed} from '../validators';
+import {required, nonEmpty, isTrimmed} from '../validators';
 
 export function CreateCardslistForm(props) {
   return (

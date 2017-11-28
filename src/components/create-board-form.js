@@ -1,8 +1,7 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import Input from './input';
-import {required, nonEmpty, length, isTrimmed} from '../validators';
-import Modal from 'react-modal';
+import {required, nonEmpty, isTrimmed} from '../validators';
 
 export function CreateBoardForm(props) {
   return (<form className="create-board-input-area" onSubmit={props.handleSubmit(values => {

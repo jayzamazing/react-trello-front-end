@@ -1,7 +1,6 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import Textarea from './textarea';
-import {required, nonEmpty, length, isTrimmed} from '../validators';
 import {connect} from 'react-redux';
 import {updateCards} from '../actions/cards';
 import {submitUpdate, blurUpdate} from './utils';
@@ -23,7 +22,8 @@ export class UpdateCardsTitleForm extends React.Component {
             onKeyPress={e => submitUpdate(e)}
             onBlur={() => {
               //if function exists, then execute it
-              this.props.onBlur ? this.props.onBlur() : null;
+              const onBlur = this.props.onBlur ? this.props.onBlur : null;
+              onBlur();
               blurUpdate(this, 'updatecardsform');
             }}
             disabled={this.props.disabled}

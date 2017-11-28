@@ -2,13 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import CreateBoardForm from './create-board-form';
 import * as actions from '../actions/boards';
-import Immutable from 'seamless-immutable';
 import './boards-form.css';
 import {Link, withRouter} from 'react-router-dom';
 import Modal from 'react-modal';
-import Input from './input';
-import {Field, reduxForm, focus} from 'redux-form';
-import {required, nonEmpty, length, isTrimmed} from '../validators';
 
 //function to render multiple lists of boards
 export class Boards extends React.Component {

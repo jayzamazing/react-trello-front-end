@@ -6,6 +6,7 @@ import Checkbox from './checkbox';
 import {createUser} from '../actions/users';
 import {login} from '../actions/auth';
 import './registration-form.css';
+import {Link} from 'react-router-dom';
 
 export class RegistrationForm extends React.Component {
   onSubmit(values) {
@@ -47,7 +48,7 @@ export class RegistrationForm extends React.Component {
               inputClass="input-field form-control"
             />
             <Field
-              label={["I accept the ", <a href="#" key="0">Terms of Service</a>," and ", <a href="#" key="1">Privacy Policy</a>]}
+              label={["I accept the ", <Link href="#" key="0">Terms of Service</Link>," and ", <Link href="#" key="1">Privacy Policy</Link>]}
               component={Checkbox}
               type="checkbox"
               name="acceptTerms"

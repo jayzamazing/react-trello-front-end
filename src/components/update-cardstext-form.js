@@ -1,7 +1,6 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import Textarea from './textarea';
-import {required, nonEmpty, length, isTrimmed} from '../validators';
 import {connect} from 'react-redux';
 import {updateCards} from '../actions/cards';
 import {submitUpdate, blurUpdate} from './utils';

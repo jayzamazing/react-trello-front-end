@@ -1,7 +1,7 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import Textarea from './textarea';
-import {required, nonEmpty, length, isTrimmed} from '../validators';
+import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
 import {updateCardslist} from '../actions/cardslist';
 import {updateBoardSuccess} from '../actions/boards';

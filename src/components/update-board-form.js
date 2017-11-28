@@ -1,8 +1,7 @@
 import React from 'react';
 import {reduxForm, Field, focus} from 'redux-form';
 import Input from './input';
-import {required, nonEmpty, length, isTrimmed} from '../validators';
-import Modal from 'react-modal';
+import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
 
 export class UpdateBoardForm  extends React.Component {
