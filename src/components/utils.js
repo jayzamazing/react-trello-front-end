@@ -1,5 +1,4 @@
-export const submitUpdate = (events, data, field) => {
-
+export const submitUpdate = (events) => {
   if (events.charCode === 13) {
     events.preventDefault();
     events.target.blur();

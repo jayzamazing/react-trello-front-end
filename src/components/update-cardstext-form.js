@@ -12,16 +12,18 @@ export class UpdateCardsTextForm extends React.Component {
     return (
       <form className="update-cardstext-area" ref="updatecardstextform"
         onSubmit={
-          this.props.handleSubmit(values => this.props.updateCards(this.props._id,
-            values[this.props._id].text ? values[this.props._id].text :
-            values.text ? values.text : values[this.props._id]))}>
+          this.props.handleSubmit(values => {
+            return this.props.updateCards(this.props._id,
+              values[this.props._id]._id ? values[this.props._id].text : values[this.props._id])
+          })}>
           <Field
-            format={(data) => data ? data.text : this.props.initialValues[this.props._id].text}
+            format={(data) => {
+              return data ? data.text : ''
+            }}
             component={Textarea}
             name={this.props._id}
-            validate={[required, nonEmpty]}
             textareaClass="updateCardsText"
-            onKeyPress={e => submitUpdate(e, this.props.initialValues[this.props._id].asMutable(), 'text')}
+            onKeyPress={e => submitUpdate(e)}
             onBlur={() => blurUpdate(this, 'updatecardstextform')}
           />
       </form>
