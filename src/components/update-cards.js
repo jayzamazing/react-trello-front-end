@@ -7,7 +7,6 @@ export default class UpdateCards extends React.Component {
     super(props);
     this.state = {
       editCardsModalIsOpen: false,
-      disabled: 'true',
       modaloredit: true
     }
     this.closeModal = this.closeModal.bind(this);
@@ -15,6 +14,9 @@ export default class UpdateCards extends React.Component {
   //used for editing the title
   enableEdit() {
     this.setState({modaloredit: false});
+  }
+  disableEdit() {
+    this.setState({modaloredit: true});
   }
   //used to display the edit cards modal
   showUpdateCardsModal() {
@@ -31,7 +33,7 @@ export default class UpdateCards extends React.Component {
             <UpdateCardsTitleForm index={this.props.index}
               _id={this.props._id} card={this.props.card} disabled='true' form={this.props._id + '-1'}/>
           </span>
-          : <UpdateCardsTitleForm index={this.props.index}
+          : <UpdateCardsTitleForm index={this.props.index} onBlur={() => this.disableEdit()}
             _id={this.props._id} card={this.props.card} form={this.props._id + '-1'} />
         }
         <span onClick={() => this.enableEdit()} className="glyphicon glyphicon-pencil edit-cards">

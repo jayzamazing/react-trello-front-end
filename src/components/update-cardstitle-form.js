@@ -8,9 +8,9 @@ import {submitUpdate, blurUpdate} from './utils';
 import './update-cardstitle-form.css';
 
 export class UpdateCardsTitleForm extends React.Component {
+
   render() {
     return (
-
       <form className="update-cardstitle-area" ref="updatecardsform"
       onSubmit={
         this.props.handleSubmit(values => this.props.updateCards(this.props._id,
@@ -21,7 +21,11 @@ export class UpdateCardsTitleForm extends React.Component {
             name={this.props._id}
             textareaClass="updateCardsTitle"
             onKeyPress={e => submitUpdate(e)}
-            onBlur={() => blurUpdate(this, 'updatecardsform')}
+            onBlur={() => {
+              //if function exists, then execute it
+              this.props.onBlur ? this.props.onBlur() : null;
+              blurUpdate(this, 'updatecardsform');
+            }}
             disabled={this.props.disabled}
           />
       </form>
