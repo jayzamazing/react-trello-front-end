@@ -48,7 +48,7 @@ export class RegistrationForm extends React.Component {
               inputClass="input-field form-control"
             />
             <Field
-              label={["I accept the ", <Link href="#" key="0">Terms of Service</Link>," and ", <Link href="#" key="1">Privacy Policy</Link>]}
+              label={["I accept the Terms of Service, and Privacy Policy."]}
               component={Checkbox}
               type="checkbox"
               name="acceptTerms"
