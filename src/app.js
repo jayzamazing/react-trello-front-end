@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
-import HomePage from './home-page';
-import BoardsPage from './boards-page';
-import CardslistPage from './cardslist-page';
-import RegistrationPage from './registration-page';
-import Login from './login-page';
-import HeaderBar from './header-bar';
-import {refreshAuthToken} from '../actions/auth';
-import FooterBar from './footer';
+import HomePage from './components/home-page';
+import BoardsPage from './components/boards-page';
+import CardslistPage from './components/cardslist-page';
+import RegistrationPage from './components/registration-page';
+import Login from './components/login-page';
+import HeaderBar from './components/header-bar';
+import {refreshAuthToken} from './actions/auth';
+import FooterBar from './components/footer';
 import './app.css';
 
 export class App extends React.Component {

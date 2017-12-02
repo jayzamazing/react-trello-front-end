@@ -6,7 +6,7 @@ import Checkbox from './checkbox';
 import {createUser} from '../actions/users';
 import {login} from '../actions/auth';
 import './registration-form.css';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 export class RegistrationForm extends React.Component {
   onSubmit(values) {
