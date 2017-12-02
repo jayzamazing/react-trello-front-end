@@ -46,12 +46,14 @@ describe('createCards', () => {
   it('should dispatch createCardsSuccess', () => {
     const data = createTitle();
     const card = seedCardsSingle(23453212345, data.text);
+    //mock response
     global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       json() {
         return card;
       }
     }));
+    //mock dispatch
     const dispatch = jest.fn();
     //call create cards
     return createCards(data)(dispatch, state)
