@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`boards-page authenticated snapshot 1`] = `
+<div
+  className="boards container-fluid"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="boards-area col-xs-12"
+    >
+      <h3>
+        Personal Boards
+      </h3>
+      <withRouter(Connect(Boards)) />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`boards-page not authenticated snapshot 1`] = `
+<Redirect
+  push={false}
+  to="/"
+/>
+`;
