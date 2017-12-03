@@ -7,6 +7,7 @@ export default class Checkbox extends React.Component {
         }
     }
     render() {
+        const Element = this.props.element || 'checkbox';
         let error;
         if (this.props.meta.touched && this.props.meta.error) {
             error = <div className="form-error">{this.props.meta.error}</div>;
@@ -20,7 +21,7 @@ export default class Checkbox extends React.Component {
         }
         return (
             <div className={this.props.divClass}>
-              <input className={this.props.inputClass}
+              <Element className={this.props.inputClass}
                   {...this.props.input}
                   id={this.props.input.name}
                   type={this.props.type}

@@ -53,7 +53,6 @@ beforeEach(() => {
   //check dispatch is fired off when delete button is clicked
   it('dispatches delete cardslist', () => {
     const deleteCardslist = jest.fn();
-    // const dispatch = jest.fn();
     const wrapper = shallow(<Cardslist match={match} boards={boards} cardslist={cardslist} cards={cards} deleteCardslist={deleteCardslist}/>);
     wrapper.find('[name="deleteCardslist"]').at(0).simulate('click');
     expect(deleteCardslist).toHaveBeenCalledWith(cardslistKeys[0], match.params.boardId.replace(':', ''), boards[boardKeys[0]]);
