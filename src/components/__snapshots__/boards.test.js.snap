@@ -1,0 +1,292 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Boards component boards snapshot 1`] = `
+<div
+  className="boards-form"
+>
+  <ul>
+    <li
+      className="boards-list"
+      key="0"
+    >
+      <Link
+        replace={false}
+        to="/:2skdde39hzdo08aqcdgd/:XML Health"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            XML Health
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="1"
+    >
+      <Link
+        replace={false}
+        to="/:14w43d4opubteu021ato/:Bedfordshire Illinois Liaison"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Bedfordshire Illinois Liaison
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="2"
+    >
+      <Link
+        replace={false}
+        to="/:kd5o3ve2858vpjxd7wjp/:Sports Analyst Cambridgeshire"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Sports Analyst Cambridgeshire
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      name="createBoard"
+      onClick={[Function]}
+    >
+      <span
+        className="board-tile board-create"
+      >
+        Create new board...
+      </span>
+    </li>
+  </ul>
+  <CreateBoardModal
+    closeModal={[Function]}
+    isOpen={false}
+    onSubmit={[Function]}
+  />
+</div>
+`;
+
+exports[`Boards component click on create board snapshot 1`] = `
+<div
+  className="boards-form"
+>
+  <ul>
+    <li
+      className="boards-list"
+      key="0"
+    >
+      <Link
+        replace={false}
+        to="/:2skdde39hzdo08aqcdgd/:XML Health"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            XML Health
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="1"
+    >
+      <Link
+        replace={false}
+        to="/:14w43d4opubteu021ato/:Bedfordshire Illinois Liaison"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Bedfordshire Illinois Liaison
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="2"
+    >
+      <Link
+        replace={false}
+        to="/:kd5o3ve2858vpjxd7wjp/:Sports Analyst Cambridgeshire"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Sports Analyst Cambridgeshire
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      name="createBoard"
+      onClick={[Function]}
+    >
+      <span
+        className="board-tile board-create"
+      >
+        Create new board...
+      </span>
+    </li>
+  </ul>
+  <CreateBoardModal
+    closeModal={[Function]}
+    isOpen={false}
+    onSubmit={[Function]}
+  />
+</div>
+`;
+
+exports[`Boards component click on create board snapshot 2`] = `
+<div
+  className="boards-form"
+>
+  <ul>
+    <li
+      className="boards-list"
+      key="0"
+    >
+      <Link
+        replace={false}
+        to="/:2skdde39hzdo08aqcdgd/:XML Health"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            XML Health
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="1"
+    >
+      <Link
+        replace={false}
+        to="/:14w43d4opubteu021ato/:Bedfordshire Illinois Liaison"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Bedfordshire Illinois Liaison
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="2"
+    >
+      <Link
+        replace={false}
+        to="/:kd5o3ve2858vpjxd7wjp/:Sports Analyst Cambridgeshire"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Sports Analyst Cambridgeshire
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        name="deleteBoard"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      name="createBoard"
+      onClick={[Function]}
+    >
+      <span
+        className="board-tile board-create"
+      >
+        Create new board...
+      </span>
+    </li>
+  </ul>
+  <CreateBoardModal
+    closeModal={[Function]}
+    isOpen={true}
+    onSubmit={[Function]}
+  />
+</div>
+`;

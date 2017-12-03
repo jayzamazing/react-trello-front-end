@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/boards';
-import './boards-form.css';
+import './boards.css';
 import {Link, withRouter} from 'react-router-dom';
 import CreateBoardModal from './create-board-modal';
 
@@ -55,14 +55,14 @@ export class Boards extends React.Component {
                 }</span>
             </div>
           </Link>
-          <span onClick={() => this.props.deleteBoard(temp._id)} className="glyphicon glyphicon-minus boards-delete"></span>
+          <span onClick={() => this.props.deleteBoard(temp._id)} className="glyphicon glyphicon-minus boards-delete" name="deleteBoard"></span>
         </li>);
       });
     }
     return (<div className="boards-form">
       <ul>
         {list}
-        <li className="boards-list" onClick={() => this.showCreateModal()}>
+        <li className="boards-list" onClick={() => this.showCreateModal()} name="createBoard">
           <span className="board-tile board-create">
             Create new board...
           </span>

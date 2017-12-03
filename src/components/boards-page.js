@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import BoardsForm from './boards-form';
+import Boards from './boards';
 import './boards-page.css';
 
 export function BoardsPage(props) {
@@ -14,7 +14,7 @@ export function BoardsPage(props) {
           <div className="row">
             <div className="boards-area col-xs-12">
               <h3>Personal Boards</h3>
-              <BoardsForm />
+              <Boards />
             </div>
           </div>
         </div>
