@@ -38,42 +38,7 @@ beforeEach(() => {
     const dispatch = jest.fn();
     const wrapper = shallow(<Cards cardslistId={cardslistKeys[0]} cardslist={cardslist} cards={cards} dispatch={dispatch}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.find('[name="addCards"]').simulate('click');
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-  //check dispatch is fired off when delete button is clicked
-  it('dispatches delete cards', () => {
-    const deleteCards = jest.fn();
-    // const dispatch = jest.fn();
-    const wrapper = shallow(<Cards cardslistId={cardslistKeys[0]} cardslist={cardslist} cards={cards} deleteCards={deleteCards}/>);
-    wrapper.find('[name="deleteCards"]').at(0).simulate('click');
-    expect(deleteCards).toHaveBeenCalledWith(cardsKeys[0]);
-  });
-  //click on delete button and check before and after snapshots
-  it('delete cards snapshot', () => {
-    const deleteCards = jest.fn();
-    // const dispatch = jest.fn();
-    const wrapper = shallow(<Cards cardslistId={cardslistKeys[0]} cardslist={cardslist} cards={cards} deleteCards={deleteCards}/>);
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.find('[name="deleteCards"]').at(0).simulate('click');
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-  //check dispatch is fired when update button is clicked
-  it('dispatches update cards', () => {
-    const updateCards = jest.fn();
-    const wrapper = shallow(<Cards cardslistId={cardslistKeys[0]} cardslist={cardslist} cards={cards} updateCards={updateCards}/>);
-    wrapper.find('[name="cardsName"]').at(0).simulate('keypress', {key: 'Enter'});
-    expect(updateCards).toHaveBeenCalledWith({"key": "Enter"});
-  });
-  //click on update button and check before and after snapshots
-  it('update cards snapshot', () => {
-    const updateCards = jest.fn();
-    const wrapper = shallow(<Cards cardslistId={cardslistKeys[0]} cardslist={cardslist} cards={cards} updateCards={updateCards}/>);
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.find('[name="editCards"]').at(0).simulate('click');
-    const keys = Object.keys(boards);
-    wrapper.find('[name="cardsName"]').at(0).simulate('change', { target: { value: 'testing', id: keys[0] } });
-    wrapper.find('[name="cardsName"]').at(0).simulate('keypress', {key: 'Enter'})
+    wrapper.find('[name="createcards"]').simulate('click');
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

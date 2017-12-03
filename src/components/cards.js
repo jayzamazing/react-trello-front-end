@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as actions from '../actions/cards';
 import * as cardslistActions from '../actions/cardslist';
 import {Immutable} from 'seamless-immutable';
-import './cards-form.css';
+import './cards.css';
 import CreateCardsForm from './create-cards-form';
 import UpdateCards from './update-cards';
 //component to store list of cards and title
@@ -109,10 +109,6 @@ export class Cards extends React.Component {
           </div>
           </li>
         </ul>
-          {/*<input type="button" value="Add Cards" onClick={() => this.showCreateCards} name="addCards"/>
-          {this.state.showCreateCards ? <CreateItems
-              onAddInputChanged={this.onAddInputChanged}
-              addItems={this.addCards} name="addCards"/> : null}*/}
       </div>
     );
   }

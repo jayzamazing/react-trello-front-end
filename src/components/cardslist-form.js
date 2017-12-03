@@ -1,5 +1,5 @@
 import React from 'react';
-import CardsForm from './cards-form';
+import Cards from './cards';
 import {connect} from 'react-redux';
 import * as actions from '../actions/cardslist';
 import * as boardActions from '../actions/boards';
@@ -80,7 +80,7 @@ export class Cardslist extends React.Component {
                   </div>
                 </div>
                 <div className="">
-                  <CardsForm cardslistId={item} key={index} boardId={boardId}/>
+                  <Cards cardslistId={item} key={index} boardId={boardId}/>
                 </div>
               </div>
             </li>
