@@ -1,10 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CreateBoardForm from './create-board-form';
 import * as actions from '../actions/boards';
 import './boards-form.css';
 import {Link, withRouter} from 'react-router-dom';
-import Modal from 'react-modal';
+import CreateBoardModal from './create-board-modal';
 
 //function to render multiple lists of boards
 export class Boards extends React.Component {
@@ -40,7 +39,6 @@ export class Boards extends React.Component {
   }
   createBoardModalSubmit(boardTitle) {
     this.props.addBoard(boardTitle);
-    this.closeModal();
   }
   render() {
     //only execute if there is data
@@ -70,20 +68,9 @@ export class Boards extends React.Component {
           </span>
         </li>
       </ul>
-      <Modal isOpen={this.state.boardsModalIsOpen}
-        onRequestClose={() => this.closeModal()}
-        contentLabel="Create Board Modal"
-        className={{
-          base: 'create-board',
-          afterOpen: 'create-board-after-open',
-          beforeClose: 'create-board-before-close'
-        }} overlayClassName={{
-          base: 'create-board-overlay',
-          afterOpen: 'create-board-overlay-after-open',
-          beforeClose: 'create-board-overlay-before-close'
-        }}>
-        <CreateBoardForm onSubmit={this.createBoardModalSubmit} closeModal={this.closeModal}/>
-      </Modal>
+      <CreateBoardModal isOpen={this.state.boardsModalIsOpen}
+        onSubmit={this.createBoardModalSubmit}
+        closeModal={this.closeModal} />
     </div>);
   }
 };

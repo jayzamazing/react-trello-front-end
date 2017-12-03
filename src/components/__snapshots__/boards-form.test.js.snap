@@ -1,0 +1,374 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Boards component add board click snapshot 1`] = `
+<MemoryRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "canGo": [Function],
+        "createHref": [Function],
+        "entries": Array [
+          Object {
+            "hash": "",
+            "key": "f4qi9h",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+        ],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "index": 0,
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "key": "f4qi9h",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Boards
+      boards={
+        Object {
+          "14w43d4opubteu021ato": Object {
+            "_id": "14w43d4opubteu021ato",
+            "cardslist": "14w43d4opubteu021ato",
+            "title": "Bedfordshire Illinois Liaison",
+          },
+          "2skdde39hzdo08aqcdgd": Object {
+            "_id": "2skdde39hzdo08aqcdgd",
+            "cardslist": "2skdde39hzdo08aqcdgd",
+            "title": "XML Health",
+          },
+          "kd5o3ve2858vpjxd7wjp": Object {
+            "_id": "kd5o3ve2858vpjxd7wjp",
+            "cardslist": "kd5o3ve2858vpjxd7wjp",
+            "title": "Sports Analyst Cambridgeshire",
+          },
+        }
+      }
+      dispatch={[Function]}
+    >
+      <div
+        className="boards-form"
+      >
+        <ul>
+          <li
+            className="boards-list"
+            key="0"
+          >
+            <Link
+              replace={false}
+              to="/:2skdde39hzdo08aqcdgd/:XML Health"
+            >
+              <a
+                href="/:2skdde39hzdo08aqcdgd/:XML Health"
+                onClick={[Function]}
+              >
+                <div
+                  className="board-tile"
+                >
+                  <span
+                    className=""
+                  >
+                    XML Health
+                  </span>
+                </div>
+              </a>
+            </Link>
+            <span
+              className="glyphicon glyphicon-minus boards-delete"
+              onClick={[Function]}
+            />
+          </li>
+          <li
+            className="boards-list"
+            key="1"
+          >
+            <Link
+              replace={false}
+              to="/:14w43d4opubteu021ato/:Bedfordshire Illinois Liaison"
+            >
+              <a
+                href="/:14w43d4opubteu021ato/:Bedfordshire Illinois Liaison"
+                onClick={[Function]}
+              >
+                <div
+                  className="board-tile"
+                >
+                  <span
+                    className=""
+                  >
+                    Bedfordshire Illinois Liaison
+                  </span>
+                </div>
+              </a>
+            </Link>
+            <span
+              className="glyphicon glyphicon-minus boards-delete"
+              onClick={[Function]}
+            />
+          </li>
+          <li
+            className="boards-list"
+            key="2"
+          >
+            <Link
+              replace={false}
+              to="/:kd5o3ve2858vpjxd7wjp/:Sports Analyst Cambridgeshire"
+            >
+              <a
+                href="/:kd5o3ve2858vpjxd7wjp/:Sports Analyst Cambridgeshire"
+                onClick={[Function]}
+              >
+                <div
+                  className="board-tile"
+                >
+                  <span
+                    className=""
+                  >
+                    Sports Analyst Cambridgeshire
+                  </span>
+                </div>
+              </a>
+            </Link>
+            <span
+              className="glyphicon glyphicon-minus boards-delete"
+              onClick={[Function]}
+            />
+          </li>
+          <li
+            className="boards-list"
+            onClick={[Function]}
+          >
+            <span
+              className="board-tile board-create"
+            >
+              Create new board...
+            </span>
+          </li>
+        </ul>
+        <Modal
+          ariaHideApp={true}
+          bodyOpenClassName="ReactModal__Body--open"
+          className={
+            Object {
+              "afterOpen": "create-board-after-open",
+              "base": "create-board",
+              "beforeClose": "create-board-before-close",
+            }
+          }
+          closeTimeoutMS={0}
+          contentLabel="Create Board Modal"
+          isOpen={false}
+          onRequestClose={[Function]}
+          overlayClassName={
+            Object {
+              "afterOpen": "create-board-overlay-after-open",
+              "base": "create-board-overlay",
+              "beforeClose": "create-board-overlay-before-close",
+            }
+          }
+          parentSelector={[Function]}
+          portalClassName="ReactModalPortal"
+          shouldCloseOnEsc={true}
+          shouldCloseOnOverlayClick={true}
+          shouldFocusAfterRender={true}
+          shouldReturnFocusAfterClose={true}
+        >
+          <ModalPortal
+            ariaHideApp={true}
+            bodyOpenClassName="ReactModal__Body--open"
+            className={
+              Object {
+                "afterOpen": "create-board-after-open",
+                "base": "create-board",
+                "beforeClose": "create-board-before-close",
+              }
+            }
+            closeTimeoutMS={0}
+            contentLabel="Create Board Modal"
+            defaultStyles={
+              Object {
+                "content": Object {
+                  "WebkitOverflowScrolling": "touch",
+                  "background": "#fff",
+                  "border": "1px solid #ccc",
+                  "borderRadius": "4px",
+                  "bottom": "40px",
+                  "left": "40px",
+                  "outline": "none",
+                  "overflow": "auto",
+                  "padding": "20px",
+                  "position": "absolute",
+                  "right": "40px",
+                  "top": "40px",
+                },
+                "overlay": Object {
+                  "backgroundColor": "rgba(255, 255, 255, 0.75)",
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "fixed",
+                  "right": 0,
+                  "top": 0,
+                },
+              }
+            }
+            isOpen={false}
+            onRequestClose={[Function]}
+            overlayClassName={
+              Object {
+                "afterOpen": "create-board-overlay-after-open",
+                "base": "create-board-overlay",
+                "beforeClose": "create-board-overlay-before-close",
+              }
+            }
+            parentSelector={[Function]}
+            portalClassName="ReactModalPortal"
+            shouldCloseOnEsc={true}
+            shouldCloseOnOverlayClick={true}
+            shouldFocusAfterRender={true}
+            shouldReturnFocusAfterClose={true}
+            style={
+              Object {
+                "content": Object {},
+                "overlay": Object {},
+              }
+            }
+          />
+        </Modal>
+      </div>
+    </Boards>
+  </Router>
+</MemoryRouter>
+`;
+
+exports[`Boards component boards snapshot 1`] = `
+<div
+  className="boards-form"
+>
+  <ul>
+    <li
+      className="boards-list"
+      key="0"
+    >
+      <Link
+        replace={false}
+        to="/:2skdde39hzdo08aqcdgd/:XML Health"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            XML Health
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="1"
+    >
+      <Link
+        replace={false}
+        to="/:14w43d4opubteu021ato/:Bedfordshire Illinois Liaison"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Bedfordshire Illinois Liaison
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      key="2"
+    >
+      <Link
+        replace={false}
+        to="/:kd5o3ve2858vpjxd7wjp/:Sports Analyst Cambridgeshire"
+      >
+        <div
+          className="board-tile"
+        >
+          <span
+            className=""
+          >
+            Sports Analyst Cambridgeshire
+          </span>
+        </div>
+      </Link>
+      <span
+        className="glyphicon glyphicon-minus boards-delete"
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className="boards-list"
+      onClick={[Function]}
+    >
+      <span
+        className="board-tile board-create"
+      >
+        Create new board...
+      </span>
+    </li>
+  </ul>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className={
+      Object {
+        "afterOpen": "create-board-after-open",
+        "base": "create-board",
+        "beforeClose": "create-board-before-close",
+      }
+    }
+    closeTimeoutMS={0}
+    contentLabel="Create Board Modal"
+    isOpen={false}
+    onRequestClose={[Function]}
+    overlayClassName={
+      Object {
+        "afterOpen": "create-board-overlay-after-open",
+        "base": "create-board-overlay",
+        "beforeClose": "create-board-overlay-before-close",
+      }
+    }
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <ReduxForm
+      closeModal={[Function]}
+      onSubmit={[Function]}
+    />
+  </Modal>
+</div>
+`;
