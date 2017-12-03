@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../actions/cardslist';
 import * as boardActions from '../actions/boards';
 import * as cardActions from '../actions/cards';
-import './cardslist-form.css';
+import './cardslist.css';
 import Modal from 'react-modal';
 import {withRouter} from 'react-router-dom';
 import CreateCardslistForm from './create-cardslist-form';

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import CardslistForm from './cardslist-form';
+import CardslistForm from './cardslist';
 import './cardslist-page.css';
 
 export function CardslistPage(props) {

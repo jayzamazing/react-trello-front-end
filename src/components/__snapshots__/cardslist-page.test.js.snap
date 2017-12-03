@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cardslist-page authenticated snapshot 1`] = `
+<div
+  className="cardslist container-fluid"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="cardslist-form-area"
+    >
+      <withRouter(Connect(Cardslist)) />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`cardslist-page not authenticated snapshot 1`] = `
+<Redirect
+  push={false}
+  to="/"
+/>
+`;
