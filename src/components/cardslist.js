@@ -75,7 +75,8 @@ export class Cardslist extends React.Component {
                 <div className="update-cardslist">
                   <UpdateCardslistForm boardId={boardId} board={board} index={index} _id={cardslistItem._id}/>
                   <div>
-                    <span onClick={() => this.props.deleteCardslist(cardslistItem._id, boardId, board)} className="glyphicon glyphicon-minus cardslist-delete">
+                    <span onClick={() => this.props.deleteCardslist(cardslistItem._id, boardId, board)}
+                    className="glyphicon glyphicon-minus cardslist-delete" name="deleteCardslist">
                     </span>
                   </div>
                 </div>
