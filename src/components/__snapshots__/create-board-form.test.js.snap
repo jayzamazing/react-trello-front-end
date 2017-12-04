@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateBoardForm snapshot 1`] = `
+exports[`create-board-form snapshot 1`] = `
 <form
   className="create-board-input-area"
   name="createBoardForm"

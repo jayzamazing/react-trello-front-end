@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-cards-form snapshot 1`] = `
+<form
+  className="create-cards-area cards-tile"
+>
+  <Field
+    component={[Function]}
+    name="cardsTitle"
+    placeholder="Add a card"
+    textareaClass="addcards"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <button
+    className="create-cards-btn btn btn-success"
+    type="submit"
+  >
+    Add
+  </button>
+  <button
+    aria-label="close button"
+    className="btn btn-default close-cards-btn"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      className="glyphicon glyphicon-remove"
+    />
+  </button>
+</form>
+`;
