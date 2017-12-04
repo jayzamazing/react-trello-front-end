@@ -42,10 +42,9 @@ const mapStateToProps = (state, props) => ({
   initialValues: {[props.boardId]: state.boards[props.boardId].title}
 });
 
-UpdateBoardForm = reduxForm({
+export default connect(mapStateToProps)(reduxForm({
     form: 'updateboard',
     enableReinitialize : true,
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('updateboard', Object.keys(errors)[0]))
-})(UpdateBoardForm);
-export default connect(mapStateToProps)(UpdateBoardForm);
+})(UpdateBoardForm));

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`update-board-form snapshot 1`] = `
+<form
+  className="update-board-input-area"
+>
+  <span
+    className="center-text"
+  >
+    <h5>
+      Rename Board
+    </h5>
+  </span>
+  <button
+    aria-label="close button"
+    className="btn btn-default close-modal-btn"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      className="glyphicon glyphicon-remove"
+    />
+  </button>
+  <hr />
+  <Field
+    component={[Function]}
+    inputClass="update-board-input"
+    label="Name"
+    labelclass="update-label"
+    name="35re4qwefgt34werwd"
+    onChange={[Function]}
+    placeholder="Update board title"
+    type="text"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <button
+    className="update-board-btn btn btn-success"
+    type="submit"
+  >
+    Rename
+  </button>
+</form>
+`;
