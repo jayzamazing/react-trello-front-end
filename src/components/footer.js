@@ -2,19 +2,12 @@ import React from 'react';
 import './footer.css';
 import {Link} from 'react-router-dom';
 
-export default class FooterBar extends React.Component {
+export function FooterBar(props){
   //only show when at the root page
-  hideFooter() {
-    const root = this.props.location.pathname === '/' ? true : false;
-    if (root) {
-      return 'container footer-bar'
-    } else {
-      return 'invisible';
-    }
-  }
-  render() {
+  const root = props.location.pathname === '/' ? true : false;
+  if (root) {
     return(
-      <footer className={this.hideFooter()}>
+      <footer className="container footer-bar">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <ul className="social social-bottom">
                   <li><Link to="https://twitter.com/jayzamazing" target="_Blank"><i className="fa fa-twitter fa-3x" aria-hidden="true"></i></Link></li>
