@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateBoardForm snapshot 1`] = `
+<form
+  className="create-board-input-area"
+  name="createBoardForm"
+>
+  <Field
+    component={[Function]}
+    inputClass="create-board-input"
+    labelclass="remove"
+    name="boardTitle"
+    placeholder="Add board title"
+    type="text"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <button
+    aria-label="close button"
+    className="btn btn-default close-modal-btn"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      className="glyphicon glyphicon-remove"
+    />
+  </button>
+  <button
+    className="create-board-btn btn"
+    name="createBoardBtn"
+    type="submit"
+  >
+    Create Board
+  </button>
+</form>
+`;
