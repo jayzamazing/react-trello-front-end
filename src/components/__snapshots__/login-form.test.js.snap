@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login-form snapshot 1`] = `
+<form
+  className="login-form"
+>
+  <Field
+    component={[Function]}
+    id="email"
+    inputClass="input-field form-control"
+    label="Email (or username)"
+    name="email"
+    type="text"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    id="password"
+    inputClass="input-field form-control"
+    label="Password"
+    name="password"
+    type="password"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <button
+    className="btn btn-success log-in"
+  >
+    Log in
+  </button>
+</form>
+`;
