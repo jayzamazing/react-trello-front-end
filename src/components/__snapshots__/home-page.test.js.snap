@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`home-page redirect snapshow 1`] = `
+<Redirect
+  push={false}
+  to="/boards"
+/>
+`;
+
+exports[`home-page snapshot 1`] = `
+<section>
+  <main
+    className="home container"
+  >
+    <div
+      className="row wrapper"
+    >
+      <div
+        className="text-center"
+      >
+        <h1>
+          Welcome to Trello!
+        </h1>
+      </div>
+      <div
+        className="text-center wrapper-2"
+      >
+        <h3>
+          This is a simple project that emulates some of trello's functionality.
+        </h3>
+        <div
+          className="wrapper-2"
+        >
+          <Link
+            replace={false}
+            to="/register"
+          >
+            <button
+              className="btn sign-up-btn"
+            >
+              <h4>
+                Sign Up - It's Free.
+              </h4>
+            </button>
+          </Link>
+        </div>
+        <div
+          className="wrapper"
+        >
+          <p>
+            Already use Trello? 
+            <Link
+              className="a-login"
+              replace={false}
+              to="/login"
+            >
+              Log in.
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>
+`;

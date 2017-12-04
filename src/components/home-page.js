@@ -3,7 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './home.css';
 
-class HomePage extends React.Component {
+export class HomePage extends React.Component {
   componentWillMount() {
     document.body.style.backgroundColor = "#026aa7";
   }
