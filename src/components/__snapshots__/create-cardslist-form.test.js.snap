@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-cardslist-form snapshot 1`] = `
+<form
+  className="create-cardslist-area cardslist-tile"
+>
+  <Field
+    component={[Function]}
+    inputClass="updateCardslist-input"
+    labelclass="remove"
+    name="cardslistTitle"
+    placeholder="Add a list"
+    type="text"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <button
+    className="create-cardslist-btn btn btn-success"
+    type="submit"
+  >
+    Save
+  </button>
+  <button
+    aria-label="close button"
+    className="btn btn-default close-cardslist-btn"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      className="glyphicon glyphicon-remove"
+    />
+  </button>
+</form>
+`;
