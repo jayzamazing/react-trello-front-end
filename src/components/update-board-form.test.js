@@ -30,7 +30,7 @@ describe('update-board-form', () => {
     const handleSubmit = jest.fn();
     const wrapper = shallow(<UpdateBoardForm handleSubmit={handleSubmit} initialValues={initialValues} boardId="35re4qwefgt34werwd"/>);
     wrapper.find('[name="35re4qwefgt34werwd"]').at(0).simulate('change', { target: { value: 'testing' } });
-    wrapper.find('.update-board-btn').simulate('submit');
+    wrapper.find('.update-board-btn').simulate('click');
     expect(handleSubmit).toHaveBeenCalled();
   });
   //click on create button and check dispatches

@@ -24,7 +24,7 @@ describe('login-form', () => {
     wrapper.find('[name="email"]').at(0).simulate('change', { target: { value: 'test@test.com' } });
     wrapper.find('[name="password"]').at(0).simulate('change', { target: { value: 'somereallylongpassword2343' } });
     wrapper.find('[name="acceptTerms"]').at(0).simulate('change', {target: {checked: true}});
-    wrapper.find('.btn-success').simulate('submit');
+    wrapper.find('.btn-success').simulate('click');
     expect(handleSubmit).toHaveBeenCalled();
   });
 });

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`update-cardslist-form snapshot 1`] = `
+<form
+  className="update-cardslist-area"
+>
+  <Field
+    component={[Function]}
+    format={[Function]}
+    name="35re4qwefgt34werwd"
+    onBlur={[Function]}
+    onKeyPress={[Function]}
+    textareaClass="updateCardslist"
+    validate={
+      Array [
+        [Function],
+        [Function],
+      ]
+    }
+  />
+</form>
+`;
