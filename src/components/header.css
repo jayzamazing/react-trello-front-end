@@ -14,7 +14,7 @@
 .nav-right button {
   margin-left: 15px;
 }
-.login-btn {
+.login-btn, .logout-btn {
   background-color: #0067a3;
 }
 .sign-up-btn {
