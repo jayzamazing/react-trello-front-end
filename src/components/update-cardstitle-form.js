@@ -44,9 +44,8 @@ const mapDispatchToProps = (dispatch) => ({
     }));
   }
 });
-UpdateCardsTitleForm = reduxForm({
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
     enableReinitialize : true,
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('updatecards', Object.keys(errors)[0]))
-})(UpdateCardsTitleForm);
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateCardsTitleForm);
+})(UpdateCardsTitleForm));

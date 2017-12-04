@@ -20,7 +20,7 @@ beforeEach(() => {
   cardsKeys = Object.keys(cards);
 });
   afterEach(() => {
-    cardslist = {}, cards = {};
+    cardslist = {}, cards = {}, cardslistKeys = {}, cardsKeys = {}, boards = {}, params = {}, boardKeys = {};
   });
   //ensure cards renders without any issues
   it('should render', () => {
