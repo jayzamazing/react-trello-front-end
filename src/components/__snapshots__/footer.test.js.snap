@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`footer home snapshot 1`] = `
+<footer
+  className="container footer-bar"
+>
+  <div
+    className="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+  >
+    <ul
+      className="social social-bottom"
+    >
+      <li>
+        <Link
+          replace={false}
+          target="_Blank"
+          to="https://twitter.com/jayzamazing"
+        >
+          <i
+            aria-hidden="true"
+            className="fa fa-twitter fa-3x"
+          />
+        </Link>
+      </li>
+      <li>
+        <Link
+          replace={false}
+          target="_Blank"
+          to="https://github.com/jayzamazing"
+        >
+          <i
+            aria-hidden="true"
+            className="fa fa-github fa-3x"
+          />
+        </Link>
+      </li>
+      <li>
+        <Link
+          replace={false}
+          target="_Blank"
+          to="https://www.linkedin.com/pub/adrian-lopez/99/341/688"
+        >
+          <i
+            aria-hidden="true"
+            className="fa fa-linkedin fa-3x"
+          />
+        </Link>
+      </li>
+      <li>
+        <Link
+          replace={false}
+          target="_Blank"
+          to="https://plus.google.com/108258618753081021419"
+        >
+          <i
+            aria-hidden="true"
+            className="fa fa-google-plus fa-3x"
+          />
+        </Link>
+      </li>
+    </ul>
+    <p>
+      <span
+        className="copyright"
+      >
+        © Adrian J Lopez
+      </span>
+    </p>
+  </div>
+</footer>
+`;
+
+exports[`footer should not be visible snapshot 1`] = `""`;

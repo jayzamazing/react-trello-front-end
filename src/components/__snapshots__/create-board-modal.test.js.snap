@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-board-modal snapshot should match 1`] = `
+<Modal
+  ariaHideApp={true}
+  bodyOpenClassName="ReactModal__Body--open"
+  className={
+    Object {
+      "afterOpen": "create-board-after-open",
+      "base": "create-board",
+      "beforeClose": "create-board-before-close",
+    }
+  }
+  closeTimeoutMS={0}
+  contentLabel="Create Board Modal"
+  isOpen={true}
+  overlayClassName={
+    Object {
+      "afterOpen": "create-board-overlay-after-open",
+      "base": "create-board-overlay",
+      "beforeClose": "create-board-overlay-before-close",
+    }
+  }
+  parentSelector={[Function]}
+  portalClassName="ReactModalPortal"
+  shouldCloseOnEsc={true}
+  shouldCloseOnOverlayClick={true}
+  shouldFocusAfterRender={true}
+  shouldReturnFocusAfterClose={true}
+>
+  <ReduxForm />
+</Modal>
+`;

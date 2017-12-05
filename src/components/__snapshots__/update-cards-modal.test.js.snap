@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`update-cards-modal snapshot should match 1`] = `
+<Modal
+  ariaHideApp={true}
+  bodyOpenClassName="ReactModal__Body--open"
+  className={
+    Object {
+      "afterOpen": "update-cards-modal-after-open",
+      "base": "update-cards-modal",
+      "beforeClose": "update-cards-modal-before-close",
+    }
+  }
+  closeTimeoutMS={0}
+  contentLabel="Update Cards Modal"
+  isOpen={true}
+  onRequestClose={[Function]}
+  overlayClassName={
+    Object {
+      "afterOpen": "update-cards-modal-overlay-after-open",
+      "base": "update-cards-modal-overlay",
+      "beforeClose": "update-cards-modal-overlay-before-close",
+    }
+  }
+  parentSelector={[Function]}
+  portalClassName="ReactModalPortal"
+  shouldCloseOnEsc={true}
+  shouldCloseOnOverlayClick={true}
+  shouldFocusAfterRender={true}
+  shouldReturnFocusAfterClose={true}
+>
+  <button
+    aria-label="close button"
+    className="btn btn-default close-modal-btn"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      className="glyphicon glyphicon-remove"
+    />
+  </button>
+  <Connect(ReduxForm)
+    form="undefined-2"
+  />
+  <span
+    className="glyphicon glyphicon-minus cards-delete"
+    onClick={[Function]}
+  />
+  <Connect(ReduxForm)
+    form="undefined-3"
+  />
+  <span
+    className="glyphicon glyphicon-minus cards-update"
+    onClick={[Function]}
+  />
+</Modal>
+`;

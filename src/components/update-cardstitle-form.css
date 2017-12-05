@@ -1,0 +1,19 @@
+.updateCardsTitle {
+  border: unset;
+  resize: none;
+  background-color: unset;
+  width: 237px;
+}
+.updateCardsTitle:focus {
+  background-color: white;
+}
+.update-cardstitle-area {
+  background-color: white;
+  border-radius: 5px;
+  width: 237px;
+}
+.edit-cards {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

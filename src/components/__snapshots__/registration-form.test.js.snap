@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login-form snapshot 1`] = `
+<form
+  className="login-form"
+>
+  <Field
+    component={[Function]}
+    inputClass="input-field form-control"
+    label="Name"
+    name="fullName"
+    type="text"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    inputClass="input-field form-control"
+    label="Email"
+    name="email"
+    type="text"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    inputClass="input-field form-control"
+    label="Password"
+    name="password"
+    type="password"
+    validate={
+      Array [
+        [Function],
+        [Function],
+        [Function],
+      ]
+    }
+  />
+  <Field
+    component={[Function]}
+    divClass="inline-block space"
+    inputClass="checkbox-space"
+    label={
+      Array [
+        "I accept the Terms of Service, and Privacy Policy.",
+      ]
+    }
+    labelclass="checkbox-label"
+    name="acceptTerms"
+    type="checkbox"
+    validate={
+      Array [
+        [Function],
+      ]
+    }
+  />
+  <button
+    className="block btn btn-success create-acc-btn"
+    type="submit"
+  >
+    Create New Account
+  </button>
+</form>
+`;

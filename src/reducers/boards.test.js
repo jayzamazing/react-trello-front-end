@@ -18,20 +18,20 @@ describe('board reducer', () => {
       state = reducer(undefined, findBoardsSuccess(boards));
     });
     it('should exist', () => {
-      expect(state.boards).toEqual(expect.anything());
+      expect(state).toEqual(expect.anything());
     });
     it('should have properties', () => {
-      let keys = Object.keys(state.boards);
-      expect(state.boards).toHaveProperty(keys[0]);
-      expect(state.boards[keys[0]]).toHaveProperty('_id');
-      expect(state.boards[keys[0]]).toHaveProperty('title');
-      expect(state.boards[keys[0]]).toHaveProperty('cardsList');
-      expect(Array.isArray(state.boards[keys[0]].cardsList)).toBe(true);
+      let keys = Object.keys(state);
+      expect(state).toHaveProperty(keys[0]);
+      expect(state[keys[0]]).toHaveProperty('_id');
+      expect(state[keys[0]]).toHaveProperty('title');
+      expect(state[keys[0]]).toHaveProperty('cardsList');
+      expect(Array.isArray(state[keys[0]].cardsList)).toBe(true);
     });
     it('should deserialize the order', () => {
-      let keys = Object.keys(state.boards);
-      expect(state.boards[keys[0]]._id).toEqual(boards[0]._id);
-      expect(state.boards[keys[1]].title).toEqual(boards[1].title);
+      let keys = Object.keys(state);
+      expect(state[keys[0]]._id).toEqual(boards[0]._id);
+      expect(state[keys[1]].title).toEqual(boards[1].title);
     });
   });
   describe('CREATE_BOARD_SUCCESS', () => {
@@ -42,18 +42,18 @@ describe('board reducer', () => {
       state = reducer(state, createBoardSuccess(test));
     });
     it('should exist', () => {
-      expect(state.boards).toEqual(expect.anything());
+      expect(state).toEqual(expect.anything());
     });
     it('should have properties', () => {
-      let keys = Object.keys(state.boards);
-      expect(state.boards).toHaveProperty(keys[0]);
-      expect(state.boards[keys[0]]).toHaveProperty('_id');
-      expect(state.boards[keys[0]]).toHaveProperty('title');
-      expect(state.boards[keys[0]]).toHaveProperty('cardsList');
+      let keys = Object.keys(state);
+      expect(state).toHaveProperty(keys[0]);
+      expect(state[keys[0]]).toHaveProperty('_id');
+      expect(state[keys[0]]).toHaveProperty('title');
+      expect(state[keys[0]]).toHaveProperty('cardsList');
     });
     it('should deserialize the order', () => {
-      expect(state.boards[test._id]._id).toEqual(test._id);
-      expect(state.boards[test._id].title).toEqual('grocery list');
+      expect(state[test._id]._id).toEqual(test._id);
+      expect(state[test._id].title).toEqual('grocery list');
     });
   });
   describe('DELETE_BOARD_SUCCESS', () => {
@@ -63,10 +63,10 @@ describe('board reducer', () => {
       state = reducer(state, deleteBoardSuccess(boards[1]._id));
     });
     it('should exist', () => {
-      expect(state.boards).toEqual(expect.anything());
+      expect(state).toEqual(expect.anything());
     });
     it('should not have properties', () => {
-      expect(state.boards).not.toHaveProperty(boards[1]._id);
+      expect(state).not.toHaveProperty(boards[1]._id);
     });
   });
   describe('UPDATE_BOARD_SUCCESS', () => {
@@ -78,16 +78,16 @@ describe('board reducer', () => {
       test));
     });
     it('should exist', () => {
-      expect(state.boards).toEqual(expect.anything());
+      expect(state).toEqual(expect.anything());
     });
     it('should have properties', () => {
-      expect(state.boards).toHaveProperty(test._id);
-      expect(state.boards[test._id]).toHaveProperty('_id');
-      expect(state.boards[test._id]).toHaveProperty('title');
+      expect(state).toHaveProperty(test._id);
+      expect(state[test._id]).toHaveProperty('_id');
+      expect(state[test._id]).toHaveProperty('title');
     });
     it('should deserialize the order', () => {
-      expect(state.boards[test._id]._id).toEqual(test._id);
-      expect(state.boards[test._id].title).toEqual('super mario');
+      expect(state[test._id]._id).toEqual(test._id);
+      expect(state[test._id].title).toEqual('super mario');
     });
   });
 });

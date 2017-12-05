@@ -1,7 +1,7 @@
-'use strict';
-import {normalize,arrayOf} from 'normalizr';
+import {normalize} from 'normalizr';
 import {boardArray, boardsSchema} from '../board-schema';
-
+import {BASE_URL} from '../config';
+import {normalizeResponseErrors} from './utils';
 
 /*
 * action to tell store that all boards has been retrieved
@@ -9,12 +9,14 @@ import {boardArray, boardsSchema} from '../board-schema';
 * @returns action type and boards
 */
 export const FIND_BOARDS_SUCCESS = 'FIND_BOARDS_SUCCESS';
-export const findBoardsSuccess = boards => {
+export const findBoardsSuccess = items => {
   //grab all boards array with cards and cardslist and normalize it
-  const items = (normalize(boards, boardArray)).entities;
+  const {boards, cardslist, cards} = items ? normalize(items, boardArray).entities : {};
   return {
     type: FIND_BOARDS_SUCCESS,
-    items
+    boards,
+    cardslist,
+    cards
   };
 };
 /*
@@ -22,12 +24,25 @@ export const findBoardsSuccess = boards => {
 * @params findBoardsSuccess or passed in action
 * @dispatch findBoardsSuccess or passed in action
 */
-export const getBoards = (action = findBoardsSuccess) => dispatch => {
-  return fetch('/boards')
-    .then((res) => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      dispatch(action(res.body));
-    });
+export const getBoards = (action = findBoardsSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/boards`, {
+    headers: {
+      Accept: 'application/json',
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res =>  {
+      if (res.status !== 204) {
+        return res.json();
+      } else {
+        return;
+      }
+    })
+    .then(res => dispatch(action(res)))
+    .catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a board has been created
@@ -35,11 +50,11 @@ export const getBoards = (action = findBoardsSuccess) => dispatch => {
 * @returns action type and boards
 */
 export const CREATE_BOARD_SUCCESS = 'CREATE_BOARD_SUCCESS';
-export const createBoardSuccess = boards => {
-  const items = (normalize(boards, boardsSchema)).entities;
+export const createBoardSuccess = items => {
+  const {boards} = items ? normalize(items, boardsSchema).entities : {};
   return {
     type: CREATE_BOARD_SUCCESS,
-    items
+    boards
   };
 };
 /*
@@ -48,15 +63,24 @@ export const createBoardSuccess = boards => {
 * @params createBoardSuccess or passed in action
 * @dispatch createBoardSuccess or passed in action
 */
-export const createBoards = (postData, action = createBoardSuccess) => dispatch => {
-  return fetch('/boards', {
+export const createBoards = (postData, action = createBoardSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/boards`, {
     method: "POST",
-    body: postData
+    body: JSON.stringify({
+      ...postData
+    }),
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`,
+      "Content-Type": 'application/json',
+      Accept: 'application/json'
+    }
   })
-    .then((res) => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      dispatch(action(res.body));
-    });
+    .then((res) => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then((res) => dispatch(action(res)))
+    .catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a board has been deleted
@@ -76,14 +100,17 @@ export const deleteBoardSuccess = id => {
 * @params deleteBoardSuccess or passed in action
 * @dispatch deleteBoardSuccess or passed in action
 */
-export const deleteBoards = (id, action = deleteBoardSuccess) => dispatch => {
-  return fetch(`/boards/${id}`, {
-    method: 'DELETE'
+export const deleteBoards = (id, action = deleteBoardSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/boards/${id}`, {
+    method: 'DELETE',
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
   })
-    .then((res) => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      dispatch(action(id));
-    });
+  .then((res) => normalizeResponseErrors(res))
+    .then((res) => dispatch(action(id)));
 };
 /*
 * action to tell store that a board has been updated
@@ -92,11 +119,12 @@ export const deleteBoards = (id, action = deleteBoardSuccess) => dispatch => {
 * @returns action type and boards
 */
 export const UPDATE_BOARD_SUCCESS = 'UPDATE_BOARD_SUCCESS';
-export const updateBoardSuccess = function(id, boards) {
-  const items = (normalize(boards, boardsSchema)).entities;
+export const updateBoardSuccess = (id, items) => {
+  items._id = id;
+  const {boards} = items ? normalize(items, boardsSchema).entities : {};
   return {
     type: UPDATE_BOARD_SUCCESS,
-    items,
+    boards,
     boardId: id
   };
 };
@@ -107,13 +135,21 @@ export const updateBoardSuccess = function(id, boards) {
 * @params updateBoardSuccess or passed in action
 * @dispatch updateBoardSuccess or passed in action
 */
-export const updateBoards = (id, postData, action = updateBoardSuccess) => dispatch => {
-  return fetch(`/boards/${id}`, {
+export const updateBoards = (id, postData, action = updateBoardSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/boards/${id}`, {
     method: 'PUT',
-    body: postData
+    body: JSON.stringify({
+      ...postData
+    }),
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`,
+      "Content-Type": 'application/json',
+      Accept: 'application/json'
+    }
   })
-    .then((res) => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      dispatch(action(id, postData));
-    });
+  .then((res) => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then((res) => dispatch(action(id, res)));
 };

@@ -1,0 +1,151 @@
+.cardslist-list {
+  overflow-y: auto;
+  height: 100%;
+}
+.cardslist-tile {
+  width: 270px;
+  display: block;
+  background-color: #E2E4E6;
+  border-radius: 3px;
+  padding: 5px;
+}
+.cardslist-tile h2 {
+  margin: 5px 0 5px 0;
+}
+.cardslist-list-ul {
+  padding-left: 0;
+  display: flex;
+}
+.cardslist-list ul li {
+  list-style: none;
+  margin: 0 10px 10px 0;
+}
+.create-cardslist-area .remove, .create-cardslist-area .form-error {
+  display: none;
+}
+#createCardslist {
+  background-color: #0067a3;
+  color: #E2E4E6;
+  border-radius: 3px;
+  padding: 4px;
+}
+.createCardslist {
+  width: 250px;
+  display: block;
+  height: 25px;
+  cursor: pointer;
+}
+.create-cardslist .remove, .create-cardslist .form-error {
+  display: none;
+}
+.create-cardslist-btn, .close-cardslist-btn {
+  margin-top: 5px;
+}
+.create-cardslist-area {
+  width: 260px;
+  height: 75px;
+  background-color: #E2E4E6;
+  padding: 5px;
+}
+.close-cardslist-btn {
+  border: unset;
+  background-color: unset;
+  color: #999;
+}
+.close-cardslist-btn .glyphicon {
+  font-size: 20px;
+  font-weight: 100;
+}
+.cardslist-form {
+  height: 100%;
+}
+.update-board {
+  width: 300px;
+  height: 100px;
+  margin: 137px 0;
+}
+.update-board:focus {
+  outline: none;
+}
+.update-board-overlay {
+  /*background-color: rgba(0, 0, 0, 0.75);*/
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  float: none;
+  top: -33px;
+}
+.update-board-input-area {
+  width: 300px;
+  height: 130px;
+  background-color: #0067a3;
+  padding: 10px;
+  color: black;
+}
+.update-board-input-area h5 {
+  margin: 0;
+}
+.update-board-input-area hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.update-board-input {
+  border: none;
+}
+.close-modal-btn {
+  position: relative;
+  float: right;
+  border: none;
+  background-color: unset;
+  margin: -22px -10px 0px 0px;
+}
+.close-modal-btn:hover, .close-modal-btn:focus:active,
+.close-modal-btn:focus, .close-modal-btn:active {
+  border: none;
+  background-color: unset;
+  box-shadow: unset;
+}
+.update-board-input-area .remove, .update-board-input-area .form-error {
+  display: none;
+}
+.update-board-btn {
+  position: absolute;
+  top: 225px;
+}
+.update-label {
+  display: block;
+}
+.center-text {
+  text-align: center;
+}
+.update-cardslist {
+  position: relative;
+}
+.update-cardslist form {
+  /*margin-left: -5px;*/
+}
+.cardslist-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.updateCardslist {
+  background-color: #E2E4E6;
+  height: 25px;
+  border: unset;
+  resize: none;
+  z-index: 9999;
+  width: 240px;
+}
+.updateCardslist:focus {
+  background-color: white;
+}
+.updateCardslist-input {
+  background-color: #E2E4E6;
+  height: 25px;
+  resize: none;
+  z-index: 9999;
+  width: 100%;
+  boder-width: 1px;
+  border-radius: 6px;
+}

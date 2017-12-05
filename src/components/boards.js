@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Router, hashHistory } from 'react-router';
-import CreateItems from './create-items';
 import * as actions from '../actions/boards';
-import Immutable from 'seamless-immutable';
+import './boards.css';
+import {Link, withRouter} from 'react-router-dom';
+import CreateBoardModal from './create-board-modal';
+
 //function to render multiple lists of boards
 export class Boards extends React.Component {
   //set up initial data state
@@ -13,105 +14,91 @@ export class Boards extends React.Component {
       showCreateBoard: false,
       editBoard: {},
       boards: {},
-      boardTitle: ''
+      boardTitle: '',
+      boardsModalIsOpen: false
     }
+    this.createBoardModalSubmit = this.createBoardModalSubmit.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
-  //keep track of text
-  onAddInputChanged(event) {
-    //if the addBoard input is being used
-    if (event.target.name == 'addBoard') {
-      //store title for board
-      this.setState({boardTitle: event.target.value});
-      //otherwise assume we are editing board name
-    } else {
-      //get boards from state
-      var temp = this.state.boards;
-      //update the title for the selected board
-      var temp2 = Immutable.update(temp,
-        event.target.id,
-        function() {
-          return {
-            title: event.target.value
-          };
-        });
-      //store the updated board title
-      this.setState({boards: temp2});
+  componentDidMount() {
+    //don't load if not logged in
+    if (!this.props.loggedIn) {
+      return;
     }
+    this.props.getBoards();
   }
   //hide create board when called
   addBoard() {
     this.setState({showCreateBoard: false});
   }
-  //set the variable to show the create board inputs
-  showCreateBoard() {
-    this.setState({showCreateBoard: true});
+  showCreateModal() {
+    this.setState({boardsModalIsOpen: true});
   }
-  //set variable to enable the editing of the boards name
-  editBoardName(item) {
-    var temp = this.state.editBoard;
-    temp[item] = false;
-    this.setState({editBoard: temp});
+  closeModal() {
+    this.setState({boardsModalIsOpen: false});
   }
-  showBoard(boardId, boardName, item) {
-    if (this.state.editBoard[item] == undefined) {
-      var temp = this.state.editBoard;
-      temp[item] = true;
-      this.setState({editBoard: temp});
-    }
-    if (this.state.editBoard[item] == true) {
-      hashHistory.push('/:' + boardId + '/:' + boardName);
-    }
+  createBoardModalSubmit(boardTitle) {
+    this.props.addBoard(boardTitle);
   }
   render() {
     //only execute if there is data
     if (this.props.boards) {
       var list = Object.keys(this.props.boards).map((item, index) => {
         var temp = this.props.boards[item];
-        return (
-          <li key={index}>
-            <span onClick={() => this.showBoard(null, temp._id, temp.title, temp._id)}>
-              <input type="text" id={temp._id} value={this.state.boards[temp._id] ? this.state.boards[temp._id].title : temp.title}
-                disabled={(this.state.editBoard[temp._id] == undefined) ? true : this.state.editBoard[temp._id] }
-                onChange={(evt) => this.onAddInputChanged(evt)}
-                onKeyPress={(evt) => this.props.updateBoard(evt)} name="boardName"/>
-            </span>
-            <input type="button" value="Delete Board" name="deleteBoard"
-              onClick={() => this.props.deleteBoard(temp._id)}/>
-            <input type="button" value="Edit Board" name="editBoard"
-              onClick={() => this.editBoardName(temp._id)}/>
-          </li>
-        );
+        return (<li key={index} className="boards-list">
+          <Link to={'/:' + temp._id + '/:' + temp.title}>
+            <div className="board-tile">
+              <span className="">{
+                  this.state.boards[temp._id]
+                    ? this.state.boards[temp._id].title
+                    : temp.title
+                }</span>
+            </div>
+          </Link>
+          <span onClick={() => this.props.deleteBoard(temp._id)} className="glyphicon glyphicon-minus boards-delete" name="deleteBoard"></span>
+        </li>);
       });
     }
-    return (
-      <div>
-        <ul>{list}</ul>
-        <input type="button" value="Add Board" onClick={() => this.showCreateBoard()} name="addBoard"/>
-        {this.state.showCreateBoard ?
-          <CreateItems onAddInputChanged={(evt) => this.onAddInputChanged(evt)}
-            addItems={() => {this.addBoard(); this.props.addBoard();}} name="boardInput"/> : null}
-      </div>
-    );
+    return (<div className="boards-form">
+      <ul>
+        {list}
+        <li className="boards-list" onClick={() => this.showCreateModal()} name="createBoard">
+          <span className="board-tile board-create">
+            Create new board...
+          </span>
+        </li>
+      </ul>
+      <CreateBoardModal isOpen={this.state.boardsModalIsOpen}
+        onSubmit={this.createBoardModalSubmit}
+        closeModal={this.closeModal} />
+    </div>);
   }
 };
 //allows subcription to redux updates and access to data stored in redux store
-const mapStateToProps = (state, props) => ({
-  boards: state.boards
+const mapStateToProps = (state, props) => {
+  return {
+    boards: state.boards,
+    loggedIn: state.auth.currentUser !== null
+  };
+};
+const mapDispatchToProps = (dispatch, props) => ({
+  //get all boards
+  getBoards: () => {
+    dispatch(actions.getBoards())
+  },
+  //dispatch to delete board
+  deleteBoard: (boardId) => {
+    dispatch(actions.deleteBoards(boardId));
+  },
+  //dispatch to add board
+  addBoard: (boardTitle) => {
+    dispatch(actions.createBoards({title: boardTitle}))
+    //after dispatch, grab the created board and redirect to it
+      .then((res) => {
+      const keys = Object.keys(res.boards);
+      const title = res.boards[keys[0]].title;
+      props.history.push("/:" + keys[0] + "/:" + title);
+    });
+  }
 });
-const mapDispatchToProps = (dispatch, props) => (dispatch(actions.getBoards()), {
-    //dispatch to delete board
-    deleteBoard: (boardId) => {
-      dispatch(actions.deleteBoards(boardId));
-    },
-    //dispatch to add board
-    addBoard: () => {
-      dispatch(actions.createBoards({title: props.boardTitle}));
-    },
-    //dispatch update to board name if enter key is press in field
-    updateBoard: () => {
-      if(events.charCode==13) {
-        dispatch(actions.updateBoards(events.target.id, {title: events.target.value}));
-      }
-    }
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Boards);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Boards));

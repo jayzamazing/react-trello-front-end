@@ -2,46 +2,40 @@ import Immutable from 'seamless-immutable';
 import {FIND_BOARDS_SUCCESS} from '../actions/boards';
 import {CREATE_CARDS_SUCCESS, DELETE_CARDS_SUCCESS, UPDATE_CARDS_SUCCESS} from '../actions/cards';
 
-const initialRepositoryState = Immutable({
-  cards: {}
-});
-
-/*
-* Function called when FIND_BOARDS_SUCCESS or CREATE_CARDS_SUCCESS is called to update cards with a new cards
-* params state- old state before merge
-* params action.items.cards- cards to add to the state
-*/
-export const createCards= (state, action) => state.merge({cards: action.items.cards});
+const initialRepositoryState = Immutable({});
 
 /*
 * Function called when DELETE_CARDS_SUCCESS is called to deal with deleting a Cards and removing it from state
 * params state- old state before merge
 * params action.cardsid- Cards to delete
 */
-export const deleteCards= (state, action) => Immutable({cards: Immutable.without(state.cards, action.cardsId)});
+export const deleteCards = (state, {cardsId}) => state.without(cardsId);
 
 /*
 * Function called when UPDATE_CARDS_SUCCESS is called to update cardslsit with a new cards
 * params state- old state before merge
 * params action.items.cardslsit- cards to update
 */
-export const updateCards= (state, action) => Immutable({cards: Immutable.update(state.cards,
-Object.keys(action.items.cards), () => action.items.cards[Object.keys(action.items.cards)])});
+export const updateCards = (state, {cards}) => state.merge(cards, {deep: true});
 
 /*
 * Function to deal with using various reducer functions
 * params state- old state before merge
 * params action- action with data to modify state
 */
-export default (state, action) => {
-  state = state || initialRepositoryState;
+export default (state = initialRepositoryState, action) => {
   switch (action.type) {
   case FIND_BOARDS_SUCCESS:
   case CREATE_CARDS_SUCCESS:
-    return createCards(state, action);
+  case UPDATE_CARDS_SUCCESS:
+    if (action.cards) {
+      return updateCards(state, action);
+    } else {
+      return state;
+    }
   case DELETE_CARDS_SUCCESS:
     return deleteCards(state, action);
-  case UPDATE_CARDS_SUCCESS:
-    return updateCards(state, action);
+  default:
+    return state;
   }
 };

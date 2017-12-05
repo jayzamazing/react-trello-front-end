@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`update-cards cards snapshot 1`] = `
+<div
+  className="edit-title-or-entire-card"
+>
+  <span
+    onClick={[Function]}
+  >
+    <Connect(ReduxForm)
+      _id="432e39hzdo08aqcdgd"
+      disabled="true"
+      form="432e39hzdo08aqcdgd-1"
+      onBlur={null}
+    />
+  </span>
+  <span
+    className="glyphicon glyphicon-pencil edit-cards"
+    onClick={[Function]}
+  />
+  <UpdateCardsModal
+    _id="432e39hzdo08aqcdgd"
+    cardslist={
+      Object {
+        "14w43d4opubteu021ato": Object {
+          "_id": "14w43d4opubteu021ato",
+          "boardId": "346rfdghsdhteu021ato",
+          "cards": Array [
+            "6532opubteu021ato",
+          ],
+          "title": "Bedfordshire Illinois Liaison",
+        },
+        "2skdde39hzdo08aqcdgd": Object {
+          "_id": "2skdde39hzdo08aqcdgd",
+          "boardId": "46mdujckqs45tkdsh2jdxz",
+          "cards": Array [
+            "432e39hzdo08aqcdgd",
+          ],
+          "title": "XML Health",
+        },
+        "kd5o3ve2858vpjxd7wjp": Object {
+          "_id": "kd5o3ve2858vpjxd7wjp",
+          "boardId": "kd5o3ve2858qggfqw4rtfda",
+          "cards": Array [
+            "5643e2858vpjxd7wjp",
+          ],
+          "title": "Sports Analyst Cambridgeshire",
+        },
+      }
+    }
+    closeModal={[Function]}
+    isOpen={false}
+  />
+</div>
+`;

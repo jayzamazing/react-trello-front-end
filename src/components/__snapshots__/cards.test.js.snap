@@ -1,267 +1,239 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Cards component add cards click snaphot 1`] = `
-<div>
-  <ul>
+<div
+  className="cards-form"
+>
+  <ul
+    className="cards-list-ul"
+  >
     <li
       key="0"
     >
-      <input
-        disabled={true}
-        id="432e39hzdo08aqcdgd"
-        name="cardsName"
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="eat dinner"
-      />
-      <input
-        name="deleteCards"
-        onClick={[Function]}
-        type="button"
-        value="Delete Card"
-      />
-      <input
-        name="editCards"
-        onClick={[Function]}
-        type="button"
-        value="Edit Card"
-      />
+      <div
+        className="cards-tile"
+      >
+        <div
+          className="update-card"
+        >
+          <UpdateCards
+            _id="432e39hzdo08aqcdgd"
+            card={
+              Object {
+                "title-0": undefined,
+              }
+            }
+            cardslist={
+              Object {
+                "14w43d4opubteu021ato": Object {
+                  "_id": "14w43d4opubteu021ato",
+                  "boardId": "346rfdghsdhteu021ato",
+                  "cards": Array [
+                    "6532opubteu021ato",
+                  ],
+                  "title": "Bedfordshire Illinois Liaison",
+                },
+                "2skdde39hzdo08aqcdgd": Object {
+                  "_id": "2skdde39hzdo08aqcdgd",
+                  "boardId": "46mdujckqs45tkdsh2jdxz",
+                  "cards": Array [
+                    "432e39hzdo08aqcdgd",
+                  ],
+                  "title": "XML Health",
+                },
+                "kd5o3ve2858vpjxd7wjp": Object {
+                  "_id": "kd5o3ve2858vpjxd7wjp",
+                  "boardId": "kd5o3ve2858qggfqw4rtfda",
+                  "cards": Array [
+                    "5643e2858vpjxd7wjp",
+                  ],
+                  "title": "Sports Analyst Cambridgeshire",
+                },
+              }
+            }
+            index={0}
+          />
+        </div>
+      </div>
+    </li>
+    <li>
+      <div
+        className="create-cards"
+      >
+        <div
+          className="create-cards-link"
+        >
+          <span
+            className="createcards"
+            id="createcards"
+            name="createcards"
+            onClick={[Function]}
+            value="Add Cards"
+          >
+            Add a card...
+          </span>
+        </div>
+      </div>
     </li>
   </ul>
-  <input
-    name="addCards"
-    onClick={[Function]}
-    type="button"
-    value="Add Cards"
-  />
 </div>
 `;
 
 exports[`Cards component add cards click snaphot 2`] = `
-<div>
-  <ul>
+<div
+  className="cards-form"
+>
+  <ul
+    className="cards-list-ul"
+  >
     <li
       key="0"
     >
-      <input
-        disabled={true}
-        id="432e39hzdo08aqcdgd"
-        name="cardsName"
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="eat dinner"
-      />
-      <input
-        name="deleteCards"
-        onClick={[Function]}
-        type="button"
-        value="Delete Card"
-      />
-      <input
-        name="editCards"
-        onClick={[Function]}
-        type="button"
-        value="Edit Card"
-      />
+      <div
+        className="cards-tile"
+      >
+        <div
+          className="update-card"
+        >
+          <UpdateCards
+            _id="432e39hzdo08aqcdgd"
+            card={
+              Object {
+                "title-0": undefined,
+              }
+            }
+            cardslist={
+              Object {
+                "14w43d4opubteu021ato": Object {
+                  "_id": "14w43d4opubteu021ato",
+                  "boardId": "346rfdghsdhteu021ato",
+                  "cards": Array [
+                    "6532opubteu021ato",
+                  ],
+                  "title": "Bedfordshire Illinois Liaison",
+                },
+                "2skdde39hzdo08aqcdgd": Object {
+                  "_id": "2skdde39hzdo08aqcdgd",
+                  "boardId": "46mdujckqs45tkdsh2jdxz",
+                  "cards": Array [
+                    "432e39hzdo08aqcdgd",
+                  ],
+                  "title": "XML Health",
+                },
+                "kd5o3ve2858vpjxd7wjp": Object {
+                  "_id": "kd5o3ve2858vpjxd7wjp",
+                  "boardId": "kd5o3ve2858qggfqw4rtfda",
+                  "cards": Array [
+                    "5643e2858vpjxd7wjp",
+                  ],
+                  "title": "Sports Analyst Cambridgeshire",
+                },
+              }
+            }
+            index={0}
+          />
+        </div>
+      </div>
+    </li>
+    <li>
+      <div
+        className="create-cards"
+      >
+        <ReduxForm
+          cardslist={
+            Object {
+              "_id": "2skdde39hzdo08aqcdgd",
+              "boardId": "46mdujckqs45tkdsh2jdxz",
+              "cards": Array [
+                "432e39hzdo08aqcdgd",
+              ],
+              "title": "XML Health",
+            }
+          }
+          close={[Function]}
+          onSubmit={[Function]}
+        />
+      </div>
     </li>
   </ul>
-  <input
-    name="addCards"
-    onClick={[Function]}
-    type="button"
-    value="Add Cards"
-  />
 </div>
 `;
 
 exports[`Cards component cards snapshot 1`] = `
-<div>
-  <ul>
+<div
+  className="cards-form"
+>
+  <ul
+    className="cards-list-ul"
+  >
     <li
       key="0"
     >
-      <input
-        disabled={true}
-        id="432e39hzdo08aqcdgd"
-        name="cardsName"
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="eat dinner"
-      />
-      <input
-        name="deleteCards"
-        onClick={[Function]}
-        type="button"
-        value="Delete Card"
-      />
-      <input
-        name="editCards"
-        onClick={[Function]}
-        type="button"
-        value="Edit Card"
-      />
+      <div
+        className="cards-tile"
+      >
+        <div
+          className="update-card"
+        >
+          <UpdateCards
+            _id="432e39hzdo08aqcdgd"
+            card={
+              Object {
+                "title-0": undefined,
+              }
+            }
+            cardslist={
+              Object {
+                "14w43d4opubteu021ato": Object {
+                  "_id": "14w43d4opubteu021ato",
+                  "boardId": "346rfdghsdhteu021ato",
+                  "cards": Array [
+                    "6532opubteu021ato",
+                  ],
+                  "title": "Bedfordshire Illinois Liaison",
+                },
+                "2skdde39hzdo08aqcdgd": Object {
+                  "_id": "2skdde39hzdo08aqcdgd",
+                  "boardId": "46mdujckqs45tkdsh2jdxz",
+                  "cards": Array [
+                    "432e39hzdo08aqcdgd",
+                  ],
+                  "title": "XML Health",
+                },
+                "kd5o3ve2858vpjxd7wjp": Object {
+                  "_id": "kd5o3ve2858vpjxd7wjp",
+                  "boardId": "kd5o3ve2858qggfqw4rtfda",
+                  "cards": Array [
+                    "5643e2858vpjxd7wjp",
+                  ],
+                  "title": "Sports Analyst Cambridgeshire",
+                },
+              }
+            }
+            index={0}
+          />
+        </div>
+      </div>
+    </li>
+    <li>
+      <div
+        className="create-cards"
+      >
+        <div
+          className="create-cards-link"
+        >
+          <span
+            className="createcards"
+            id="createcards"
+            name="createcards"
+            onClick={[Function]}
+            value="Add Cards"
+          >
+            Add a card...
+          </span>
+        </div>
+      </div>
     </li>
   </ul>
-  <input
-    name="addCards"
-    onClick={[Function]}
-    type="button"
-    value="Add Cards"
-  />
-</div>
-`;
-
-exports[`Cards component delete cards snapshot 1`] = `
-<div>
-  <ul>
-    <li
-      key="0"
-    >
-      <input
-        disabled={true}
-        id="432e39hzdo08aqcdgd"
-        name="cardsName"
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="eat dinner"
-      />
-      <input
-        name="deleteCards"
-        onClick={[Function]}
-        type="button"
-        value="Delete Card"
-      />
-      <input
-        name="editCards"
-        onClick={[Function]}
-        type="button"
-        value="Edit Card"
-      />
-    </li>
-  </ul>
-  <input
-    name="addCards"
-    onClick={[Function]}
-    type="button"
-    value="Add Cards"
-  />
-</div>
-`;
-
-exports[`Cards component delete cards snapshot 2`] = `
-<div>
-  <ul>
-    <li
-      key="0"
-    >
-      <input
-        disabled={true}
-        id="432e39hzdo08aqcdgd"
-        name="cardsName"
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="eat dinner"
-      />
-      <input
-        name="deleteCards"
-        onClick={[Function]}
-        type="button"
-        value="Delete Card"
-      />
-      <input
-        name="editCards"
-        onClick={[Function]}
-        type="button"
-        value="Edit Card"
-      />
-    </li>
-  </ul>
-  <input
-    name="addCards"
-    onClick={[Function]}
-    type="button"
-    value="Add Cards"
-  />
-</div>
-`;
-
-exports[`Cards component update cards snapshot 1`] = `
-<div>
-  <ul>
-    <li
-      key="0"
-    >
-      <input
-        disabled={true}
-        id="432e39hzdo08aqcdgd"
-        name="cardsName"
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="eat dinner"
-      />
-      <input
-        name="deleteCards"
-        onClick={[Function]}
-        type="button"
-        value="Delete Card"
-      />
-      <input
-        name="editCards"
-        onClick={[Function]}
-        type="button"
-        value="Edit Card"
-      />
-    </li>
-  </ul>
-  <input
-    name="addCards"
-    onClick={[Function]}
-    type="button"
-    value="Add Cards"
-  />
-</div>
-`;
-
-exports[`Cards component update cards snapshot 2`] = `
-<div>
-  <ul>
-    <li
-      key="0"
-    >
-      <input
-        disabled={false}
-        id="432e39hzdo08aqcdgd"
-        name="cardsName"
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        type="text"
-        value="eat dinner"
-      />
-      <input
-        name="deleteCards"
-        onClick={[Function]}
-        type="button"
-        value="Delete Card"
-      />
-      <input
-        name="editCards"
-        onClick={[Function]}
-        type="button"
-        value="Edit Card"
-      />
-    </li>
-  </ul>
-  <input
-    name="addCards"
-    onClick={[Function]}
-    type="button"
-    value="Add Cards"
-  />
 </div>
 `;

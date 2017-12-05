@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`header-bar should not be visible 1`] = `""`;
+
+exports[`header-bar should not be visible 2`] = `""`;
+
+exports[`header-bar snapshot with login button 1`] = `
+<header
+  className="container-fluid header-bar"
+>
+  <nav
+    className="row home-nav"
+  >
+    <div
+      className="nav-left"
+    >
+      <Link
+        className="logo"
+        replace={false}
+        to="/"
+      >
+        <img
+          alt="Logo"
+          src="trello-logo-white.svg"
+        />
+      </Link>
+    </div>
+    <div
+      className="nav-right"
+    >
+      <Link
+        replace={false}
+        to="/login"
+      >
+        <button
+          className="btn login-btn"
+        >
+          Log In
+        </button>
+      </Link>
+      <Link
+        replace={false}
+        to="/register"
+      >
+        <button
+          className="btn sign-up-btn"
+        >
+          Sign Up
+        </button>
+      </Link>
+    </div>
+  </nav>
+</header>
+`;
+
+exports[`header-bar snapshot with logout button 1`] = `
+<header
+  className="container-fluid header-bar"
+>
+  <nav
+    className="row home-nav"
+  >
+    <div
+      className="nav-left"
+    >
+      <Link
+        className="logo"
+        replace={false}
+        to="/"
+      >
+        <img
+          alt="Logo"
+          src="trello-logo-white.svg"
+        />
+      </Link>
+    </div>
+    <div
+      className="nav-right"
+    >
+      <button
+        className="btn logout-btn"
+        onClick={[Function]}
+      >
+        Log out
+      </button>
+    </div>
+  </nav>
+</header>
+`;

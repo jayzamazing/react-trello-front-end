@@ -1,10 +1,11 @@
 'use strict';
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import {shallow, mount} from 'enzyme';
-import component, {Boards} from './boards';
+import {shallow} from 'enzyme';
+import {Boards} from './boards';
 import {seedBoardsInput} from '../testutils/seeddata';
 import * as actions from '../actions/boards';
+import {MemoryRouter as Router} from 'react-router-dom';
 
 //testing for the boards class
 describe('Boards component', () => {
@@ -28,15 +29,9 @@ describe('Boards component', () => {
   //render board and check against the previous snapshot
   it('boards snapshot', () => {
     const dispatch = jest.fn();
-    const wrapper = shallow(<Boards boards={boards} dispatch={dispatch}/>);
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-  //click on add button and check before and after snapshots
-  it('add board click snapshot', () => {
-    const dispatch = jest.fn();
-    const wrapper = mount(<Boards boards={boards} dispatch={dispatch}/>);
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.find('[name="addBoard"]').simulate('click');
+    const wrapper = shallow(
+      <Boards boards={boards} dispatch={dispatch}/>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
   //check dispatch is fired off when delete button is clicked
@@ -48,32 +43,16 @@ describe('Boards component', () => {
     wrapper.find('[name="deleteBoard"]').at(0).simulate('click');
     expect(deleteBoard).toHaveBeenCalledWith(keys[0]);
   });
-  //click on delete button and check before and after snapshots
-  it('delete board snapshot', () => {
-    const deleteBoard = jest.fn();
+  //take snapshot and ensure that createboardmodal isOpen is set to true
+  it('click on create board snapshot', () => {
+    const store = boards;
     const dispatch = jest.fn();
-    const wrapper = mount(<Boards boards={boards} dispatch={dispatch} deleteBoard={deleteBoard}/>);
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.find('[name="deleteBoard"]').at(2).simulate('click');
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-  //check dispatch is fired when update button is clicked
-  it('dispatches update board', () => {
-    const updateBoard = jest.fn();
-    const wrapper = shallow(<Boards boards={boards} updateBoard={updateBoard}/>);
-    // const keys = Object.keys(boards);
-    wrapper.find('[name="boardName"]').at(0).simulate('keypress', {key: 'Enter'});
-    expect(updateBoard).toHaveBeenCalledWith({"key": "Enter"});
-  });
-  //click on update button and check before and after snapshots
-  it('update board snapshot', () => {
-    const updateBoard = jest.fn();
-    const wrapper = mount(<Boards boards={boards} updateBoard={updateBoard}/>);
-    expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.find('[name="editBoard"]').at(0).simulate('click');
+    const wrapper = shallow(
+      <Boards boards={boards} dispatch={dispatch} />
+    );
     const keys = Object.keys(boards);
-    wrapper.find('[name="boardName"]').at(0).simulate('change', { target: { value: 'testing', id: keys[0] } });
-    wrapper.find('[name="boardName"]').at(0).simulate('keypress', {key: 'Enter'})
+    expect(toJson(wrapper)).toMatchSnapshot();
+    wrapper.find('[name="createBoard"]').simulate('click');
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

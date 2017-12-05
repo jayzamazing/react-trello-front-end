@@ -1,7 +1,7 @@
 /*
 * Schema representing Boards
 */
-import { normalize, schema, arrayOf } from 'normalizr';
+import { schema } from 'normalizr';
 
 //define schema items
 const boardsSchema = new schema.Entity('boards', {}, { idAttribute: '_id' });
@@ -10,7 +10,7 @@ const cardsSchema = new schema.Entity('cards', {}, { idAttribute: '_id' });
 
 //A board has an array of card list
 boardsSchema.define({
-  cardsList: [cardsListSchema]
+  cardslist: [cardsListSchema]
 });
 //Each cardslist has an array of cards
 cardsListSchema.define({

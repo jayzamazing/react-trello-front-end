@@ -1,0 +1,24 @@
+.text-center {
+  text-align: center;
+}
+main {
+  padding: 30px 15px;
+}
+.wrapper {
+  margin-top: 100px;
+}
+.wrapper-2 {
+  margin-top: 50px;
+}
+.wrapper-3 {
+  margin-top: 25px;
+}
+.home a {
+  color: white;
+}
+.home a:active, a:hover {
+  text-decoration: none;
+}
+.a-login {
+  text-decoration: underline;
+}

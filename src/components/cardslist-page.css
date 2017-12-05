@@ -1,0 +1,9 @@
+.cardslist-form-area {
+  color: black;
+}
+.cardslist {
+  height: 93%;
+}
+.cardslist .row, .cardslist-form-area {
+  height: 100%;
+}

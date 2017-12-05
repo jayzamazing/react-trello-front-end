@@ -1,0 +1,116 @@
+.board-name h1 {
+  display: inline-block;
+}
+.boards-form ul li {
+  list-style: none;
+  margin: 0 10px 10px 0;
+}
+.boards-form ul {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.board-tile {
+  display: block;
+  padding: 10px;
+  height: 100%;
+  cursor: pointer;
+}
+.boards-form li {
+  height: 100px;
+  width: 280px;
+  background: #0067a3;
+}
+@media only screen and (max-width: 750px) {
+  .boards-form li  {
+    width: 100%;
+  }
+}
+.boards-form a {
+  color: white;
+  display: block;
+  height: 100%;
+}
+.board-create {
+  color: white;
+  border-radius: 5px;
+}
+.create-board {
+  width: 400px;
+  height: 140px;
+  margin: 50px auto 0 auto;
+}
+.create-board:focus {
+  outline: none;
+}
+.create-board-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  float: none;
+  top: 0;
+}
+.create-board-input-area {
+  width: 300px;
+  height: 100px;
+  background-color: #0067a3;
+  padding: 10px;
+  color: black;
+}
+.create-board-input {
+  border: none;
+  border-radius: 3px;
+  width: 200px;
+  height: 27px;
+}
+.create-board-input-area .close-modal-btn {
+  position: relative;
+  float: right;
+  border: none;
+  background-color: unset;
+  margin: -36px -10px 0px 0px;
+  color: white;
+}
+.create-board-input-area .close-modal-btn:hover, .create-board-input-area .close-modal-btn:focus:active,
+.create-board-input-area .close-modal-btn:focus, .create-board-input-area .close-modal-btn:active {
+  border: none;
+  background-color: unset;
+  box-shadow: unset;
+}
+.create-board-input-area .remove, .create-board-input-area .form-error {
+  display: none;
+}
+.create-board-input-area {
+  border-radius: 3px;
+}
+.create-board-btn {
+  position: absolute;
+  top: 155px;
+  margin-left: -10px;
+  background: #F8F9F9;
+  color: #B6BBBF;
+  opacity: unset !important;
+}
+.create-board-btn:hover {
+  color: #B6BBBF;
+}
+.create-board-btn:enabled {
+  color: white;
+  background-color: #5AAC44;
+}
+.create-board-btn:enabled:active,
+.create-board-btn:enabled:focus,
+.create-board-btn:enabled:hover {
+  background-color: #49852E;
+}
+.boards-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+}
+.boards-list {
+  position: relative;
+  border-radius: 5px;
+}

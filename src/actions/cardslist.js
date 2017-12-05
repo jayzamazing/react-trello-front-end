@@ -1,18 +1,18 @@
-'use strict';
 import {normalize} from 'normalizr';
 import {cardsListSchema} from '../board-schema';
-
+import {BASE_URL} from '../config';
+import {normalizeResponseErrors} from './utils';
 /*
 * action to tell store that a cardslist has been created
 * @params data - data to be sent to store
 * @returns action type and data
 */
 export const CREATE_CARDSLIST_SUCCESS = 'CREATE_CARDSLIST_SUCCESS';
-export const createCardslistSuccess = cardslist => {
-  const items = (normalize(cardslist, cardsListSchema)).entities;
+export const createCardslistSuccess = items => {
+  const {cardslist} = items ? normalize(items, cardsListSchema).entities : {};
   return {
     type: CREATE_CARDSLIST_SUCCESS,
-    items
+    cardslist
   };
 };
 /*
@@ -21,15 +21,24 @@ export const createCardslistSuccess = cardslist => {
 * @params createCardslistSuccess or passed in action
 * @dispatch createCardslistSuccess or passed in action
 */
-export const createCardslist = (postData, action = createCardslistSuccess) => dispatch => {
-  return fetch('/cardslist', {
+export const createCardslist = (postData, action = createCardslistSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/cardslist`, {
     method: "POST",
-    body: postData
+    body: JSON.stringify({
+      ...postData
+    }),
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`,
+      "Content-Type": 'application/json',
+      Accept: 'application/json'
+    }
   })
-    .then(res => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      return dispatch(action(res.body));
-    });
+  .then((res) => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then((res) => dispatch(action(res)))
+  .catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a cardslist has been created
@@ -49,14 +58,18 @@ export const deleteCardslistSuccess = id => {
 * @params deleteCardslistSuccess or passed in action
 * @dispatch deleteCardslistSuccess or passed in action
 */
-export const deleteCardslist = (id, action = deleteCardslistSuccess) => dispatch => {
-  return fetch(`/cardslist/${id}`, {
-    method: 'DELETE'
+export const deleteCardslist = (id, action = deleteCardslistSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/cardslist/${id}`, {
+    method: 'DELETE',
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
   })
-    .then((res) => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      dispatch(action(id));
-    });
+  .then(res => normalizeResponseErrors(res))
+  .then(() => dispatch(action(id)))
+  .catch(err => {console.log(err)});
 };
 /*
 * action to tell store that a cardslist has been updated
@@ -65,11 +78,12 @@ export const deleteCardslist = (id, action = deleteCardslistSuccess) => dispatch
 * @returns action type and cardslist
 */
 export const UPDATE_CARDSLIST_SUCCESS = 'UPDATE_CARDSLIST_SUCCESS';
-export const updateCardslistSuccess = function(id, cardslist) {
-  const items = (normalize(cardslist, cardsListSchema)).entities;
+export const updateCardslistSuccess = (id, items) => {
+  items._id = id;
+  const {cardslist} = items ? normalize(items, cardsListSchema).entities : {};
   return {
     type: UPDATE_CARDSLIST_SUCCESS,
-    items,
+    cardslist,
     cardslistId: id
   };
 };
@@ -80,13 +94,22 @@ export const updateCardslistSuccess = function(id, cardslist) {
 * @params updateCardslistSuccess or passed in action
 * @dispatch updateCardslistSuccess or passed in action
 */
-export const updateCardslist = (id, postData, action = updateCardslistSuccess) => dispatch => {
-  return fetch(`/cardslist/${id}`, {
+export const updateCardslist = (id, postData, action = updateCardslistSuccess) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${BASE_URL}/cardslist/${id}`, {
     method: 'PUT',
-    body: postData
+    body: JSON.stringify({
+      ...postData
+    }),
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`,
+      "Content-Type": 'application/json',
+      Accept: 'application/json'
+    }
   })
-    .then((res) => {
-      if (!res.ok) return Promise.reject(res.statusText);
-      dispatch(action(id, postData));
-    });
+  .then((res) => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then((res) => dispatch(action(id, res)))
+  .catch(err => {console.log(err)});
 };
