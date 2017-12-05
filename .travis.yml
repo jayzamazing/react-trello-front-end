@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: V9KO7obsOBRheqf/QXn6lgBV3YulqVwrmh7GO/l0RrzK3pfJ8yoKoU1rUfmDBZesGo57psDekeWXWWFIWw7WUHZQi/xSUpHIsGxY5Km3O8kEBfphfVgRVMqlHgFWXYHN/8Y9wddDYwj44ud48mIOnEeMHXccWvQ1DCiphIf6fnpgR1F/bgJBdIHRE+U1SSp7PV05vdFNxL34wYtyzu/4BpKUwx0QTKrbuTpUKBh0PHnmPUAUD0JJlmUoO/p90lsCgXdcvcF69lETqD26LBf6Q/hvR2+IK6/lGYMGigrZU3mRn/rwVsWuqfIZM2rv/TgXsVmMaK6HcNdjNRB/smrRFbOpnVXT3mPGjxn1Q4lWmvZ2NJl3J86pI6LZnG272hp8gUzTjaQmzAsb1Qx6c0oIBzbabmDCL8L2o/BCkA/cUp4BrkySClYi+hMgtDPNxljLvPTzzcR0DYC8XYkD2niAnVQ5WDnvzrRwvOH+z46nSzaqlqhL9CUF9Dz7JTEvy26La16i7LqDWCMj0dcXMzhsj92VB/nowtjiHNMD4bVPXmIboEpXiwThml7FxfP67Pi53GyqbPfkDyncMt4H1LXnhDlyb4wvF8tyY78k5RKWvGNinL7Y+aA+5VzJU9xBDazrn7u38GvgHISoleY30gWItvommMYolUi6Pe6MpzjcVac=
+  app: jays-react-trello-front-end
+  on:
+    repo: jayzamazing/react-trello-front-end
