@@ -8,7 +8,7 @@ import RegistrationPage from './components/registration-page';
 import Login from './components/login-page';
 import HeaderBar from './components/header-bar';
 import {refreshAuthToken} from './actions/auth';
-import FooterBar from './components/footer';
+import {FooterBar} from './components/footer';
 import './app.css';
 
 export class App extends React.Component {

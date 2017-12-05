@@ -23,7 +23,9 @@ export class UpdateCardsTitleForm extends React.Component {
             onBlur={() => {
               //if function exists, then execute it
               const onBlur = this.props.onBlur ? this.props.onBlur : null;
-              onBlur();
+              if (onBlur) {
+                onBlur();
+              }  
               blurUpdate(this, 'updatecardsform');
             }}
             disabled={this.props.disabled}

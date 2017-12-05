@@ -21,5 +21,7 @@ export function FooterBar(props){
             </div>
       </footer>
     );
+  } else {
+    return null;
   }
 }

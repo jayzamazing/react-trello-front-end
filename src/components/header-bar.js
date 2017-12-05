@@ -16,7 +16,7 @@ export class HeaderBar extends React.Component {
       const temp1 = this.props.location.pathname === '/register' ? true : false;
       const temp2 = this.props.location.pathname === '/login' ? true : false;
       if (temp1 || temp2) {
-        return;
+        return  null;
       } else {
         // Only render the log out button if we are logged in
         let buttons;

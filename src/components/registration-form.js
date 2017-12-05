@@ -50,6 +50,7 @@ export class RegistrationForm extends React.Component {
             <Field
               label={["I accept the Terms of Service, and Privacy Policy."]}
               component={Checkbox}
+              labelclass="checkbox-label"
               type="checkbox"
               name="acceptTerms"
               validate={[required]}
@@ -57,7 +58,7 @@ export class RegistrationForm extends React.Component {
               inputClass="checkbox-space"
             />
 
-          <button className="block btn btn-success"
+          <button className="block btn btn-success create-acc-btn"
               type="submit"
               disabled={this.props.pristine || this.props.submitting}>
               Create New Account
@@ -70,5 +71,5 @@ export class RegistrationForm extends React.Component {
 export default reduxForm({
   form: 'registration',
   onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('login-form', Object.keys(errors)[0]))
+      dispatch(focus('registration', Object.keys(errors)[0]))
 })(RegistrationForm);

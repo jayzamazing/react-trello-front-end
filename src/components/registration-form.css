@@ -13,3 +13,9 @@
 .checkbox-space {
   margin-right: 5px !important;
 }
+.checkbox-label {
+  font-size: 12px;
+}
+.create-acc-btn {
+  margin: 10px 0;
+}
