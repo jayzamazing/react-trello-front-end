@@ -55,6 +55,7 @@ exports[`login-form snapshot 1`] = `
         "I accept the Terms of Service, and Privacy Policy.",
       ]
     }
+    labelclass="checkbox-label"
     name="acceptTerms"
     type="checkbox"
     validate={
@@ -64,7 +65,7 @@ exports[`login-form snapshot 1`] = `
     }
   />
   <button
-    className="block btn btn-success"
+    className="block btn btn-success create-acc-btn"
     type="submit"
   >
     Create New Account
