@@ -15,7 +15,7 @@ export class UpdateCardsTitleForm extends React.Component {
         this.props.handleSubmit(values => this.props.updateCards(this.props._id,
           values[this.props._id]._id ? values[this.props._id].title : values[this.props._id]))}>
           <Field
-            format={(data) => data ? data.title : ''}
+            format={(data) => data === undefined ? this.props.initialValues[this.props._id].title : data ? data.title : ''}
             component={Textarea}
             name={this.props._id}
             textareaClass="updateCardsTitle"
@@ -25,7 +25,7 @@ export class UpdateCardsTitleForm extends React.Component {
               const onBlur = this.props.onBlur ? this.props.onBlur : null;
               if (onBlur) {
                 onBlur();
-              }  
+              }
               blurUpdate(this, 'updatecardsform');
             }}
             disabled={this.props.disabled}
@@ -48,6 +48,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
     enableReinitialize : true,
-    onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('updatecards', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) => dispatch(focus(this.props.form, Object.keys(errors)[0]))
 })(UpdateCardsTitleForm));

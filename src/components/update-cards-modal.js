@@ -24,7 +24,7 @@ export default function UpdateCardsModal(props) {
       </button>
         <UpdateCardsTitleForm index={props.index} _id={props._id} form={props._id + '-2'}/>
         <span onClick={() => {
-            props.deleteCards(props._id, props.cardslist._id, props.cardslist);
+            props.deleteCards(props._id, props.cardslistId, props.cardslist[props.cardslistId]);
             props.closeModal();
           }} className="glyphicon glyphicon-minus cards-delete">
         </span>
