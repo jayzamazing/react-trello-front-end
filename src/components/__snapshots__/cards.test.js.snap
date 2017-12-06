@@ -18,9 +18,23 @@ exports[`Cards component add cards click snaphot 1`] = `
         >
           <UpdateCards
             _id="432e39hzdo08aqcdgd"
-            card={
+            cards={
               Object {
-                "title-0": undefined,
+                "432e39hzdo08aqcdgd": Object {
+                  "_id": "432e39hzdo08aqcdgd",
+                  "cardslistId": "2skdde39hzdo08aqcdgd",
+                  "text": "eat dinner",
+                },
+                "5643e2858vpjxd7wjp": Object {
+                  "_id": "5643e2858vpjxd7wjp",
+                  "cardslistId": "kd5o3ve2858vpjxd7wjp",
+                  "text": "masking tape",
+                },
+                "6532opubteu021ato": Object {
+                  "_id": "6532opubteu021ato",
+                  "cardslistId": "14w43d4opubteu021ato",
+                  "text": "tea tree oil",
+                },
               }
             }
             cardslist={
@@ -51,6 +65,7 @@ exports[`Cards component add cards click snaphot 1`] = `
                 },
               }
             }
+            cardslistId="2skdde39hzdo08aqcdgd"
             index={0}
           />
         </div>
@@ -97,9 +112,23 @@ exports[`Cards component add cards click snaphot 2`] = `
         >
           <UpdateCards
             _id="432e39hzdo08aqcdgd"
-            card={
+            cards={
               Object {
-                "title-0": undefined,
+                "432e39hzdo08aqcdgd": Object {
+                  "_id": "432e39hzdo08aqcdgd",
+                  "cardslistId": "2skdde39hzdo08aqcdgd",
+                  "text": "eat dinner",
+                },
+                "5643e2858vpjxd7wjp": Object {
+                  "_id": "5643e2858vpjxd7wjp",
+                  "cardslistId": "kd5o3ve2858vpjxd7wjp",
+                  "text": "masking tape",
+                },
+                "6532opubteu021ato": Object {
+                  "_id": "6532opubteu021ato",
+                  "cardslistId": "14w43d4opubteu021ato",
+                  "text": "tea tree oil",
+                },
               }
             }
             cardslist={
@@ -130,6 +159,7 @@ exports[`Cards component add cards click snaphot 2`] = `
                 },
               }
             }
+            cardslistId="2skdde39hzdo08aqcdgd"
             index={0}
           />
         </div>
@@ -177,9 +207,23 @@ exports[`Cards component cards snapshot 1`] = `
         >
           <UpdateCards
             _id="432e39hzdo08aqcdgd"
-            card={
+            cards={
               Object {
-                "title-0": undefined,
+                "432e39hzdo08aqcdgd": Object {
+                  "_id": "432e39hzdo08aqcdgd",
+                  "cardslistId": "2skdde39hzdo08aqcdgd",
+                  "text": "eat dinner",
+                },
+                "5643e2858vpjxd7wjp": Object {
+                  "_id": "5643e2858vpjxd7wjp",
+                  "cardslistId": "kd5o3ve2858vpjxd7wjp",
+                  "text": "masking tape",
+                },
+                "6532opubteu021ato": Object {
+                  "_id": "6532opubteu021ato",
+                  "cardslistId": "14w43d4opubteu021ato",
+                  "text": "tea tree oil",
+                },
               }
             }
             cardslist={
@@ -210,6 +254,7 @@ exports[`Cards component cards snapshot 1`] = `
                 },
               }
             }
+            cardslistId="2skdde39hzdo08aqcdgd"
             index={0}
           />
         </div>
