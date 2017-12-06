@@ -12,11 +12,11 @@ This application could be useful both at work and everyday life. A person could 
 
 ###Initial UX
 The initial web and mobile wireframes are shown below:
-![image](<./github/Home Page.png>)
-![image](<./github/registration page.png>)
-![image](<./github/login page.png>)
-![image](<./github/boards page.png>)
-![image](<./github/lists page.png>)
+![image](<./github/homepage.png>)
+![image](<./github/registrationpage.png>)
+![image](<./github/loginpage.png>)
+![image](<./github/boardspage.png>)
+![image](<./github/listspage.png>)
 
 ###Prototype
 You can see the application in action at the following link:
