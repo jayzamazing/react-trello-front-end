@@ -33,13 +33,13 @@ export default class UpdateCards extends React.Component {
         <UpdateCardsTitleForm index={this.props.index}
           disabled={this.state.modaloredit ? 'true' : null}
           onBlur={this.state.modaloredit ? null : this.disableEdit}
-          _id={this.props._id} card={this.props.card} form={this.props._id + '-1'} />
+          _id={this.props._id} cards={this.props.cards} form={this.props._id + '-1'} />
         </span>
         <span onClick={() => this.enableEdit()} className="glyphicon glyphicon-pencil edit-cards">
         </span>
         <UpdateCardsModal _id={this.props._id} isOpen={this.state.editCardsModalIsOpen}
           closeModal={this.closeModal} index={this.props.index} deleteCards={this.props.deleteCards}
-          updateCards={this.props.updateCards} cardslistId={this.props.cardslist._id} cardslist={this.props.cardslist}/>
+          updateCards={this.props.updateCards} cardslistId={this.props.cardslistId} cardslist={this.props.cardslist}/>
       </div>
     );
   }

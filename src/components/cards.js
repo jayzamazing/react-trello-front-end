@@ -80,8 +80,8 @@ export class Cards extends React.Component {
             <div className="cards-tile">
               <div className="update-card">
                 <UpdateCards index={index} deleteCards={this.props.deleteCards} updateCards={this.props.updateCards}
-                  _id={cardsItem._id} card={{['title-' + index]: this.state.cards[cardsItem._id] ? this.state.cards[cardsItem._id].title : cardsItem.title}}
-                  cardslistId={this.props.cardslist._id} cardslist={this.props.cardslist}/>
+                  _id={cardsItem._id} cards={this.props.cards}
+                  cardslistId={cardsItem.cardslistId} cardslist={this.props.cardslist}/>
               </div>
             </div>
           </li>
@@ -141,10 +141,11 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(actions.deleteCards(cardId))
     .then(() => {
       let mutableCardslist = [];
-      if (cardslist.cardslist) {
-        mutableCardslist = cardslist.cards.asMutable();
+      if (cardslist) {
+        mutableCardslist = cardslist.asMutable();
+        mutableCardslist.cards = mutableCardslist.cards.asMutable();
       }
-      mutableCardslist.splice(mutableCardslist.indexOf(cardId), 1);
+      mutableCardslist.cards.splice(mutableCardslist.cards.indexOf(cardId), 1);
       dispatch(cardslistActions.updateCardslistSuccess(cardslistId, mutableCardslist));
     });
   },
@@ -155,8 +156,3 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 //connects component to redux store
 export default connect(mapStateToProps, mapDispatchToProps)(Cards);
-// export default reduxForm({
-//   form: 'cards',
-//   onSubmitFail: (errors, dispatch) =>
-//       dispatch(focus('cards-form', Object.keys(errors)[0]))
-// })(Cards);
