@@ -9,7 +9,6 @@ exports[`update-cardstext-form snapshot 1`] = `
     format={[Function]}
     name="35re4qwefgt34werwd"
     onBlur={[Function]}
-    onKeyPress={[Function]}
     textareaClass="updateCardsText"
   />
 </form>
