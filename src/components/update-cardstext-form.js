@@ -3,7 +3,7 @@ import {reduxForm, Field, focus} from 'redux-form';
 import Textarea from './textarea';
 import {connect} from 'react-redux';
 import {updateCards} from '../actions/cards';
-import {submitUpdate, blurUpdate} from './utils';
+import {blurUpdate} from './utils';
 import './update-cardstext-form.css';
 
 export class UpdateCardsTextForm extends React.Component {
