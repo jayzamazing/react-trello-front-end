@@ -22,7 +22,6 @@ export class UpdateCardsTextForm extends React.Component {
             component={Textarea}
             name={this.props._id}
             textareaClass="updateCardsText"
-            onKeyPress={e => submitUpdate(e)}
             onBlur={() => blurUpdate(this, 'updatecardstextform')}
           />
       </form>
