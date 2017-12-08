@@ -36,6 +36,10 @@ export class HomePage extends React.Component {
               </div>
             </div>
           </div>
+          <div className="row wrapper-2 video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/GQuNxPiQWTY?rel=0"
+              frameborder="0" gesture="media" allow="encrypted-media" allowFullScreen></iframe>
+          </div>
         </main>
       </section>
     );
