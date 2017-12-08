@@ -5,7 +5,7 @@ main {
   padding: 30px 15px;
 }
 .wrapper {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .wrapper-2 {
   margin-top: 50px;
@@ -21,4 +21,8 @@ main {
 }
 .a-login {
   text-decoration: underline;
+}
+.video {
+  position: relative;
+  text-align: center;
 }

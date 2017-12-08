@@ -60,6 +60,20 @@ exports[`home-page snapshot 1`] = `
         </div>
       </div>
     </div>
+    <div
+      className="row wrapper-2 video"
+    >
+      <iframe
+        allow="encrypted-media"
+        allowFullScreen={true}
+        frameborder="0"
+        gesture="media"
+        height="315"
+        src="https://www.youtube.com/embed/GQuNxPiQWTY?rel=0"
+        title="trello walk through"
+        width="560"
+      />
+    </div>
   </main>
 </section>
 `;
