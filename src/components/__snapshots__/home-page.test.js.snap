@@ -70,6 +70,7 @@ exports[`home-page snapshot 1`] = `
         gesture="media"
         height="315"
         src="https://www.youtube.com/embed/GQuNxPiQWTY?rel=0"
+        title="trello walk through"
         width="560"
       />
     </div>
