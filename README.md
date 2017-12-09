@@ -38,4 +38,5 @@ This is v4.2.1 of the app. Future enhancements can be seen below:
 * Allow boards to be shared.
 * Add archive for board.
 * Board must be archived before being deleted.
-* Move delete into dropdown with other options.
+* Move delete to archived items.
+* Add drag and drop.

@@ -1,17 +1,17 @@
 {
-  "name": "client",
+  "name": "react-trello-front-end",
   "version": "4.4.5",
   "private": true,
-  "homepage": "https://github.com/jayzamazing/react-trello#readme",
+  "homepage": "https://github.com/jayzamazing/react-trello-front-end#readme",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jayzamazing/react-trello.git"
+    "url": "git+https://github.com/jayzamazing/react-trello-front-end.git"
   },
   "author": "Adrian J Lopez <adrianjaylopez@gmail.com>",
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/jayzamazing/react-trello/issues"
+    "url": "https://github.com/jayzamazing/react-trello-front-end/issues"
   },
   "dependencies": {
     "jwt-decode": "^2.2.0",
